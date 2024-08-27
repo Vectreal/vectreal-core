@@ -1,3 +1,14 @@
+## 0.0.3-0 (2024-08-27)
+
+
+### 🩹 Fixes
+
+- **official-website/Dockerfile:** use `npm install` instead of `npm ci` ([fd3a78f](https://github.com/Vectreal/vectreal-core/commit/fd3a78f))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.2 (2024-08-27)
 
 This was a version bump only, there were no code changes.
