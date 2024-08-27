@@ -30,8 +30,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-${{ hashFiles('apps/official-website/Dockerfile') }}-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-buildx-${{ hashFiles('apps/official-website/Dockerfile') }}-
             ${{ runner.os }}-buildx-
 
       - id: 'auth'
@@ -45,6 +46,9 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker
 
+      - name: Create cache directory
+        run: mkdir -p /tmp/.buildx-cache
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -53,12 +57,7 @@ jobs:
           push: true
           tags: ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
       - name: Deploy to Cloud Run
         run: |
