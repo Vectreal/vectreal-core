@@ -18,7 +18,6 @@
   "defaultBase": "main",
   "release": {
     "projects": [
-      "vctrl/official-website",
       "vctrl/viewer",
       "vctrl/hooks"
     ],

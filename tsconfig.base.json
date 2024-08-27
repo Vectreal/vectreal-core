@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@vctrl/hooks": ["packages/hooks/src/index.ts"],
-      "@vctrl/viewer": ["packages/viewer/src/index.ts"],
-      "@vctrl/official-website": ["apps/official-website/src/index.ts"]
+      "@vctrl/official-website": ["apps/official-website/src/index.ts"],
+      "@vctrl/viewer": ["packages/viewer/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
