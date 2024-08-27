@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "@vctrl/root",
   "private": true,
   "workspaces": [
     "packages/*",

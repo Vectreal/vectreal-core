@@ -5,6 +5,9 @@
   "module": "./index.es.js",
   "types": "./index.d.ts",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "."
   ],

@@ -5,6 +5,9 @@
   "module": "./index.mjs",
   "types": "./index.d.ts",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": "./index.js",
