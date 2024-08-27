@@ -1,0 +1,105 @@
+name: Deploy apps/official-website to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/official-website/**'
+      - 'package*.json'
+      - '.github/workflows/deploy-official-website.yaml'
+
+env:
+  GCR_HOSTNAME: gcr.io
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  IMAGE_NAME: official-website
+  RETENTION_DAYS: 30
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./apps/official-website/Dockerfile
+          push: true
+          tags: ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.IMAGE_NAME }} \
+            --image ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated
+
+      - name: Clean up old artifacts
+        run: |
+          # List all images and their creation time
+          images=$(gcloud container images list-tags ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }} --format='get(digest,timestamp.datetime,tags)')
+
+          # Current time in seconds since epoch
+          current_time=$(date +%s)
+
+          # Sort images by timestamp (newest first) and get the most recent digest
+          most_recent_digest=$(echo "$images" | sort -k2 -r | head -n1 | cut -d' ' -f1)
+
+          # Loop through each image
+          echo "$images" | while read -r line; do
+            digest=$(echo $line | cut -d' ' -f1)
+            timestamp=$(echo $line | cut -d' ' -f2)
+            tags=$(echo $line | cut -d' ' -f3-)
+            
+            # Convert timestamp to seconds since epoch
+            image_time=$(date -d "${timestamp}" +%s)
+            
+            # Calculate the age of the image in days
+            age_days=$(( (current_time - image_time) / 86400 ))
+            
+            # If the image is older than RETENTION_DAYS and not the most recent, try to delete it
+            if [ $age_days -gt ${{ env.RETENTION_DAYS }} ] && [ "$digest" != "$most_recent_digest" ]; then
+              echo "Attempting to delete old image: $digest with tags: $tags"
+              if gcloud container images delete "${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}@$digest" --quiet --force-delete-tags 2>&1 | grep -q "Manifest is still referenced"; then
+                echo "Skipping deletion of $digest as it is still referenced by other images"
+              else
+                echo "Successfully deleted image: $digest"
+              fi
+            else
+              echo "Keeping image: $digest with tags: $tags (Age: $age_days days)"
+            fi
+          done
