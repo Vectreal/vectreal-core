@@ -1,6 +1,6 @@
 {
   "name": "@vctrl/viewer",
-  "version": "v0.0.2-2",
+  "version": "0.0.2-4",
   "main": "./index.js",
   "module": "./index.mjs",
   "types": "./index.d.ts",
