@@ -1,0 +1,15 @@
+{
+  "name": "@vctrl/viewer",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  }
+}

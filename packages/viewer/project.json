@@ -1,0 +1,16 @@
+{
+  "name": "vctrl/viewer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/viewer/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/packages/vctrl/viewer",
+        "configFile": "packages/viewer/vite.config.ts"
+      }
+    }
+  }
+}
