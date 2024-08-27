@@ -1,3 +1,15 @@
+## 0.0.3-2 (2024-08-27)
+
+
+### 🩹 Fixes
+
+- **official-website/Dockerfile:** use `npm install` instead of `npm ci` ([fd3a78f](https://github.com/Vectreal/vectreal-core/commit/fd3a78f))
+- **package-lock.json:** replace old lock file ([11d5344](https://github.com/Vectreal/vectreal-core/commit/11d5344))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.3-0 (2024-08-27)
 
 
