@@ -1,6 +1,6 @@
 {
   "name": "@vctrl/hooks",
-  "version": "0.0.3-2",
+  "version": "0.0.3-3",
   "main": "./index.cjs.js",
   "module": "./index.es.js",
   "types": "./index.d.ts",
