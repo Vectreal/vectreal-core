@@ -1,3 +1,14 @@
+## 0.0.7-3 (2024-08-28)
+
+
+### 🩹 Fixes
+
+- **packages:** `Error verifying sigstore provenance bundle`so add `repository.url` to packages `package.json` ([5c91ad6](https://github.com/Vectreal/vectreal-core/commit/5c91ad6))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7-2 (2024-08-28)
 
 
