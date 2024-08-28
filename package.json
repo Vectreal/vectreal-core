@@ -6,7 +6,7 @@
     "apps/*"
   ],
   "scripts": {
-    "publish-release": "npx nx release --skip-publish && git push && git push --tags"
+    "publish-release": "npx nx release --skip-publish && git push --force && git push --tags"
   },
   "dependencies": {
     "@gltf-transform/core": "^4.0.8",
