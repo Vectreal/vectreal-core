@@ -1,3 +1,19 @@
+## 0.0.7 (2024-08-28)
+
+
+### 🩹 Fixes
+
+- **ci/cd:** build command in version release gh workflow ([6a02c51](https://github.com/Vectreal/vectreal-core/commit/6a02c51))
+
+### 📖 Documentation
+
+- **packages/viewer:** add link to github in contributing section ([11e6dd8](https://github.com/Vectreal/vectreal-core/commit/11e6dd8))
+- **project:** clean up readme files ([fa9bab4](https://github.com/Vectreal/vectreal-core/commit/fa9bab4))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.6 (2024-08-28)
 
 
