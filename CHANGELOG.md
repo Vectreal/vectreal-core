@@ -1,3 +1,14 @@
+## 0.0.7-5 (2024-08-28)
+
+
+### 🩹 Fixes
+
+- **packages:** change package.json files repository url type ([f0aaece](https://github.com/Vectreal/vectreal-core/commit/f0aaece))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7-4 (2024-08-28)
 
 
