@@ -26,6 +26,11 @@
     "version": {
       "conventionalCommits": true
     },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    },
     "conventionalCommits": {
       "types": {
         "docs": {
