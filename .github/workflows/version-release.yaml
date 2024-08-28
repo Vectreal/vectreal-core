@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Build packages
-        run: npx nx affected --targets build --exclude vctrl/official-website,official-website-e2e
+        run: npx nx run-many --targets build --exclude vctrl/official-website,official-website-e2e
 
       - name: Setup Git
         run: |
