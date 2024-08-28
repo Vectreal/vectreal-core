@@ -1,3 +1,14 @@
+## 0.0.7-4 (2024-08-28)
+
+
+### 🩹 Fixes
+
+- **packages:** remove git type from repository fields in package.json files ([f552727](https://github.com/Vectreal/vectreal-core/commit/f552727))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7-3 (2024-08-28)
 
 
