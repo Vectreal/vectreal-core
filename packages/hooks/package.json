@@ -1,4 +1,5 @@
 {
+  "version": "0.0.7-2",
   "name": "@vctrl/hooks",
   "description": "vctrl/hooks is a React hooks package designed to simplify 3D model loading and management within React applications. It's part of the vectreal-core ecosystem and is primarily used in the vctrl/viewer React component and the official website application.",
   "bugs": {
@@ -22,7 +23,10 @@
     "three-model-loading",
     "model-viewer"
   ],
-  "version": "0.0.7-2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vectreal/vectreal-core"
+  },
   "main": "./index.cjs.js",
   "module": "./index.es.js",
   "types": "./index.d.ts",
