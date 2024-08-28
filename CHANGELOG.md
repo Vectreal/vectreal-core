@@ -1,3 +1,14 @@
+## 0.0.7-2 (2024-08-28)
+
+
+### 📖 Documentation
+
+- **packages:** update package descriptions and co. ([1244950](https://github.com/Vectreal/vectreal-core/commit/1244950))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7 (2024-08-28)
 
 

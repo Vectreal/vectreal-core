@@ -22,7 +22,7 @@
     "three-model-loading",
     "model-viewer"
   ],
-  "version": "0.0.7",
+  "version": "0.0.7-2",
   "main": "./index.cjs.js",
   "module": "./index.es.js",
   "types": "./index.d.ts",
