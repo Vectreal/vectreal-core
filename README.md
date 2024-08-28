@@ -2,13 +2,18 @@
 
 # Vectreal Core
 
+[![Deploy apps/official-website to Google Cloud Run](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/deploy-official-website.yaml?logo=github&logoColor=%23fc6c18&label=Deploy%20apps%2Fofficial-website%20to%20Google%20Cloud%20Run&color=%23fc6c18)
+](https://github.com/Vectreal/vectreal-core/actions/workflows/deploy-official-website.yaml) [![Version and release packages to NPM](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/version-release.yaml?logo=github&logoColor=%23fc6c18&label=Version%20and%20release%20packages%20to%20NPM&color=%23fc6c18)
+](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml) [![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
+[![@vctrl/hooks | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fhooks?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fhooks%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://www.npmjs.com/package/@vctrl/hooks)
+
 ## Introduction
 
 Vectreal Core is a robust, community-driven, open-source toolkit designed to seamlessly integrate high-performance 3D content into React-based projects. Our mission is to empower developers, designers, and creators with comprehensive resources to build stunning, interactive 3D experiences.
 
 The monorepo is orchestrated using NX within an npm workspaces environment, primarily consisting of React.js projects.
 
->This project provides easy-to-use, fully configured components, hooks, and additional tools built on top of [Three.js](https://github.com/mrdoob/three.js) and [React Three Fiber](https://github.com/pmndrs/react-three-fiber).
+> This project provides easy-to-use, fully configured components, hooks, and additional tools built on top of [Three.js](https://github.com/mrdoob/three.js) and [React Three Fiber](https://github.com/pmndrs/react-three-fiber).
 
 ## Table of Contents
 
@@ -142,8 +147,6 @@ To contribute:
 Join our Discord community for support, announcements, and discussions about the future of 3D web content.
 
 ## License
-
-
 
 ## Contact
 
