@@ -169,7 +169,7 @@ Please refer to the LICENSE file in the package root for licensing information.
 
 ## Contributing
 
-Contributions are welcome! Please read the contributing guidelines (if available) before submitting pull requests.
+Contributions are welcome! Please read the contributing guidelines in the [vectreal-core](https://github.com/vectreal/vectreal-core) monorepo before submitting pull requests.
 
 ## Support
 
