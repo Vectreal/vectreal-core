@@ -18,10 +18,7 @@
   "defaultBase": "main",
   "release": {
     "projects": [
-      "*",
-      "!**/node_modules/**",
-      "!apps/official-website",
-      "!apps/official-website-e2e"
+      "packages/*"
     ],
     "version": {
       "conventionalCommits": true
