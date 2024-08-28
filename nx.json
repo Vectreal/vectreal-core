@@ -25,6 +25,14 @@
     ],
     "version": {
       "conventionalCommits": true
+    },
+
+    "conventionalCommits": {
+      "types": {
+        "docs": {
+          "semverBump": "patch"
+        }
+      }
     }
   },
   "plugins": [
