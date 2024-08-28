@@ -1,3 +1,14 @@
+## 0.0.6 (2024-08-28)
+
+
+### 📖 Documentation
+
+- **packages/viewer:** add link to github in contributing section ([ae4c19c](https://github.com/Vectreal/vectreal-core/commit/ae4c19c))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.3-3 (2024-08-28)
 
 
