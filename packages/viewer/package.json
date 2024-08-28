@@ -23,7 +23,6 @@
     "model-viewer"
   ],
   "repository": {
-    "type": "git",
     "url": "https://github.com/vectreal/vectreal-core"
   },
   "main": "./index.js",
