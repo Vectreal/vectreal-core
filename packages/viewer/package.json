@@ -21,7 +21,7 @@
     "usdz",
     "model-viewer"
   ],
-  "version": "0.0.7",
+  "version": "0.0.7-2",
   "main": "./index.js",
   "module": "./index.mjs",
   "types": "./index.d.ts",
