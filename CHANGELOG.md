@@ -1,3 +1,22 @@
+## 0.0.3-3 (2024-08-28)
+
+
+### 🩹 Fixes
+
+- **project:** versioning action ([970f6f9](https://github.com/Vectreal/vectreal-core/commit/970f6f9))
+- **project:** npm/git release mechanism ([f373e1f](https://github.com/Vectreal/vectreal-core/commit/f373e1f))
+
+### 📖 Documentation
+
+- **packages:** add `vctrl/hooks` and `vctrl/viewer` documentation readme ([ccb2ddd](https://github.com/Vectreal/vectreal-core/commit/ccb2ddd))
+- **packages:** add status badge to packages readme files ([c64afab](https://github.com/Vectreal/vectreal-core/commit/c64afab))
+- **project:** add status badges to docs ([1f6ad74](https://github.com/Vectreal/vectreal-core/commit/1f6ad74))
+- **project:** clean up readme files ([a0a2f11](https://github.com/Vectreal/vectreal-core/commit/a0a2f11))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.3-2 (2024-08-27)
 
 
