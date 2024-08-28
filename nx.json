@@ -18,10 +18,14 @@
   "defaultBase": "main",
   "release": {
     "projects": [
-      "vctrl/viewer",
-      "vctrl/hooks"
+      "*",
+      "!**/node_modules/**",
+      "!apps/official-website",
+      "!apps/official-website-e2e"
     ],
-    "conventionalCommits": true
+    "version": {
+      "conventionalCommits": true
+    }
   },
   "plugins": [
     {
