@@ -1,5 +1,7 @@
 # vctrl/viewer
 
+[![Version and Release](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml/badge.svg)](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
+
 ## Table of Contents
 
 - [vctrl/viewer](#vctrlviewer)
