@@ -5,6 +5,9 @@
     "packages/*",
     "apps/*"
   ],
+  "scripts": {
+    "publish-release": "npx nx release --skip-publish && git push && git push --tags"
+  },
   "dependencies": {
     "@gltf-transform/core": "^4.0.8",
     "@gltf-transform/extensions": "^4.0.8",
