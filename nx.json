@@ -17,9 +17,7 @@
   },
   "defaultBase": "main",
   "release": {
-    "projects": [
-      "packages/*"
-    ],
+    "projects": ["packages/*"],
     "version": {
       "conventionalCommits": true
     },
