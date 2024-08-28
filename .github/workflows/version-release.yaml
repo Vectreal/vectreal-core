@@ -1,0 +1,34 @@
+name: Version and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  versioning:
+    name: Versioning and Publishing to NPM
+    environment: packages-releasing
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build packages
+        run: npx nx affected --targets build --exclude vctrl/official-website,official-website-e2e
+
+      - name: Bump versions and publish to NPM
+        run: npx nx release -y
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

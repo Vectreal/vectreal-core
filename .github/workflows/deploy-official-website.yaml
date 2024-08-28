@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'apps/official-website/**'
+      - 'packages/hooks/**'
+      - 'packages/viewer/**'
       - 'package*.json'
       - '.github/workflows/deploy-official-website.yaml'
 
@@ -17,7 +19,7 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
