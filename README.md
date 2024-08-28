@@ -1,11 +1,13 @@
 ![Vectreal Core Banner](https://storage.googleapis.com/documentation-assets/vectreal-core-banner.png)
 
-# Vectreal Core
-
 [![Deploy apps/official-website to Google Cloud Run](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/deploy-official-website.yaml?logo=github&logoColor=%23fc6c18&label=Deploy%20apps%2Fofficial-website%20to%20Google%20Cloud%20Run&color=%23fc6c18)
-](https://github.com/Vectreal/vectreal-core/actions/workflows/deploy-official-website.yaml) [![Version and release packages to NPM](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/version-release.yaml?logo=github&logoColor=%23fc6c18&label=Version%20and%20release%20packages%20to%20NPM&color=%23fc6c18)
-](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml) [![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
+](https://github.com/Vectreal/vectreal-core/actions/workflows/deploy-official-website.yaml)
+[![Version and release packages to NPM](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/version-release.yaml?logo=github&logoColor=%23fc6c18&label=Version%20and%20release%20packages%20to%20NPM&color=%23fc6c18)
+](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
+[![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
 [![@vctrl/hooks | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fhooks?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fhooks%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://www.npmjs.com/package/@vctrl/hooks)
+
+# Vectreal Core
 
 ## Introduction
 
