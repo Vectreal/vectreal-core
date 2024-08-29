@@ -1,3 +1,14 @@
+## 0.0.9-1 (2024-08-29)
+
+
+### 🩹 Fixes
+
+- **packages:** prevent nx vite executor from changing `package.json` file ([09fc53e](https://github.com/Vectreal/vectreal-core/commit/09fc53e))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.9 (2024-08-29)
 
 
