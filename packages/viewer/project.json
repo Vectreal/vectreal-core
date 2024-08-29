@@ -9,7 +9,9 @@
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/viewer",
-        "configFile": "packages/viewer/vite.config.ts"
+        "configFile": "packages/viewer/vite.config.ts",
+        "includeDevDependenciesInPackageJson": true,
+        "generatePackageJson": false
       }
     }
   }
