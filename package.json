@@ -5,6 +5,10 @@
     "packages/*",
     "apps/*"
   ],
+  "repository": {
+    "url": "https://github.com/vectreal/vectreal-core",
+    "type": "https"
+  },
   "scripts": {
     "publish-release": "npx nx release --skip-publish && git push --force && git push --tags"
   },
