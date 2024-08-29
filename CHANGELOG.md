@@ -1,3 +1,14 @@
+## 0.0.9 (2024-08-29)
+
+
+### 🩹 Fixes
+
+- **packages/hooks:** remove files field from package.json ([028a371](https://github.com/Vectreal/vectreal-core/commit/028a371))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.8 (2024-08-29)
 
 This was a version bump only, there were no code changes.
