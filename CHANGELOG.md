@@ -1,3 +1,14 @@
+## 0.0.7-7 (2024-08-29)
+
+
+### 🩹 Fixes
+
+- **packages:** also add repository.url to root + move `.npmrc` to root ([4410952](https://github.com/Vectreal/vectreal-core/commit/4410952))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7-5 (2024-08-28)
 
 
