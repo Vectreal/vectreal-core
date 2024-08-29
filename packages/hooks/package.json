@@ -34,9 +34,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "."
-  ],
   "exports": {
     "./use-load-model": {
       "import": "./use-load-model.es.js",
