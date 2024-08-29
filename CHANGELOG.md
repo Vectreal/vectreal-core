@@ -1,3 +1,14 @@
+## 0.0.9-2 (2024-08-29)
+
+
+### 🩹 Fixes
+
+- **packages:** re-active build executor generating package.json files ([4f34274](https://github.com/Vectreal/vectreal-core/commit/4f34274))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.9-1 (2024-08-29)
 
 
