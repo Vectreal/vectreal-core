@@ -8,11 +8,15 @@ import { useModelContext } from '@vctrl/hooks/src/use-load-model';
 
 const Editor = () => {
   const { file } = useModelContext();
-  
+
   return (
     <section className="h-dvh overflow-hidden mx-[-1rem]">
       <AnimatePresence mode="wait">
-        {file?.model ? <ModelViewer gridOptions={{ showGrid: true }}/> : <DropZone />}
+        {file?.model ? (
+          <ModelViewer gridOptions={{ showGrid: true }} />
+        ) : (
+          <DropZone />
+        )}
       </AnimatePresence>
       <FileMenu />
     </section>

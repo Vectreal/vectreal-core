@@ -10,7 +10,8 @@
     "type": "https"
   },
   "scripts": {
-    "publish-release": "npx nx release --skip-publish"
+    "publish-release": "npx nx release --skip-publish",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix && prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@gltf-transform/core": "^4.0.8",

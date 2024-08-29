@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
 interface Props extends PropsWithChildren {
   isHighlighted?: boolean;
@@ -6,9 +6,9 @@ interface Props extends PropsWithChildren {
 
 export function TypographyLead({ children, isHighlighted }: Props) {
   const isHighlightedClass = isHighlighted
-    ? "text-primary"
-    : "text-muted-foreground";
-    
+    ? 'text-primary'
+    : 'text-muted-foreground';
+
   return (
     <p
       className={`text-xl transition-colors duration-300 ${isHighlightedClass}`}

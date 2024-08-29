@@ -6,7 +6,6 @@ import {
 import BaseLayout from '@/components/base-layout';
 import { Help, Home, Contact, Editor } from '@/pages';
 
-
 const RouterProvider = () => {
   const router = createBrowserRouter([
     {

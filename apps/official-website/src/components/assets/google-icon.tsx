@@ -1,5 +1,5 @@
 interface GoogleIconProps {
-    className?: string;
+  className?: string;
 }
 
 const GoogleLogoIcon = ({ className }: GoogleIconProps) => {

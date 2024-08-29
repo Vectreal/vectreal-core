@@ -1,15 +1,15 @@
-import { FormEvent } from "react";
+import { FormEvent } from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import TitleSection from "@/components/title-section";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import TitleSection from '@/components/title-section';
 
 const Contact = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Form submitted");
+    console.log('Form submitted');
 
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
@@ -30,7 +30,7 @@ const Contact = () => {
             type="text"
             name="name"
             id="name"
-            placeholder="What&apos;s your name?"
+            placeholder="What's your name?"
             className="input"
           />
 
@@ -39,7 +39,7 @@ const Contact = () => {
             type="email"
             name="email"
             id="email"
-            placeholder="What&apos;s your email?"
+            placeholder="What's your email?"
             className="input"
           />
 
