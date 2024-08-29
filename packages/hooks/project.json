@@ -9,9 +9,7 @@
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/hooks",
-        "configFile": "packages/hooks/vite.config.ts",
-        "includeDevDependenciesInPackageJson": true,
-        "generatePackageJson": false
+        "configFile": "packages/hooks/vite.config.ts"
       }
     }
   }

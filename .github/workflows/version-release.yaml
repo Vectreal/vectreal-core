@@ -10,9 +10,6 @@ jobs:
     name: Versioning and Publishing to NPM
     environment: packages-releasing
     runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      id-token: write
 
     steps:
       - name: Checkout code
@@ -48,4 +45,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
