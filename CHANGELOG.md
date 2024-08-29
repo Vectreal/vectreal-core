@@ -1,3 +1,25 @@
+## 0.0.7-8 (2024-08-29)
+
+
+### 🩹 Fixes
+
+- **ci/cd:** build command in version release gh workflow ([ee9e3ea](https://github.com/Vectreal/vectreal-core/commit/ee9e3ea))
+- **packages:** `Error verifying sigstore provenance bundle`so add `repository.url` to packages `package.json` ([681e94e](https://github.com/Vectreal/vectreal-core/commit/681e94e))
+- **packages:** remove git type from repository fields in package.json files ([629c1c8](https://github.com/Vectreal/vectreal-core/commit/629c1c8))
+- **packages:** change package.json files repository url type ([db99ba5](https://github.com/Vectreal/vectreal-core/commit/db99ba5))
+- **packages:** also add repository.url to root + move `.npmrc` to root ([3598f23](https://github.com/Vectreal/vectreal-core/commit/3598f23))
+- **project:** nx version migration ([837419d](https://github.com/Vectreal/vectreal-core/commit/837419d))
+
+### 📖 Documentation
+
+- **packages:** update package descriptions and co. ([b62cf76](https://github.com/Vectreal/vectreal-core/commit/b62cf76))
+- **packages/viewer:** add link to github in contributing section ([98499e7](https://github.com/Vectreal/vectreal-core/commit/98499e7))
+- **project:** clean up readme files ([eadf146](https://github.com/Vectreal/vectreal-core/commit/eadf146))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.7-7 (2024-08-29)
 
 
