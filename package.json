@@ -10,7 +10,7 @@
     "type": "https"
   },
   "scripts": {
-    "publish-release": "npx nx release --skip-publish && git push --force && git push --tags"
+    "publish-release": "npx nx release --skip-publish"
   },
   "dependencies": {
     "@gltf-transform/core": "^4.0.8",
@@ -33,6 +33,7 @@
     "clsx": "^2.1.1",
     "firebase": "^10.12.3",
     "framer-motion": "^11.3.28",
+    "generate-license-file": "^3.5.1",
     "next-themes": "^0.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
