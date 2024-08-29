@@ -1,4 +1,4 @@
-![Vectreal Core Banner](https://storage.googleapis.com/documentation-assets/vectreal-core-banner.png)
+[![Vectreal Core Banner](https://storage.googleapis.com/documentation-assets/vectreal-core-banner.png)](https://core.vectreal.com)
 
 [![Deploy apps/official-website to Google Cloud Run](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/deploy-official-website.yaml?logo=github&logoColor=%23fc6c18&label=Deploy%20apps%2Fofficial-website%20to%20Google%20Cloud%20Run&color=%23fc6c18)
 ](https://github.com/Vectreal/vectreal-core/actions/workflows/deploy-official-website.yaml)
@@ -149,6 +149,10 @@ To contribute:
 Join our Discord community for support, announcements, and discussions about the future of 3D web content.
 
 ## License
+
+GNU Affero General Public License
+
+Please refer to the LICENSE file in the package root for licensing information.
 
 ## Contact
 
