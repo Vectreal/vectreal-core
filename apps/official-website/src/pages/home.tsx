@@ -133,7 +133,9 @@ const Home = () => {
                 </div>
               }
             >
-              <ModelScene url="/assets/DamagedHelmet.glb" />
+              <Suspense>
+                <ModelScene url="/assets/DamagedHelmet.glb" />
+              </Suspense>
             </Suspense>
           </Card>
         </div>
