@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   CubeIcon,
   DiscordLogoIcon,
@@ -30,6 +30,8 @@ import {
   SheetTrigger,
 } from './ui/sheet';
 import { Button } from './ui/button';
+import VectrealLogo from './assets/vectreal-logo';
+import TypographyLead from './typography/typography-lead';
 
 const mainEntries: { title: string; href: string }[] = [
   {
@@ -192,10 +194,15 @@ const NavMenu = () => {
   return (
     <nav
       className={cn(
-        'z-50 fixed left-0 top-0 flex items-center w-full py-2 px-4 bg-zinc-950/75 shadow-xl',
-        isMobile ? 'flex-row-reverse' : 'flex-row',
+        'z-50 fixed left-0 top-0 flex items-center justify-between w-full py-2 px-4 bg-zinc-950/75 shadow-xl ',
       )}
     >
+      <NavLink
+        to={'/'}
+        className="flex items-baseline font-semibold text-neutral-500 h-8 text-[rgba(255,255,255,0.25)] hover:text-[rgba(255,255,255,0.5)] cursor-pointer transition-colors"
+      >
+        <VectrealLogo /> <p className="text-xs">CORE</p>
+      </NavLink>
       {isMobile ? <MobileMenu /> : <DesktopMenu />}
     </nav>
   );
