@@ -8,7 +8,7 @@
     "nx-release-publish": {
       "executor": "@nx/js:release-publish",
       "options": {
-        "packageRoot": "/dist/packages/vctrl/hooks"
+        "packageRoot": "/dist/packages/vctrl/viewer"
       }
     },
     "build": {
