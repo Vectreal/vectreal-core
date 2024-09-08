@@ -5,6 +5,12 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "nx-release-publish": {
+      "executor": "@nx/js:release-publish",
+      "options": {
+        "packageRoot": "/dist/packages/vctrl/hooks"
+      }
+    },
     "build": {
       "executor": "@nx/vite:build",
       "options": {
