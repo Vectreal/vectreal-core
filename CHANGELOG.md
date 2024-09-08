@@ -1,3 +1,19 @@
+## 0.0.9-3 (2024-09-08)
+
+
+### 🚀 Features
+
+- **apps/official-website:** add logo to nav-bar ([aef2e1a](https://github.com/Vectreal/vectreal-core/commit/aef2e1a))
+- **apps/official-website:** add seo meta information ([14c93e5](https://github.com/Vectreal/vectreal-core/commit/14c93e5))
+
+### 🩹 Fixes
+
+- **packages:** nx release executor configuration ([a6ae69c](https://github.com/Vectreal/vectreal-core/commit/a6ae69c))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.9-2 (2024-08-29)
 
 
