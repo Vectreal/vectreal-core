@@ -1,3 +1,14 @@
+## 0.0.9-4 (2024-09-08)
+
+
+### 🩹 Fixes
+
+- **packages/viewer:** release executor package path ([074af1b](https://github.com/Vectreal/vectreal-core/commit/074af1b))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.0.9-3 (2024-09-08)
 
 
