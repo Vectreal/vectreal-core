@@ -1,3 +1,22 @@
+## 0.1.1 (2024-09-09)
+
+
+### 🚀 Features
+
+- **apps/official-website:** add logo to nav-bar ([aef2e1a](https://github.com/Vectreal/vectreal-core/commit/aef2e1a))
+- **apps/official-website:** add seo meta information ([14c93e5](https://github.com/Vectreal/vectreal-core/commit/14c93e5))
+
+### 🩹 Fixes
+
+- **packages:** nx release executor configuration ([9539735](https://github.com/Vectreal/vectreal-core/commit/9539735))
+- **packages:** publish docs along side build output ([c1d5ecc](https://github.com/Vectreal/vectreal-core/commit/c1d5ecc))
+- **packages:** rework build/publish executors ([2ecc5bb](https://github.com/Vectreal/vectreal-core/commit/2ecc5bb))
+- **packages/viewer:** release executor package path ([b55d888](https://github.com/Vectreal/vectreal-core/commit/b55d888))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.1.0 (2024-09-09)
 
 
