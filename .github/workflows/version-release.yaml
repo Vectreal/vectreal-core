@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with: 
+        with:
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -26,9 +26,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Build packages
-        run: npx nx run-many --targets build --exclude vctrl/official-website,official-website-e2e
 
       - name: Setup Git
         run: |
