@@ -6,28 +6,27 @@
   "tags": [],
   "targets": {
     "nx-release-publish": {
-      "dependsOn": ["build"],
+      "dependsOn": ["copy-md"],
       "options": {
         "packageRoot": "dist/packages/vctrl/hooks"
       }
     },
+    "copy-md": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          "rsync -rat packages/hooks/*.md dist/packages/vctrl/hooks/"
+        ]
+      }
+    },
     "build": {
-      "dependsOn": ["clean-copy"],
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/hooks",
         "configFile": "packages/hooks/vite.config.ts",
         "assets": ["packages/hooks/*.md"]
-      }
-    },
-    "clean-copy": {
-      "executor": "nx:run-commands",
-      "outputs": [],
-      "options": {
-        "commands": [
-          "rm -rf dist/packages/vctrl/hooks/*",
-          "rsync -rat packages/hooks/*.md dist/packages/vctrl/hooks/"
-        ]
       }
     }
   }
