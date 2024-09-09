@@ -6,16 +6,28 @@
   "tags": [],
   "targets": {
     "nx-release-publish": {
-      "executor": "@nx/js:release-publish",
+      "dependsOn": ["build"],
       "options": {
-        "packageRoot": "/dist/packages/vctrl/viewer"
+        "packageRoot": "dist/packages/vctrl/viewer"
       }
     },
     "build": {
+      "dependsOn": ["clean-copy"],
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/viewer",
-        "configFile": "packages/viewer/vite.config.ts"
+        "configFile": "packages/viewer/vite.config.ts",
+        "assets": ["packages/viewer/*.md"]
+      }
+    },
+    "clean-copy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          "rm -rf dist/packages/vctrl/hooks/*",
+          "rsync -rat packages/hooks/*.md dist/packages/vctrl/hooks/"
+        ]
       }
     }
   }
