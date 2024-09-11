@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: '20'
       - run: npm i
-      - run: npx nx run-many -t build
+      - run: npx nx affected --target=build
