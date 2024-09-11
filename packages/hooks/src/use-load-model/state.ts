@@ -33,13 +33,13 @@ export const initialState: State = {
  */
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'SET_FILE':
+    case 'set-file':
       return { ...state, file: action.payload };
-    case 'SET_FILE_LOADING':
+    case 'set-file-loading':
       return { ...state, isFileLoading: action.payload };
-    case 'SET_PROGRESS':
+    case 'set-progress':
       return { ...state, progress: action.payload };
-    case 'RESET_STATE':
+    case 'reset-state':
       return { ...initialState };
     default:
       return state;

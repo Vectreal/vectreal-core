@@ -16,14 +16,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 import { useReducer, useCallback, useRef, useEffect } from 'react';
 
-import { ModelFileTypes, InputFileOrDirectory } from './types';
-import { useLoadBinary, useLoadGltf } from './file-type-hooks';
-import { readDirectory } from './utils';
+import { useOptimizeModel } from '../use-optimize-model';
 
 import eventSystem from './event-system';
 import reducer, { initialState } from './state';
+import {
+  ModelFileTypes,
+  InputFileOrDirectory,
+  Action,
+  ModelFile,
+} from './types';
+import { useLoadBinary, useLoadGltf } from './file-type-hooks';
+import { readDirectory } from './utils';
+import { createGltfLoader } from './loaders';
 
-function useLoadModel() {
+function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
   const uploadCompleteRef = useRef(false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -37,17 +44,18 @@ function useLoadModel() {
   );
 
   const updateProgress = useCallback((progress: number) => {
-    dispatch({ type: 'SET_PROGRESS', payload: progress });
-    eventSystem.emit('UPLOAD_PROGRESS', progress);
+    dispatch({ type: 'set-progress', payload: progress });
+    eventSystem.emit('load-progress', progress);
+  }, []);
+
+  const reset = useCallback(() => {
+    dispatch({ type: 'reset-state' });
+    eventSystem.emit('load-reset');
   }, []);
 
   const processFiles = useCallback(
     (files: File[]) => {
       if (files.length === 0) return;
-
-      dispatch({ type: 'SET_FILE_LOADING', payload: true });
-      updateProgress(0);
-      uploadCompleteRef.current = false;
 
       const gltfFile = getFileOfType(files, ModelFileTypes.gltf);
       const glbFile = getFileOfType(files, ModelFileTypes.glb);
@@ -58,7 +66,7 @@ function useLoadModel() {
       ) as File[];
 
       if (supportedFiles.length > 1) {
-        eventSystem.emit('MULTIPLE_3D_MODELS', supportedFiles);
+        eventSystem.emit('multiple-models', supportedFiles);
         return;
       }
 
@@ -83,17 +91,23 @@ function useLoadModel() {
           updateFileProgress(100),
         );
       } else {
-        eventSystem.emit('UNSUPPORTED_FILE_TYPE', files);
-        dispatch({ type: 'SET_FILE_LOADING', payload: false });
+        eventSystem.emit('not-loaded-files', files);
+        dispatch({ type: 'set-file-loading', payload: false });
         return;
       }
     },
     [updateProgress, getFileOfType, loadGltf, loadBinary],
   );
 
-  const handleFileUpload = useCallback(
+  const load = useCallback(
     async (filesOrDirectories: InputFileOrDirectory) => {
       const allFiles: File[] = [];
+
+      dispatch({ type: 'reset-state' });
+      dispatch({ type: 'set-file-loading', payload: true });
+
+      updateProgress(0);
+      uploadCompleteRef.current = false;
 
       for (const item of filesOrDirectories) {
         if (item instanceof File) {
@@ -106,22 +120,109 @@ function useLoadModel() {
 
       processFiles(allFiles);
     },
-    [processFiles],
+    [processFiles, updateProgress],
   );
 
   useEffect(() => {
     if (uploadCompleteRef.current && state.file) {
-      eventSystem.emit('UPLOAD_COMPLETE', state.file);
+      eventSystem.emit('load-complete', state.file);
       uploadCompleteRef.current = false;
+
+      if (optimizer) {
+        optimizer.load(state.file.model);
+      }
     }
-  }, [state.file]);
+  }, [state.file, optimizer]);
+
+  const optimizerIntegration = useOptimizerIntegration(
+    optimizer,
+    dispatch,
+    state.file,
+  );
 
   return {
     ...state,
     on: eventSystem.on,
     off: eventSystem.off,
-    handleFileUpload,
+    load,
+    reset,
+    optimize: optimizerIntegration,
   };
+}
+
+function useOptimizerIntegration(
+  optimizer: ReturnType<typeof useOptimizeModel> | undefined,
+  dispatch: React.Dispatch<Action>,
+  file: ModelFile | null,
+) {
+  const dispatchNewModel = useCallback(
+    (model: Uint8Array) => {
+      console.log('Dispatching new model');
+      const gltfLoader = createGltfLoader();
+
+      gltfLoader.parse(
+        model.buffer,
+        '',
+        (gltf) => {
+          console.log('Loaded new model');
+          dispatch({
+            type: 'set-file',
+            payload: {
+              model: gltf.scene,
+              type: ModelFileTypes.glb,
+              name: file?.name || 'optimized.glb',
+            },
+          });
+        },
+        (error) => {
+          console.error('Error loading new model:', error);
+        },
+      );
+    },
+    [dispatch, file],
+  );
+
+  const runOptimization = useCallback(
+    async (optimizationFunction: (() => Promise<void>) | undefined) => {
+      if (!optimizer || !optimizationFunction) {
+        console.warn('Optimizer or optimization function is not available');
+        return;
+      }
+
+      try {
+        await optimizationFunction();
+        const optimizedModel = await optimizer.getModel();
+
+        if (optimizedModel) {
+          dispatchNewModel(optimizedModel);
+        }
+      } catch (error) {
+        console.error('Optimization failed:', error);
+        // Optionally dispatch an error action here
+      }
+    },
+    [optimizer, dispatchNewModel],
+  );
+
+  return optimizer
+    ? {
+        simplifyOptimization: () =>
+          runOptimization(optimizer.simplifyOptimization),
+        dedupOptimization: () => runOptimization(optimizer.dedupOptimization),
+        quantizeOptimization: () =>
+          runOptimization(optimizer.quantizeOptimization),
+      }
+    : {
+        simplifyOptimization: () => {
+          console.warn('Optimizer is not available');
+        },
+        dedupOptimization: () => {
+          console.warn('Optimizer is not available');
+        },
+        quantizeOptimization: () => {
+          console.warn('Optimizer is not available');
+        },
+      };
 }
 
 export default useLoadModel;
