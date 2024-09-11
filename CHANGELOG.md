@@ -1,3 +1,28 @@
+## 0.2.0 (2024-09-11)
+
+
+### 🚀 Features
+
+- **apps/official-website:** add editor context provider ([f42659a](https://github.com/Vectreal/vectreal-core/commit/f42659a))
+- **packages/hooks:** add optimizer hook ([78b9cd5](https://github.com/Vectreal/vectreal-core/commit/78b9cd5))
+- **project:** Move shadcn components into `shared` library project and modify `tsconfig` paths ([1f15bef](https://github.com/Vectreal/vectreal-core/commit/1f15bef))
+
+### 🩹 Fixes
+
+- **packages:** rework build/publish executors ([bfad14f](https://github.com/Vectreal/vectreal-core/commit/bfad14f))
+- **packages/hooks:** add meshopt decoder to gltf loader ([87e2198](https://github.com/Vectreal/vectreal-core/commit/87e2198))
+- **packages/viewer:** optimize initial props + rendering ([42bbd6e](https://github.com/Vectreal/vectreal-core/commit/42bbd6e))
+- **project:** remove playwright for apps/official-website ([c2d7035](https://github.com/Vectreal/vectreal-core/commit/c2d7035))
+
+### 📖 Documentation
+
+- **packages/hooks:** small changes ([6dae863](https://github.com/Vectreal/vectreal-core/commit/6dae863))
+- **packages/hooks:** add hooks/use-optimize-model to documentation ([d5404cf](https://github.com/Vectreal/vectreal-core/commit/d5404cf))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.1.0 (2024-09-09)
 
 
