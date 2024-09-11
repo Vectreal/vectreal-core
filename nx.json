@@ -4,12 +4,17 @@
     "production": ["!{projectRoot}/**/*.spec.tsx"]
   },
   "targetDefaults": {
-    "build": {
-      "executor": "@nx/vite:build"
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "cache": true
     },
     "typecheck": {
       "executor": "@nx/js:tsc",
       "cache": true
+    },
+    "build": {
+      "dependsOn": ["lint", "typecheck"],
+      "executor": "@nx/vite:build"
     }
   },
   "defaultBase": "main",

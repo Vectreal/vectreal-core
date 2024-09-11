@@ -1,0 +1,18 @@
+name: Lint and build affected NX projects
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i
+      - run: npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=origin/${{ github.event.pull_request.head.ref }}
