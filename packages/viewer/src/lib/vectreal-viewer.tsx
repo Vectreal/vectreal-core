@@ -14,13 +14,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-import { Suspense, useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { Suspense, useEffect, useState } from 'react';
 import { MutatingDots } from 'react-loader-spinner';
-
 import { clsx } from 'clsx';
 import { Object3D, PerspectiveCamera, Vector3 } from 'three';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import {
   Grid,
   GridProps as ThreeGridProps,
@@ -29,18 +27,16 @@ import {
   Stage,
 } from '@react-three/drei';
 
-import { useModelContext } from '@vctrl/hooks/src/use-load-model';
+import { useModelContext } from '@vctrl/hooks/use-load-model';
 
 interface ModelProps {
   object: null | Object3D;
 }
 
-const Model = (props: ModelProps) => {
-  const { object } = props;
+const Model = ({ object }: ModelProps) => {
+  const { file } = useModelContext();
 
-  const model = object || null;
-
-  if (!model) return null;
+  if (!(object || file?.model)) return null;
 
   return (
     <Stage
@@ -51,20 +47,26 @@ const Model = (props: ModelProps) => {
       shadows="contact"
       environment="city"
     >
-      <primitive object={model} />
+      <primitive object={object || file?.model || new Object3D()} />
     </Stage>
   );
 };
 
-const Loading = () => {
+const Spinner = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center absolute top-0 right-0 bottom-0 left-0">
-      <MutatingDots
-        height="100px"
-        width="100px"
-        color="#fff"
-        secondaryColor="#fff"
-      />
+    <MutatingDots
+      height="100px"
+      width="100px"
+      color="#fff"
+      secondaryColor="#fff"
+    />
+  );
+};
+
+const SpinnerWrapper = ({ loader }: { loader: JSX.Element }) => {
+  return (
+    <div className="flex items-center justify-center absolute top-0 right-0 bottom-0 left-0">
+      {loader}
     </div>
   );
 };
@@ -76,6 +78,30 @@ interface CameraProps {
   near?: number;
   far?: number;
 }
+
+const Camera = (props: CameraProps) => {
+  const { camera }: { camera: PerspectiveCamera } = useThree();
+
+  useEffect(() => {
+    camera.far = props.far || 1000;
+    camera.near = props.near || 0.01;
+    camera.fov = props.fov || 69;
+
+    if (props.initialCameraPosition) {
+      camera.position.set(
+        props.initialCameraPosition.x,
+        props.initialCameraPosition.y,
+        props.initialCameraPosition.z,
+      );
+    }
+
+    camera.updateProjectionMatrix();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only for initial render
+
+  return null;
+};
 
 interface ControlsProps extends OrbitControlsProps {
   controlsTimeout?: number;
@@ -91,20 +117,20 @@ interface VectrealViewerProps {
   cameraOptions?: CameraProps;
   controlsOptions?: ControlsProps;
   gridOptions?: GridProps;
-  loader?: () => JSX.Element;
+  loader?: JSX.Element;
 }
 
 const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
   const [isControlsEnabled, setIsControlsEnabled] = useState(false);
-  const { file, isFileLoading } = useModelContext();
+  const { isFileLoading } = useModelContext();
 
-  const { cameraOptions, gridOptions } = props;
-  let { className, controlsOptions, loader: Loader } = props;
+  const { cameraOptions, gridOptions, loader = <Spinner /> } = props;
+  let { className, controlsOptions } = props;
 
   // wait for the stage component to center the model
   // after 1 second enable the controls
   useEffect(() => {
-    if (isControlsEnabled || isFileLoading || !file || !model) return;
+    if (isControlsEnabled || isFileLoading) return;
 
     const timeoutId = setTimeout(
       () => setIsControlsEnabled(true),
@@ -117,19 +143,7 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
 
   className = clsx('w-full h-full', className);
 
-  const { initialCameraPosition, fov, aspect, near, far } = {
-    initialCameraPosition: new Vector3(0, 5, 5),
-    ...cameraOptions,
-  };
-
-  const camera = useMemo(() => {
-    const camera = new PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(...initialCameraPosition.toArray());
-    return camera;
-  }, [aspect, far, fov, initialCameraPosition, near]);
-
   controlsOptions = {
-    camera,
     enabled: controlsOptions?.enabled,
     maxPolarAngle: Math.PI / 2,
     autoRotate: true,
@@ -150,27 +164,21 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
     ...gridOptions,
   };
 
-  Loader = Loader || Loading;
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-      key="model-viewer"
-      className="w-full h-full"
-    >
-      {isFileLoading && <Loader />}
-
-      <Suspense fallback={<Loader />}>
-        <Canvas className={className} dpr={[1, 1.5]} camera={camera} shadows>
-          <OrbitControls {...controlsOptions} />
-          <Model object={model || file?.model || null} />
-          {showGrid && <Grid {...(gridOptionsRest as GridProps)} />}
-        </Canvas>
-      </Suspense>
-    </motion.div>
+    <div className="w-full h-full">
+      {isFileLoading ? (
+        <SpinnerWrapper loader={loader} />
+      ) : (
+        <Suspense fallback={loader}>
+          <Canvas className={className} dpr={[1, 1.5]} shadows>
+            <OrbitControls {...controlsOptions} />
+            <Camera {...cameraOptions} />
+            <Model object={model || null} />
+            {showGrid && <Grid {...(gridOptionsRest as GridProps)} />}
+          </Canvas>
+        </Suspense>
+      )}
+    </div>
   );
 };
 
