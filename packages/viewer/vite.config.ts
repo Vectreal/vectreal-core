@@ -20,8 +20,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src/'),
-      '@vctrl/hooks': path.resolve(__dirname, '../../packages/hooks'),
+      '@vctrl/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
     },
   },
 

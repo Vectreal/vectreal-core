@@ -10,9 +10,6 @@
     "typecheck": {
       "executor": "@nx/js:tsc",
       "cache": true
-    },
-    "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
     }
   },
   "defaultBase": "main",
@@ -56,19 +53,14 @@
         "previewTargetName": "preview",
         "serveStaticTargetName": "serve-static"
       }
-    },
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
     }
   ],
   "generators": {
     "@nx/react": {
       "library": {
         "style": "css",
-        "linter": "eslint"
+        "linter": "eslint",
+        "unitTestRunner": "none"
       },
       "application": {
         "babel": true,

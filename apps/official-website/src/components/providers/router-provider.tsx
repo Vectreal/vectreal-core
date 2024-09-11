@@ -3,9 +3,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 
-import BaseLayout from '@/components/base-layout';
-import { Help, Home, Contact, Editor } from '@/pages';
-
+import { Help, Home, Contact, Editor } from '../../pages';
+import BaseLayout from '../base-layout';
 
 const RouterProvider = () => {
   const router = createBrowserRouter([

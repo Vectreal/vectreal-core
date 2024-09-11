@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils';
 import { PropsWithChildren } from 'react';
+
+import { cn } from '@vctrl/shared/lib/utils';
 
 interface Props extends PropsWithChildren {
   className?: string;

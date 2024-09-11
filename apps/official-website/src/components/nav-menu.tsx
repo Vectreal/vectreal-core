@@ -9,10 +9,10 @@ import {
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
 
-import { cn } from '@/lib/utils';
-import useIsMobile from '@/lib/hooks/useIsMobile';
+import { cn } from '@vctrl/shared/lib/utils';
 
 import {
+  Button,
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -20,16 +20,15 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from './ui/navigation-menu';
-import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from './ui/sheet';
-import { Button } from './ui/button';
+} from '@vctrl/shared/components';
+
+import useIsMobile from '../lib/hooks/useIsMobile';
 import VectrealLogo from './assets/vectreal-logo';
 
 const mainEntries: { title: string; href: string }[] = [
@@ -194,7 +193,7 @@ const NavMenu = () => {
     <nav
       className={cn(
         'z-50 fixed left-0 top-0 flex items-center justify-between w-full py-2 px-4 bg-zinc-950/75 shadow-xl ',
-        isMobile ? "flex-row-reverse" : "flex-row"
+        isMobile ? 'flex-row-reverse' : 'flex-row',
       )}
     >
       {isMobile ? <MobileMenu /> : <DesktopMenu />}

@@ -7,12 +7,6 @@
     "strict": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
     "types": ["vite/client", "node"],
-    "baseUrl": "./",
-    "paths": {
-      "@vctrl/hooks": ["../../packages/hooks/*"],
-      "@vctrl/viewer": ["../../packages/viewer/*"],
-      "@/*": ["./src/*"]
-    }
   },
   "files": [],
   "include": [],
