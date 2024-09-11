@@ -1,6 +1,6 @@
+import { useLayoutEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, useGLTF } from '@react-three/drei';
-import { useLayoutEffect, useState } from 'react';
 
 interface ModelSceneProps {
   url: string;
