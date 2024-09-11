@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button, Input, Label, Textarea } from '@vctrl/shared/components';
 
@@ -53,6 +54,32 @@ const Contact = () => {
             Send message
           </Button>
         </form>
+
+        <p className="text-sm text-muted-foreground">
+          Or write an email to:{' '}
+          <Link
+            className="text-zinc-100 hover:underline"
+            to="mailto:info@vectreal.com"
+          >
+            info@vectreal.com
+          </Link>{' '}
+          /{' '}
+          <Link
+            className="text-zinc-100 hover:underline"
+            to="mailto:moritz@vectreal.com"
+          >
+            ken@vectreal.com
+          </Link>{' '}
+          ( or reach us via our{' '}
+          <Link
+            to="https://discord.gg/4GyS8rrD"
+            target="_blank"
+            className="text-zinc-100 hover:underline"
+          >
+            Discord Server
+          </Link>{' '}
+          ^^)
+        </p>
       </div>
     </TitleSection>
   );
