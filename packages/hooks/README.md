@@ -60,11 +60,11 @@ import React from 'react';
 import { useLoadModel } from '@vctrl/hooks/use-load-model';
 
 function ModelLoader() {
-  const { handleFileUpload, file, progress, isLoading } = useLoadModel();
+  const { load, file, progress, isLoading } = useLoadModel();
 
   const onFileChange = (event) => {
     const files = Array.from(event.target.files);
-    handleFileUpload(files);
+    load(files);
   };
 
   return (
@@ -90,7 +90,8 @@ The main hook for loading and managing 3D model files.
 - `file`: The loaded file object of type `ModelFile | null`.
 - `isLoading`: A boolean indicating whether a file is currently being loaded.
 - `progress`: A number between 0 and 100 representing the loading progress.
-- `handleFileUpload`: A function to handle file upload. It accepts an array of `File` objects or a mixed array of `File` objects and directory entries.
+- `load`: A function to handle file upload. It accepts an array of `File` objects or a mixed array of `File` objects and directory entries.
+- `reset`: A function to reset the internal state back to it's initial values.
 - `on`: A function to subscribe to events.
 - `off`: A function to unsubscribe from events.
 
@@ -110,7 +111,7 @@ function App() {
 }
 
 function ModelConsumer() {
-  const { file, isLoading, progress, handleFileUpload } = useModelContext();
+  const { file, isLoading, progress, load } = useModelContext();
   // Use the context values
 }
 ```
