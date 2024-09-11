@@ -18,6 +18,7 @@ import { WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module';
 
 import eventSystem from '../event-system';
 
@@ -30,6 +31,8 @@ function createGltfLoader() {
 
   const gltfLoader = new GLTFLoader()
     .setDRACOLoader(dracoLoader)
+    .setKTX2Loader(ktxLoader.detectSupport(new WebGLRenderer()))
+    .setMeshoptDecoder(MeshoptDecoder);
 
   gltfLoader.manager.onError = (url) => {
     eventSystem.emit('load-error', `Failed to load file ${url}`);
