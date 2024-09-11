@@ -15,18 +15,28 @@ import {
 } from '@vctrl/shared/components';
 import { useModelContext } from '@vctrl/hooks/use-load-model';
 
+import { useEditorContext } from '../../components/providers';
+
 const FileMenu = () => {
   const { file, load, reset, optimize } = useModelContext();
+  const { enableAutoRotate, setEnableAutoRotate } = useEditorContext();
+  const { simplifyOptimization } = optimize;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleReset = () => {
     reset();
   };
+
+  const handleToggleAutoRotate = () => {
+    setEnableAutoRotate(!enableAutoRotate);
+  };
+
   const handleNewFilesClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
     }
   };
+
   const handleLoadNewFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
@@ -42,6 +52,7 @@ const FileMenu = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleSimplifyClick = async () => {
+    simplifyOptimization();
   };
 
   return (
@@ -74,6 +85,12 @@ const FileMenu = () => {
           <MenubarMenu>
             <MenubarTrigger key="file">View</MenubarTrigger>
             <MenubarContent align="center">
+              <MenubarCheckboxItem
+                onClick={handleToggleAutoRotate}
+                checked={enableAutoRotate}
+              >
+                Enable auto-rotation
+              </MenubarCheckboxItem>
 
               <MenubarSeparator />
 
