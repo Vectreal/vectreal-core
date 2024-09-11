@@ -1,4 +1,4 @@
-name: Lint and build all NX projects
+name: Lint and build affected NX projects
 
 on:
   pull_request:
