@@ -17,9 +17,9 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src/'),
-      "@vctrl/hooks": path.resolve(__dirname, "../../packages/hooks"),
-      "@vctrl/viewer": path.resolve(__dirname, "../../packages/viewer"),
+      "@vctrl/hooks": path.resolve(__dirname, "../../packages/hooks/src"),
+      "@vctrl/viewer": path.resolve(__dirname, "../../packages/viewer/src"),
+      "@vctrl/shared": path.resolve(__dirname, "../../shared/src"),
     },
   },
 

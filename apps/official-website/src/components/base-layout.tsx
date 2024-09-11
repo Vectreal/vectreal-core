@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Pencil2Icon } from '@radix-ui/react-icons';
 
-import { TypewriterEffect } from './ui/typewriter-effect';
-import { Button } from './ui/button';
-import { Toaster } from './ui/sonner';
+import { TypewriterEffect, Button, Toaster } from '@vctrl/shared/components';
 
 import NavMenu from './nav-menu';
-import { Pencil2Icon } from '@radix-ui/react-icons';
 import Footer from './footer';
 
 const words = ['Make', 'your', '3D', 'models', 'Perfect.'];

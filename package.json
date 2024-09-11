@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "shared/*"
   ],
   "repository": {
     "url": "https://github.com/vectreal/vectreal-core",
