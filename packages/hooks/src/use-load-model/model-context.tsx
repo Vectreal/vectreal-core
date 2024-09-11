@@ -15,12 +15,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 import { createContext, useContext } from 'react';
+
+import { useOptimizeModel } from '../use-optimize-model';
 import useLoadModel from './use-load-model';
+
+interface ModelProviderProps extends React.PropsWithChildren {
+  optimizer?: ReturnType<typeof useOptimizeModel>;
+}
 
 const ModelContext = createContext({} as ReturnType<typeof useLoadModel>);
 
-const ModelProvider = ({ children }: React.PropsWithChildren) => {
-  const value = useLoadModel();
+const ModelProvider = ({ children, optimizer }: ModelProviderProps) => {
+  const value = useLoadModel(optimizer);
 
   return (
     <ModelContext.Provider value={value}>{children}</ModelContext.Provider>

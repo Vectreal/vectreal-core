@@ -38,6 +38,10 @@ export default defineConfig({
           __dirname,
           'src/use-load-model/index.ts',
         ),
+        'use-optimize-model': path.resolve(
+          __dirname,
+          'src/use-optimize-model/index.ts',
+        ),
       },
       name: '@vctrl/hooks',
       formats: ['es', 'cjs'],
