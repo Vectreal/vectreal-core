@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-
+import { MutatingDots } from 'react-loader-spinner';
 import {
   EyeOpenIcon,
   GitHubLogoIcon,
@@ -8,26 +8,24 @@ import {
   Pencil2Icon,
   UpdateIcon,
 } from '@radix-ui/react-icons';
-import { MutatingDots } from 'react-loader-spinner';
 
-import reactGraphic from '@/components/assets/react-graphic.png';
-
-import useIsMobile from '@/lib/hooks/useIsMobile';
-
-import TypographyMuted from '@/components/typography/typography-muted';
-import TypographyLead from '@/components/typography/typography-lead';
-import ModelScene from '@/components/title-model-scene';
-
-import { Highlight } from '@/components/ui/hero-highlight';
-import { BackgroundBeams } from '@/components/ui/background-beams';
-import { Button } from '@/components/ui/button';
 import {
+  Highlight,
+  BackgroundBeams,
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@vctrl/shared/components';
+
+import useIsMobile from '../lib/hooks/useIsMobile';
+
+import reactGraphic from '../components/assets/react-graphic.png';
+import TypographyMuted from '../components/typography/typography-muted';
+import TypographyLead from '../components/typography/typography-lead';
+import ModelScene from '../components/title-model-scene';
 
 const featureContent = [
   {

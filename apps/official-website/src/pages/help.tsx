@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import TitleSection from "@/components/title-section";
 import {
+  Button,
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+} from '@vctrl/shared/components';
+
+import TitleSection from '../components/title-section';
 
 const Help = () => {
   return (

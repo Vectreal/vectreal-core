@@ -1,6 +1,8 @@
-import { PropsWithChildren } from "react";
-import { BackgroundBeams } from "./ui/background-beams";
-import useIsMobile from "@/lib/hooks/useIsMobile";
+import { PropsWithChildren } from 'react';
+
+import { BackgroundBeams } from '@vctrl/shared/components';
+
+import useIsMobile from '../lib/hooks/useIsMobile';
 
 interface TitleSectionProps extends PropsWithChildren {
   className?: string;
