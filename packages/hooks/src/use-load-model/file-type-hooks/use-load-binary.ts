@@ -47,7 +47,7 @@ function useLoadBinary(dispatch: React.Dispatch<Action>) {
 
             gltfLoader.parse(arrayBuffer, '', (gltf) => {
               dispatch({
-                type: 'SET_FILE',
+                type: 'set-file',
                 payload: {
                   model: gltf.scene,
                   type: ModelFileTypes.glb,
@@ -60,7 +60,7 @@ function useLoadBinary(dispatch: React.Dispatch<Action>) {
             const model = usdzLoader.parse(arrayBuffer);
 
             dispatch({
-              type: 'SET_FILE',
+              type: 'set-file',
               payload: {
                 model: model,
                 type: ModelFileTypes.usdz,
@@ -70,13 +70,13 @@ function useLoadBinary(dispatch: React.Dispatch<Action>) {
           }
 
           onProgress(); // Call progress callback when binary file is loaded
-          dispatch({ type: 'SET_FILE_LOADING', payload: false });
+          dispatch({ type: 'set-file-loading', payload: false });
         }
       };
 
       reader.onerror = (error) => {
         console.error('Error reading file:', error);
-        dispatch({ type: 'SET_FILE_LOADING', payload: false });
+        dispatch({ type: 'set-file-loading', payload: false });
       };
 
       reader.readAsArrayBuffer(file);
