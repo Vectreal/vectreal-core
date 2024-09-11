@@ -4,11 +4,17 @@
 ](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
 [![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
 
+> This library is still undergoing heavy development until the first major version is released. This may lead to breaking changes in upcoming updates.
+
+## Overview
+
+vctrl/viewer is a React component library for rendering and interacting with 3D models. It's part of the vectreal ecosystem and is designed to work seamlessly with the vctrl/hooks package for model loading and management.
+
 ## Table of Contents
 
 - [vctrl/viewer](#vctrlviewer)
-  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
@@ -24,10 +30,6 @@
   - [License](#license)
   - [Contributing](#contributing)
   - [Support](#support)
-
-## Overview
-
-vctrl/viewer is a React component library for rendering and interacting with 3D models. It's part of the vectreal ecosystem and is designed to work seamlessly with the vctrl/hooks package for model loading and management.
 
 ## Features
 
