@@ -107,7 +107,7 @@ function useLoadGltf(dispatch: React.Dispatch<Action>) {
 
         gltfLoader.parse(JSON.stringify(modifiedGLTF), '', (gltf) => {
           dispatch({
-            type: 'SET_FILE',
+            type: 'set-file',
             payload: {
               model: gltf.scene,
               type: ModelFileTypes.gltf,
@@ -117,7 +117,7 @@ function useLoadGltf(dispatch: React.Dispatch<Action>) {
         });
 
         onProgress(100); // Final progress
-        dispatch({ type: 'SET_FILE_LOADING', payload: false });
+        dispatch({ type: 'set-file-loading', payload: false });
       };
 
       reader.readAsText(gltfFile);

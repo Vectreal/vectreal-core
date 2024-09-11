@@ -45,25 +45,29 @@ export interface State {
 
 // Updated Action types
 export type Action =
-  | { type: 'SET_FILE'; payload: ModelFile }
-  | { type: 'SET_FILE_LOADING'; payload: boolean }
-  | { type: 'SET_PROGRESS'; payload: number }
-  | { type: 'RESET_STATE' };
+  | { type: 'set-file'; payload: ModelFile }
+  | { type: 'set-file-loading'; payload: boolean }
+  | { type: 'set-progress'; payload: number }
+  | { type: 'reset-state' };
 
 // Updated Event types
 export type EventTypes =
-  | 'MULTIPLE_3D_MODELS'
-  | 'UNSUPPORTED_FILE_TYPE'
-  | 'UPLOAD_PROGRESS'
-  | 'UPLOAD_COMPLETE';
+  | 'multiple-models'
+  | 'not-loaded-files'
+  | 'load-progress'
+  | 'load-complete'
+  | 'load-reset'
+  | 'load-error';
 
 // Updated event data types
 export type EventData = {
-  MULTIPLE_3D_MODELS: File[];
-  UNSUPPORTED_FILE_TYPE: File[];
-  UPLOAD_PROGRESS: number;
-  UPLOAD_COMPLETE: State['file'];
+  'multiple-models': File[];
+  'not-loaded-files': File[];
+  'load-progress': number;
+  'load-complete': State['file'];
+  'load-reset': null;
+  'load-error': Error | unknown;
 };
 
 // Updated EventHandler type
-export type EventHandler<T extends EventTypes> = (data: EventData[T]) => void;
+export type EventHandler<T extends EventTypes> = (data?: EventData[T]) => void;
