@@ -9,8 +9,6 @@
 
 # Vectreal Core
 
-## Introduction
-
 Vectreal Core is a robust, community-driven, open-source toolkit designed to seamlessly integrate high-performance 3D content into React-based projects. Our mission is to empower developers, designers, and creators with comprehensive resources to build stunning, interactive 3D experiences.
 
 The monorepo is orchestrated using NX within an npm workspaces environment, primarily consisting of React.js projects.
@@ -20,7 +18,6 @@ The monorepo is orchestrated using NX within an npm workspaces environment, prim
 ## Table of Contents
 
 - [Vectreal Core](#vectreal-core)
-  - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Project Structure](#project-structure)
@@ -53,10 +50,10 @@ This monorepo is organized as follows:
 vectreal-core/
 ├── packages/
 │ ├── hooks/
-│ ├── viewer/
-│ └── docker/
+│ └── viewer/
 ├── apps/
 │ └── official-website/
+├── docker/
 ├── examples/
 └── docs/
 ```
@@ -68,6 +65,8 @@ vectreal-core/
 - **[@vctrl/hooks](https://github.com/Vectreal/vectreal-core/tree/main/packages/hooks)**: A collection of useful React hooks for loading and interacting with 3D files.
 
   - **use-load-model**: File or directory loading hooks for various approaches (Event based, React Context, direct)
+
+  - **use-optimize-model**: Utilizing the [gltf-transform](https://gltf-transform.dev/) js library to optimize models in the browser. May be used standaloe or in conjunction with the `use-load-model` hook for convenience.
 
 - **[@vctrl/viewer](https://github.com/Vectreal/vectreal-core/tree/main/packages/viewer)**: A fully type-safe and ready-to-use viewer component for React.
 
