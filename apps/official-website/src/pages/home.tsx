@@ -64,7 +64,7 @@ const Home = () => {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
             Unlock the Power of Open-Source 3D Optimization
           </h1>
-          <h4 className=" md:text-2xl text-muted-foreground ">
+          <h4 className="md:text-2xl text-muted-foreground">
             Contribute to <Highlight>the future of 3D content</Highlight> with
             Vectreal's community-driven tools.
           </h4>
@@ -85,40 +85,36 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="flex flex-col gap-8 items-center relative z-10 my-32">
         <div className="grid md:grid-cols-2 gap-8 max-w-screen-xl">
           <div className="flex flex-col gap-8 justify-center">
             <h2 className="text-4xl font-bold tracking-tight">Our Mission</h2>
             <TypographyMuted>
-              Welcome to Vectreal Core, your new home for open-source 3D tools
-              optimized for the React ecosystem. Our mission is to empower
+              Welcome to Vectreal Core, your go-to destination for open-source
+              3D tools optimized for React. Our mission is to provide
               developers, designers, and creators with the resources they need
               to integrate high-performance 3D content into React-based
               projects.
             </TypographyMuted>
-            <TypographyLead>Starting with a focus on React</TypographyLead>
+            <TypographyLead>
+              Starting with a strong focus on React
+            </TypographyLead>
             <TypographyMuted>
-              While we're starting with a strong focus on React, Vectreal's
-              proprietary platform will soon extend to offer powerful solutions
-              for a broader range of web technologies. But for now, we're
-              dedicated to providing the React community with the best tools and
-              resources to create stunning, interactive 3D experiences.
+              Vectreal's proprietary platform will soon expand to offer powerful
+              solutions for a variety of web technologies. However, our current
+              priority is supporting the React community with the best tools and
+              resources for building interactive 3D experiences.
             </TypographyMuted>
           </div>
 
           <Card className="h-[50vh] max-h-[500px] w-full overflow-hidden border-zinc-700">
             <CardHeader className="p-3 border-b bg-zinc-900">
-              {
-                // These are meant to replicate the appearence of the mac os window controls
-              }
               <span className="flex flex-row items-center gap-[12px]">
                 <div className="w-3 h-3 rounded-full bg-zinc-600 m-0" />
                 <div className="w-3 h-3 rounded-full bg-zinc-600 m-0" />
                 <div className="w-3 h-3 rounded-full bg-zinc-600 m-0" />
               </span>
             </CardHeader>
-
             <Suspense
               fallback={
                 <div className="w-full h-full flex items-center justify-center">
@@ -131,9 +127,7 @@ const Home = () => {
                 </div>
               }
             >
-              <Suspense>
-                <ModelScene url="/assets/DamagedHelmet.glb" />
-              </Suspense>
+              <ModelScene url="/assets/DamagedHelmet.glb" />
             </Suspense>
           </Card>
         </div>
@@ -162,7 +156,6 @@ const Home = () => {
         <h2 className="text-4xl font-bold tracking-tight text-center">
           Try it out for yourself
         </h2>
-
         <TypographyMuted className="text-center">
           Test the power of our tools right here using our free online editor
           toolkit.
@@ -175,27 +168,24 @@ const Home = () => {
       </section>
 
       <section className="flex flex-col gap-8 items-center relative z-10 my-32">
-        <div className="grid max-md:flex max-md:flex-col-reverse md:grid-cols-2 gap-8 max-w-screen-xl ">
+        <div className="grid max-md:flex max-md:flex-col-reverse md:grid-cols-2 gap-8 max-w-screen-xl">
           <div className="flex flex-col gap-8 justify-center">
             <h2 className="text-4xl font-bold tracking-tight">
               Why Vectreal for React?
             </h2>
             <TypographyMuted>
-              Vectreal Core is crafted with React developers in mind. Whether
-              you're building an e-commerce site, an interactive portfolio, or a
-              cutting-edge web app, our tools are designed to integrate
-              seamlessly into your React projects. We understand the React
-              ecosystem's needs and are committed to providing resources that
-              enhance your development process, not complicate it.
+              Vectreal Core is built with React developers in mind. Whether
+              you're working on e-commerce, portfolios, or web apps, our tools
+              integrate seamlessly with your React projects. We prioritize
+              simplicity and efficiency, making sure you can focus on creating
+              stunning 3D experiences without extra complexity.
             </TypographyMuted>
             <TypographyMuted>
-              Looking beyond React? Our proprietary Vectreal platform will soon
-              offer solutions that cater to a wider array of web technologies.
-              Stay tuned as we expand our offerings to meet the needs of
-              developers working across various frameworks.
+              We're expanding soon! Our proprietary Vectreal platform will cater
+              to a wider range of web technologies, so stay tuned as we roll out
+              new features for developers working with different frameworks.
             </TypographyMuted>
           </div>
-
           <img src={reactGraphic} alt="" />
         </div>
       </section>
@@ -208,11 +198,10 @@ const Home = () => {
             </CardHeader>
             <CardContent className="flex flex-col justify-between grow">
               <CardDescription>
-                Learn how to contribute to our project on GitHub. We're always
-                looking for contributors who are passionate about React and
-                three.js to help us build the future of 3D web content.
+                Learn how to contribute to our project on GitHub. We’re always
+                looking for passionate contributors who can help build the
+                future of 3D web content.
               </CardDescription>
-
               <Link
                 to="https://github.com/vectreal"
                 target="_blank"
@@ -229,11 +218,9 @@ const Home = () => {
             </CardHeader>
             <CardContent className="flex flex-col justify-between grow">
               <CardDescription>
-                Join our Discord server for support, announcements, and more. We
-                are constantly seeking new members to join our community. Let's
-                discuss and build the future of 3D web content together.
+                Join our Discord server for support, discussions, and
+                collaboration. Help shape the future of 3D web content!
               </CardDescription>
-
               <Link
                 to="https://discord.gg/UHxPjGMH"
                 target="_blank"
@@ -249,17 +236,13 @@ const Home = () => {
               Built on Collaboration
             </h2>
             <TypographyMuted>
-              Join our community of React developers and creators. At Vectreal,
-              collaboration is at the heart of everything we do. Whether you
-              want to contribute code, provide feedback, or collaborate on
-              projects, we welcome your involvement. Together, we're building
-              the future of 3D web content.
+              At Vectreal, collaboration is at the core of what we do. Join a
+              community of developers, designers, and creators working together
+              to push the boundaries of 3D web content.
             </TypographyMuted>
             <TypographyMuted>
-              Looking beyond React? Our proprietary Vectreal platform will soon
-              offer solutions that cater to a wider array of web technologies.
-              Stay tuned as we expand our offerings to meet the needs of
-              developers working across various frameworks.
+              Stay tuned as we expand beyond React to cater to a wider range of
+              web technologies. Let's build the future of 3D together.
             </TypographyMuted>
           </div>
         </div>
