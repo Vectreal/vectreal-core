@@ -4,6 +4,8 @@
 ](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
 [![@vctrl/hooks | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fhooks?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fhooks%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://www.npmjs.com/package/@vctrl/hooks)
 
+> This library is still undergoing heavy development until the first major version is released. This may lead to breaking changes in upcoming updates.
+
 ## Overview
 
 vctrl/hooks is a React hooks package designed to simplify 3D model loading and management within React applications. It's part of the vectreal-core ecosystem and is primarily used in the vctrl/viewer React component and the official website application.
@@ -21,6 +23,8 @@ The package provides a powerful hook for loading various 3D model file formats, 
   - [API Reference](#api-reference)
     - [useLoadModel](#useloadmodel)
       - [Returns](#returns)
+    - [useOptimizeModel](#useoptimizemodel)
+      - [Returns](#returns-1)
     - [ModelContext](#modelcontext)
     - [Event System](#event-system)
       - [Events](#events)
@@ -79,6 +83,58 @@ function ModelLoader() {
 
 > Multiple files can be handled, e.g. when uploading a `.gltf` model, its `.bin` file and the relavant image texture files as `.jpeg`/`.png` (Other texture file formats have not been tested).
 
+The `useLoadModel` and `useOptimizeModel` hooks may be used together or standalone to optimize gltf based scenes.
+
+1. Either use the optimizer directly with the `useLoadModel` hook
+
+   ```jsx
+   import React from 'react';
+   import { useLoadModel } from '@vctrl/hooks/use-load-model';
+   import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
+
+   function ModelLoader() {
+     const optimizer = useOptimizeModel();
+     const { load: loadFile, file, optimize } = useLoadModel(optimizer);
+     const { load: loadModel, getModel, simplifyOptimization } = optimize;
+
+     async function handleClick() {
+       await simplifyOptimization();
+     }
+   }
+   ```
+
+> Changes are applied to the `file.model` field from `useLoadModel` automatically when using optimizations
+
+2. Or use the optimizer together with the `ModelProvider`
+
+   ```jsx
+   // App.tsx
+   import { ModelProvider } from '@vctrl/hooks/use-load-model';
+   import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
+
+   function App() {
+      const optimizer = useOptimizeModel();
+
+      return (
+        <ModelProvider optimizer={optimizer}>
+          <Scene>
+        </ModelProvider>
+      )
+   }
+   ```
+
+   ```jsx
+   // Scene.tsx
+   import { useModelContext } from '@vctrl/hooks/use-load-model';
+
+   function Scene() {
+     const { optimize } = useModelContext();
+     const { load, getModel, simplifyOptimization } = optimize;
+
+     //...
+   }
+   ```
+
 ## API Reference
 
 ### useLoadModel
@@ -94,6 +150,17 @@ The main hook for loading and managing 3D model files.
 - `reset`: A function to reset the internal state back to it's initial values.
 - `on`: A function to subscribe to events.
 - `off`: A function to unsubscribe from events.
+- `optimize`: An object optionally populated by the `useOptimizeModel` hook
+
+### useOptimizeModel
+
+An addon that may be used in conjunction with the `useLoadModel` hook. It populates the `optimize` property returned by the `useLoadModel` and `useModelContext` hooks.
+
+#### Returns
+
+- `load`: Loads a Three.js Object3D model into the optimizer.
+- `getModel`: Simplifies the current model document using the MeshoptSimplifier.
+- `simplifyOptimization`: Returns the current model document as a binary array buffer.
 
 ### ModelContext
 

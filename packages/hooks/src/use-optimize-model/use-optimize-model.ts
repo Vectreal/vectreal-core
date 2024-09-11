@@ -31,6 +31,11 @@ io.registerExtensions([KHRMeshQuantization]);
 const useOptimizeModel = () => {
   const modelDoc = useRef<Document | null>(null);
 
+  /**
+   * Loads a Three.js Object3D model into the optimizer.
+   * @param model The Three.js Object3D model to load.
+   * @returns A promise that resolves when the model is loaded.
+   */
   async function load(model: Object3D) {
     const modelBuffer = (await exporter.parseAsync(model, {
       binary: true,
@@ -38,6 +43,10 @@ const useOptimizeModel = () => {
     modelDoc.current = await io.readBinary(new Uint8Array(modelBuffer));
   }
 
+  /**
+   * Simplifies the current model document using the MeshoptSimplifier.
+   * @returns {Promise<void>}
+   */
   async function simplifyOptimization() {
     if (!modelDoc.current) return;
 
@@ -67,6 +76,10 @@ const useOptimizeModel = () => {
     modelDoc.current = transformedModel;
   }
 
+  /**
+   * Returns the current model document as a binary array buffer.
+   * @returns {Promise<ArrayBuffer>}
+   */
   async function getModel() {
     if (!modelDoc.current) return;
 
