@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: '20'
       - run: npm i
-      - run: npx nx affected --target=build --base=${{ github.event.pull_request.base.label }} --head=${{ github.event.pull_request.head.label }}
+      - run: npx nx affected --target=build --base=${{ github.event.pull_request.base.ref }} --head=${{ github.event.pull_request.head.ref }}
