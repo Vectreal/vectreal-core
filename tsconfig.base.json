@@ -15,10 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@vctrl/hooks": ["packages/hooks/src/index.ts"],
       "@vctrl/hooks/*": ["packages/hooks/src/*"],
+      "@vctrl/viewer": ["packages/viewer/src/index.tsx"],
+      "@vctrl/viewer/*": ["packages/viewer/src/*"],
       "@vctrl/official-website/*": ["apps/official-website/src/*"],
-      "@vctrl/shared/*": ["shared/src/*"],
-      "@vctrl/viewer/*": ["packages/viewer/src/*"]
+      "@vctrl/shared/*": ["shared/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
