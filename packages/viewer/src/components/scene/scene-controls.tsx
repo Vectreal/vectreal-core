@@ -1,5 +1,5 @@
+import { useEffect, useMemo, useState } from 'react';
 import { OrbitControls, OrbitControlsProps } from '@react-three/drei';
-import { useEffect, useState } from 'react';
 
 export interface ControlsProps extends OrbitControlsProps {
   controlsTimeout?: number;
@@ -8,13 +8,16 @@ export interface ControlsProps extends OrbitControlsProps {
 const SceneControls = ({ enabled, ...rest }: ControlsProps) => {
   const [isControlsEnabled, setIsControlsEnabled] = useState(false);
 
-  const controlsOptions = {
-    enabled,
-    maxPolarAngle: Math.PI / 2,
-    autoRotate: true,
-    makeDefault: true,
-    ...rest,
-  };
+  const controlsOptions = useMemo(
+    () => ({
+      enabled,
+      maxPolarAngle: Math.PI / 2,
+      autoRotate: true,
+      makeDefault: true,
+      ...rest,
+    }),
+    [enabled, rest],
+  );
 
   // wait for the stage component to center the model
   // after 1 second enable the controls
