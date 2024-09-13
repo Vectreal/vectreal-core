@@ -26,6 +26,7 @@
     "url": "https://github.com/vectreal/vectreal-core",
     "type": "https"
   },
+  "license": "AGPL-3.0-only",
   "main": "./index.js",
   "module": "./index.mjs",
   "types": "./index.d.ts",
