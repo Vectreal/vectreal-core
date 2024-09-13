@@ -17,10 +17,10 @@
     "paths": {
       "@vctrl/hooks": ["packages/hooks/src/index.ts"],
       "@vctrl/hooks/*": ["packages/hooks/src/*"],
-      "@vctrl/viewer": ["packages/viewer/src/index.ts"],
-      "@vctrl/viewer/*": ["packages/viewer/src/*"],
       "@vctrl/official-website/*": ["apps/official-website/src/*"],
-      "@vctrl/shared/*": ["shared/src/*"]
+      "@vctrl/shared/*": ["shared/src/*"],
+      "@vctrl/viewer": ["packages/viewer/src/index.ts"],
+      "@vctrl/viewer/*": ["packages/viewer/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,3 +1,23 @@
+## 0.2.1 (2024-09-13)
+
+
+### 🩹 Fixes
+
+- **apps/official-website:** change viewer import to use named syntax ([6fd958a](https://github.com/Vectreal/vectreal-core/commit/6fd958a))
+- **packages/viewer:** add directory option to file input ([a97d2c9](https://github.com/Vectreal/vectreal-core/commit/a97d2c9))
+- **packages/viewer:** extension change of `ìndex` file ([06b030b](https://github.com/Vectreal/vectreal-core/commit/06b030b))
+- **packages/viewer:** memoize certain scene options ([0051955](https://github.com/Vectreal/vectreal-core/commit/0051955))
+- **project:** extend paths in `tsconfig.json` ([0a19d37](https://github.com/Vectreal/vectreal-core/commit/0a19d37))
+
+### 📖 Documentation
+
+- **packages/viewer:** add WIP info to the top ([3d1d729](https://github.com/Vectreal/vectreal-core/commit/3d1d729))
+- **project:** add mention of `use-optimize-model` hook ([4212893](https://github.com/Vectreal/vectreal-core/commit/4212893))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.2.0 (2024-09-11)
 
 
