@@ -60,10 +60,12 @@ import { VectrealViewer } from '@vctrl/viewer';
 import { ModelProvider } from '@vctrl/hooks/use-load-model';
 
 function App() {
+  const { scene } = useGltf('https://url-to-your-model.glb');
+
   return (
-    <ModelProvider>
-      <VectrealViewer />
-    </ModelProvider>
+    <>
+      <VectrealViewer model={scene} />
+    </>
   );
 }
 
