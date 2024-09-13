@@ -8,6 +8,14 @@ import { Card, CardContent } from '@vctrl/shared/components';
 import TypographyLead from '../../components/typography/typography-lead';
 import { useIsMobile } from '../../lib/hooks';
 
+declare module 'react' {
+  interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
+    // extends React's HTMLAttributes
+    directory?: string;
+    webkitdirectory?: string;
+  }
+}
+
 const DropZone = () => {
   const isMobile = useIsMobile();
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
@@ -54,7 +62,12 @@ const DropZone = () => {
             <TypographyLead isHighlighted={isDragActive}>
               Click here, or drag and drop your 3D model files
             </TypographyLead>
-            <input {...getInputProps()} />
+            <input
+              {...getInputProps()}
+              webkitdirectory="true"
+              directory="true"
+              multiple
+            />
           </div>
         </CardContent>
       </Card>
