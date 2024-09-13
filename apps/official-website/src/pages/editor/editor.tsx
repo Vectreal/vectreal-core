@@ -3,7 +3,7 @@ import { Oval } from 'react-loader-spinner';
 import { toast } from 'sonner';
 import { Vector3 } from 'three';
 
-import ModelViewer from '@vctrl/viewer/lib/vectreal-viewer';
+import { VectrealViewer } from '@vctrl/viewer';
 import {
   ModelFile,
   ModelProvider,
@@ -80,17 +80,15 @@ const Editor = () => {
       <UploadInfoDialog open={!hasShownInfo} onClose={handleClose} />
 
       {hasInput ? (
-        <ModelViewer
+        <VectrealViewer
           key="model-viewer"
+          gridOptions={{ showGrid: true }}
           controlsOptions={{
             autoRotate: enableAutoRotate,
           }}
           cameraOptions={{
-            initialCameraPosition: new Vector3(
-              0, 5, 5
-            )
+            initialCameraPosition: new Vector3(0, 5, 5),
           }}
-          gridOptions={{ showGrid: true }}
           loader={
             <Oval
               width="3rem"
