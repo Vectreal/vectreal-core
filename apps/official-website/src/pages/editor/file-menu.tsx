@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { toast } from 'sonner';
 
 import {
   Menubar,
@@ -14,30 +15,45 @@ import {
   MenubarCheckboxItem,
 } from '@vctrl/shared/components';
 import { useModelContext } from '@vctrl/hooks/use-load-model';
+import { useExportModel } from '@vctrl/hooks/use-export-model';
 
 import { useEditorContext } from '../../components/providers';
 
+function handleExportSuccess() {
+  toast.info('Successfully exported model.');
+}
+
+function handleExportError(error: ErrorEvent) {
+  toast.error(error.message);
+}
+
 const FileMenu = () => {
   const { file, load, reset, optimize } = useModelContext();
-  const { enableAutoRotate, setEnableAutoRotate } = useEditorContext();
   const { simplifyOptimization } = optimize;
+
+  const { handleGltfExport } = useExportModel(
+    handleExportSuccess,
+    handleExportError,
+  );
+
+  const { enableAutoRotate, setEnableAutoRotate } = useEditorContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleReset = () => {
+  function handleReset() {
     reset();
-  };
+  }
 
-  const handleToggleAutoRotate = () => {
+  function handleToggleAutoRotate() {
     setEnableAutoRotate(!enableAutoRotate);
-  };
+  }
 
-  const handleNewFilesClick = () => {
+  function handleNewFilesClick() {
     if (inputRef.current) {
       inputRef.current.click();
     }
-  };
+  }
 
-  const handleLoadNewFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleLoadNewFiles(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
 
     const files = event.target.files;
@@ -45,15 +61,15 @@ const FileMenu = () => {
     if (files) {
       load(Array.from(files));
     }
-  };
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const handleUsdzExport = () => {};
+  function handleUsdzExport() {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const handleSimplifyClick = async () => {
+  async function handleSimplifyClick() {
     simplifyOptimization();
-  };
+  }
 
   return (
     file && (
@@ -115,11 +131,11 @@ const FileMenu = () => {
               <MenubarSub>
                 <MenubarSubTrigger>glTF</MenubarSubTrigger>
                 <MenubarSubContent>
-                  <MenubarItem onClick={handleUsdzExport}>
+                  <MenubarItem onClick={() => handleGltfExport(file, true)}>
                     glTF-Binary
                     <pre className="text-muted-foreground"> .glb</pre>
                   </MenubarItem>
-                  <MenubarItem onClick={handleUsdzExport}>
+                  <MenubarItem onClick={() => handleGltfExport(file, false)}>
                     glTF-JSON
                     <pre className="text-muted-foreground"> .gltf</pre>
                   </MenubarItem>
@@ -127,8 +143,8 @@ const FileMenu = () => {
               </MenubarSub>
               <MenubarSeparator />
               <MenubarSub>
-                <MenubarSubTrigger>USD</MenubarSubTrigger>
-                <MenubarSubContent>
+                <MenubarSubTrigger>USD (WIP)</MenubarSubTrigger>
+                {/* <MenubarSubContent>
                   <MenubarItem onClick={handleUsdzExport}>
                     USDZ
                     <pre className="text-muted-foreground"> .usdz (ASCII)</pre>
@@ -137,7 +153,7 @@ const FileMenu = () => {
                     USDZ
                     <pre className="text-muted-foreground"> .usdz (BINARY)</pre>
                   </MenubarItem>
-                </MenubarSubContent>
+                </MenubarSubContent> */}
               </MenubarSub>
             </MenubarContent>
           </MenubarMenu>

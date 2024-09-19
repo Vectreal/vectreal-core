@@ -42,6 +42,10 @@ export default defineConfig({
           __dirname,
           'src/use-optimize-model/index.ts',
         ),
+        'use-export-model': path.resolve(
+          __dirname,
+          'src/use-export-model/index.ts',
+        ),
       },
       name: '@vctrl/hooks',
       formats: ['es', 'cjs'],
