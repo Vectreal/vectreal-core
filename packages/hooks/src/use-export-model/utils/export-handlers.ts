@@ -3,6 +3,13 @@ import { ImageDataObject, TexturesObject, URIBufferObject } from '../types';
 import dataURItoBlob from './data-uri-to-blob';
 import { getFileExtension } from './file-helpers';
 
+/**
+ * Handles processing and adding images to a zip file.
+ * 
+ * @param images The images property of the GLTF model's asset.
+ * @param textures The textures property of the GLTF model's asset.
+ * @param zip The zip file to add images to.
+ */
 export const handleImages = (
   images: Array<ImageDataObject>,
   textures: Array<TexturesObject>,
@@ -30,7 +37,19 @@ export const handleImages = (
   });
 };
 
-// Handles buffers in the GLTF export result
+
+/**
+ * Handles processing and adding buffers to a zip file.
+ * 
+ * @param buffers The buffers property of the GLTF model's asset.
+ * @param zip The zip file to add buffers to.
+ * @param baseFileName The base file name to use for the exported file.
+ * 
+ * Only ArrayBuffers and URIBufferObjects with a uri of type data URL are supported.
+ * If the buffer is not an ArrayBuffer, it must have a uri that starts with 'data:'.
+ * If the buffer is not an ArrayBuffer and does not have a uri, a warning is logged
+ * to the console.
+ */
 export const handleBuffers = (
   buffers: Array<URIBufferObject | ArrayBuffer>,
   zip: JSZip,

@@ -1,3 +1,10 @@
+/**
+ * Converts a data URI to a Blob.
+ *
+ * @param {string} dataURI - The data URI to convert.
+ *
+ * @returns {Blob} The Blob object.
+ */
 const dataURItoBlob = (dataURI: string): Blob => {
   const byteString = atob(dataURI.split(',')[1]);
   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
