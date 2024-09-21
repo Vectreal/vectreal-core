@@ -20,7 +20,13 @@ import { Object3D } from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 import { Document, WebIO } from '@gltf-transform/core';
-import { dedup, flatten, quantize, simplify, weld } from '@gltf-transform/functions';
+import {
+  dedup,
+  flatten,
+  quantize,
+  simplify,
+  weld,
+} from '@gltf-transform/functions';
 import { KHRMeshQuantization } from '@gltf-transform/extensions';
 import { MeshoptSimplifier } from 'meshoptimizer';
 
@@ -82,8 +88,6 @@ const useOptimizeModel = () => {
    */
   async function getModel() {
     if (!modelDoc.current) return;
-
-    console.log(modelDoc.current);
 
     return await io.writeBinary(modelDoc.current);
   }

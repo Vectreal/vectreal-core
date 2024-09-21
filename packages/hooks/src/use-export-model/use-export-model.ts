@@ -49,8 +49,7 @@ const useExportModel = (
     exporter.parse(
       scene,
       (result: ArrayBuffer | ExportResult) => {
-        console.log(result);
-        const baseFileName = file?.name?.split('.').shift() || 'scene';
+        const baseFileName = getFileBasename(file.name);
 
         if (result instanceof ArrayBuffer) {
           // GLB format
