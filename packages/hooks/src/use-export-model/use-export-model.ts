@@ -5,12 +5,7 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 import { ModelFile } from '../use-load-model';
 import { ExportResult } from './types';
-import {
-  getFileBasename,
-  handleBuffers,
-  handleImages,
-  saveArrayBuffer,
-} from './utils';
+import { getFileBasename, handleBuffers, handleImages } from './utils';
 
 /**
  * Processes the result of a GLTF export and saves it as a ZIP file.
@@ -72,7 +67,7 @@ const useExportModel = (
 
         if (result instanceof ArrayBuffer) {
           // GLB format
-          saveArrayBuffer(result, `${baseFileName}.glb`);
+          saveAs(new Blob([result]), `${baseFileName}.glb`);
           if (onSaved) onSaved();
         } else {
           // GLTF format
