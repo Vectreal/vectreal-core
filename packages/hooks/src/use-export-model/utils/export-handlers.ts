@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import { ImageDataObject, TexturesObject, URIBufferObject } from '../types';
-import getFileExtension from './get-file-extension';
 import dataURItoBlob from './data-uri-to-blob';
+import { getFileExtension } from './file-helpers';
 
 export const handleImages = (
   images: Array<ImageDataObject>,
