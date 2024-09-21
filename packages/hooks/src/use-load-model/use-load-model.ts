@@ -157,14 +157,12 @@ function useOptimizerIntegration(
 ) {
   const dispatchNewModel = useCallback(
     (model: Uint8Array) => {
-      console.log('Dispatching new model');
       const gltfLoader = createGltfLoader();
 
       gltfLoader.parse(
         model.buffer,
         '',
         (gltf) => {
-          console.log('Loaded new model');
           dispatch({
             type: 'set-file',
             payload: {
