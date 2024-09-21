@@ -5,7 +5,12 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 import { ModelFile } from '../use-load-model';
 import { ExportResult } from './types';
-import { handleBuffers, handleImages, saveArrayBuffer } from './utils';
+import {
+  getFileBasename,
+  handleBuffers,
+  handleImages,
+  saveArrayBuffer,
+} from './utils';
 
 /**
  * Processes the result of a GLTF export and saves it as a ZIP file.
