@@ -7,7 +7,12 @@ import { ModelFile } from '../use-load-model';
 import { ExportResult } from './types';
 import { handleBuffers, handleImages, saveArrayBuffer } from './utils';
 
-// Processes the GLTF export result
+/**
+ * Processes the result of a GLTF export and saves it as a ZIP file.
+ *
+ * @param {ExportResult} result The result of the GLTF export.
+ * @param {string} baseFileName The base file name to use for the exported file.
+ */
 const processGltfResult = (
   result: ExportResult,
   baseFileName: string,
@@ -28,6 +33,15 @@ const processGltfResult = (
   });
 };
 
+/**
+ * A React hook for exporting a 3D model from a Three.js scene.
+ *
+ * @param {Function} [onSaved] Called when the export is complete.
+ * @param {Function} [onError] Called when an error occurs during exporting.
+ * @returns An object with a single property, `handleGltfExport`. `handleGltfExport` is a function
+ *   that takes a file object and a boolean indicating whether to export in binary format.
+ *   It exports the scene in the format specified by the boolean parameter.
+ */
 const useExportModel = (
   onSaved?: () => void,
   onError?: (error: ErrorEvent) => void,
