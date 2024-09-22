@@ -12,17 +12,17 @@
 
 The package provides powerful hooks for:
 
-- Loading various 3D model file formats (`useLoadModel`)
-- Optimizing 3D models (`useOptimizeModel`)
-- Exporting 3D models from Three.js scenes (`useExportModel`)
+- **Loading various 3D model file formats** (`useLoadModel`)
+- **Optimizing 3D models** (`useOptimizeModel`)
+- **Exporting 3D models from Three.js scenes** (`useExportModel`)
 
 It also includes a React context (`ModelContext`) for easy state management and an event system for handling different stages of the model loading process.
 
-## Table of Contents
+### Table of Contents
 
 - [vctrl/hooks](#vctrlhooks)
   - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
+    - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Hooks](#hooks)
     - [useLoadModel](#useloadmodel)
@@ -30,8 +30,7 @@ It also includes a React context (`ModelContext`) for easy state management and 
       - [Features](#features)
       - [Usage](#usage)
       - [API Reference](#api-reference)
-      - [Event System](#event-system)
-        - [Events](#events)
+      - [Optimization Integration](#optimization-integration)
     - [useOptimizeModel](#useoptimizemodel)
       - [Overview](#overview-2)
       - [Features](#features-1)
@@ -42,7 +41,7 @@ It also includes a React context (`ModelContext`) for easy state management and 
       - [Features](#features-2)
       - [Usage](#usage-2)
       - [API Reference](#api-reference-2)
-  - [ModelContext](#modelcontext)
+    - [ModelContext](#modelcontext)
   - [Common Concepts](#common-concepts)
     - [Supported File Types](#supported-file-types)
     - [File Loading Process](#file-loading-process)
@@ -78,6 +77,7 @@ yarn add @vctrl/hooks
 - Emits events during the loading process
 - Integrates with Three.js
 - Supports multiple file uploads (e.g., `.gltf` with associated `.bin` and texture files)
+- Integrates with `useOptimizeModel` for model optimization
 - TypeScript support
 
 #### Usage
@@ -151,36 +151,37 @@ The `useLoadModel` hook returns the following:
 - `reset()`: A function to reset the internal state back to its initial values.
 - `on(event, handler)`: A function to subscribe to events.
 - `off(event, handler)`: A function to unsubscribe from events.
-- `optimize`: An object optionally populated by the `useOptimizeModel` hook (see below).
+- `optimize`: An object populated by the `useOptimizeModel` hook integration, providing optimization functions (see below).
 
-#### Event System
+#### Optimization Integration
 
-The `useLoadModel` hook includes a custom event system for handling various stages of the model loading process.
+If you pass an instance of `useOptimizeModel` to `useLoadModel`, it will integrate optimization functions into the `optimize` object:
 
-##### Events
+```jsx
+import React from 'react';
+import { useLoadModel } from '@vctrl/hooks/use-load-model';
+import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
 
-You can subscribe to these events using the `on` method:
+function ModelLoader() {
+  const optimizer = useOptimizeModel();
+  const { load, file, optimize } = useLoadModel(optimizer);
 
-- `'UPLOAD_PROGRESS'`: Emitted with the current progress (0-100) during file upload.
-- `'UPLOAD_COMPLETE'`: Emitted with the loaded file object when the upload is complete.
-- `'MULTIPLE_3D_MODELS'`: Emitted if multiple supported 3D model files are detected in the upload.
-- `'UNSUPPORTED_FILE_TYPE'`: Emitted if an unsupported file type is uploaded.
-
-Example usage:
-
-```javascript
-const { on, off } = useLoadModel();
-
-useEffect(() => {
-  const handleProgress = (progress) => {
-    console.log(`Upload progress: ${progress}%`);
+  const handleSimplify = async () => {
+    await optimize.simplifyOptimization();
+    // The optimized model is now in file.model
   };
 
-  on('UPLOAD_PROGRESS', handleProgress);
-
-  return () => off('UPLOAD_PROGRESS', handleProgress);
-}, [on, off]);
+  return (
+    // ... your component logic
+  );
+}
 ```
+
+The `optimize` object includes:
+
+- `simplifyOptimization()`: Simplifies the model using mesh simplification.
+- `dedupOptimization()`: Removes duplicate vertices and meshes.
+- `quantizeOptimization()`: Reduces the precision of vertex attributes.
 
 ### useOptimizeModel
 
@@ -191,6 +192,7 @@ useEffect(() => {
 #### Features
 
 - Simplifies 3D models using mesh optimization algorithms
+- Provides deduplication and quantization optimizations
 - Integrates with `useLoadModel` and `ModelContext`
 - TypeScript support
 
@@ -207,22 +209,31 @@ There are two ways to use the `useOptimizeModel` hook:
 
    function ModelLoader() {
      const optimizer = useOptimizeModel();
-     const { load: loadFile, file, optimize } = useLoadModel(optimizer);
-
-     const handleFileChange = (event) => {
-       const files = Array.from(event.target.files);
-       loadFile(files);
-     };
+     const { load, file, optimize } = useLoadModel(optimizer);
 
      const handleSimplify = async () => {
        await optimize.simplifyOptimization();
        // The optimized model is now in file.model
      };
 
+     const handleDedup = async () => {
+       await optimize.dedupOptimization();
+     };
+
+     const handleQuantize = async () => {
+       await optimize.quantizeOptimization();
+     };
+
      return (
        <div>
-         <input type="file" onChange={handleFileChange} multiple />
+         <input
+           type="file"
+           onChange={(e) => load(Array.from(e.target.files))}
+           multiple
+         />
          <button onClick={handleSimplify}>Simplify Model</button>
+         <button onClick={handleDedup}>Deduplicate Model</button>
+         <button onClick={handleQuantize}>Quantize Model</button>
        </div>
      );
    }
@@ -258,10 +269,23 @@ There are two ways to use the `useOptimizeModel` hook:
 
      const handleSimplify = async () => {
        await optimize.simplifyOptimization();
-       // Optimized model is now available
      };
 
-     return <button onClick={handleSimplify}>Simplify Model</button>;
+     const handleDedup = async () => {
+       await optimize.dedupOptimization();
+     };
+
+     const handleQuantize = async () => {
+       await optimize.quantizeOptimization();
+     };
+
+     return (
+       <div>
+         <button onClick={handleSimplify}>Simplify Model</button>
+         <button onClick={handleDedup}>Deduplicate Model</button>
+         <button onClick={handleQuantize}>Quantize Model</button>
+       </div>
+     );
    }
    ```
 
@@ -270,8 +294,10 @@ There are two ways to use the `useOptimizeModel` hook:
 The `useOptimizeModel` hook returns the following:
 
 - `load(model)`: Loads a Three.js `Object3D` model into the optimizer.
-- `getModel()`: Retrieves the optimized model document using the `MeshoptSimplifier`.
-- `simplifyOptimization()`: Simplifies the current model document and updates the model.
+- `getModel()`: Retrieves the optimized model as a binary array buffer.
+- `simplifyOptimization()`: Simplifies the current model using the `MeshoptSimplifier`.
+- `dedupOptimization()`: Removes duplicate vertices and meshes.
+- `quantizeOptimization()`: Reduces the precision of vertex attributes.
 
 ### useExportModel
 
@@ -282,6 +308,7 @@ The `useOptimizeModel` hook returns the following:
 #### Features
 
 - Exports models in GLTF or GLB format
+- Handles embedded resources and textures
 - Integrates with Three.js scenes
 - TypeScript support
 
@@ -291,14 +318,26 @@ The `useOptimizeModel` hook returns the following:
 import React from 'react';
 import { useExportModel } from '@vctrl/hooks/use-export-model';
 
-function ExportButton({ scene }) {
-  const { handleGltfExport } = useExportModel();
+function ExportButton({ file }) {
+  const { handleGltfExport } = useExportModel(
+    () => console.log('Export complete'),
+    (error) => console.error('Export error:', error),
+  );
 
-  const exportModel = () => {
-    handleGltfExport(scene, { format: 'glb' });
+  const exportAsGlb = () => {
+    handleGltfExport(file, true); // Export as GLB (binary)
   };
 
-  return <button onClick={exportModel}>Export Model</button>;
+  const exportAsGltf = () => {
+    handleGltfExport(file, false); // Export as GLTF
+  };
+
+  return (
+    <div>
+      <button onClick={exportAsGlb}>Export as GLB</button>
+      <button onClick={exportAsGltf}>Export as GLTF</button>
+    </div>
+  );
 }
 ```
 
@@ -306,11 +345,12 @@ function ExportButton({ scene }) {
 
 The `useExportModel` hook returns the following:
 
-- `handleGltfExport(scene, options)`: Function to handle exporting the scene in GLTF or GLB format.
-  - `scene`: The Three.js `Scene` or `Object3D` to export.
-  - `options`: Optional export options, such as format (`'gltf'` or `'glb'`).
+- `handleGltfExport(file, binary)`: Function to handle exporting the model.
+  - `file`: The `ModelFile` object to export.
+  - `binary`: A boolean indicating whether to export in binary format (`true` for GLB, `false` for GLTF).
+  - The function exports the model and triggers file download.
 
-## ModelContext
+### ModelContext
 
 `ModelContext` is a React context that provides the state and functions from `useLoadModel` (and optionally `useOptimizeModel`) to child components.
 
@@ -353,6 +393,7 @@ The file loading process, particularly for GLTF files, is handled internally by 
 2. Embedding external resources (buffers and images) into the GLTF content.
 3. Using Three.js `GLTFLoader` to parse the modified GLTF content.
 4. Updating the state with the loaded model.
+5. Integrating with the optimizer if provided.
 
 The loading process includes progress updates, which are communicated through the event system.
 
@@ -383,7 +424,7 @@ This package is part of a monorepo workspace managed with Nx. To contribute or m
 
 ## License
 
-Please refer to the [LICENSE](https://github.com/vectreal/vectreal-core/blob/main/LICENSE) file in the package root for licensing information.
+This project is licensed under the **GNU Affero General Public License v3.0**. Please refer to the [LICENSE](https://github.com/vectreal/vectreal-core/blob/main/LICENSE) file in the package root for licensing information.
 
 ## Contributing
 
