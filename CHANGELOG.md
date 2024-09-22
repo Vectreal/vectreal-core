@@ -1,3 +1,26 @@
+## 0.3.0 (2024-09-22)
+
+
+### 🚀 Features
+
+- **packages/hooks:** add `use-export-model` ([60964b9](https://github.com/Vectreal/vectreal-core/commit/60964b9))
+
+### 🩹 Fixes
+
+- **packages/hooks:** use `saveAs` instead of custom utils function for saving file ([30d78c1](https://github.com/Vectreal/vectreal-core/commit/30d78c1))
+
+### 📖 Documentation
+
+- **packages/hooks:** add docstrings to new functoins ([7ff1649](https://github.com/Vectreal/vectreal-core/commit/7ff1649))
+- **packages/hooks:** add docstrings to functions ([06dd1b3](https://github.com/Vectreal/vectreal-core/commit/06dd1b3))
+- **packages/hooks:** update readme ([7449fc4](https://github.com/Vectreal/vectreal-core/commit/7449fc4))
+- **packages/hooks:** finalize docs for vctrl/hooks ([8f9d6ca](https://github.com/Vectreal/vectreal-core/commit/8f9d6ca))
+- **packages/viewer:** update first example for viewer usage ([eac73ed](https://github.com/Vectreal/vectreal-core/commit/eac73ed))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.2.2 (2024-09-13)
 
 This was a version bump only, there were no code changes.
