@@ -12,7 +12,6 @@ const Contact = () => {
 
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    console.log(data, formData);
   };
 
   return (
