@@ -1,3 +1,14 @@
+## 0.3.1 (2024-09-22)
+
+
+### 🩹 Fixes
+
+- **project:** remove unused deps and fix nx project with `nx reset` ([c937184](https://github.com/Vectreal/vectreal-core/commit/c937184))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.3.0 (2024-09-22)
 
 
