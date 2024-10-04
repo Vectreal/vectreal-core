@@ -64,7 +64,7 @@ const Home = () => {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
             Unlock the Power of Open-Source 3D Optimization
           </h1>
-          <h4 className="md:text-2xl text-muted-foreground">
+          <h4 className="md:text-2xl text-muted-foreground !leading-[2.5rem]">
             Contribute to <Highlight>the future of 3D content</Highlight> with
             Vectreal's community-driven tools.
           </h4>

@@ -25,10 +25,13 @@ module.exports = {
         '2xl': '1400px',
       },
     },
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+    },
     extend: {
       colors: {
         orange: 'var(--orange)',
-        "dark-orange": 'var(--dark-orange)',
+        'dark-orange': 'var(--dark-orange)',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
