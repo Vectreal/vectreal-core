@@ -67,12 +67,12 @@
     --orange: #fc6c18;
     --dark-orange: #f54444;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
+    @apply font-poppins;
   }
+
   body {
     @apply bg-background text-foreground;
   }
