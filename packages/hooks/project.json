@@ -5,6 +5,17 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/hooks/**/*.{ts,tsx,js,jsx}",
+          "packages/hooks/package.json"
+        ]
+      }
+    },
     "nx-release-publish": {
       "dependsOn": ["copy-md"],
       "options": {
@@ -25,8 +36,7 @@
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/hooks",
-        "configFile": "packages/hooks/vite.config.ts",
-        "assets": ["packages/hooks/*.md"]
+        "configFile": "packages/hooks/vite.config.ts"
       }
     }
   }

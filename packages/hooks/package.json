@@ -41,5 +41,15 @@
       "require": "./use-load-model.cjs.js",
       "types": "./use-load-model/index.d.ts"
     }
+  },
+  "peerDependencies": {
+    "react": "18.3.1"
+  },
+  "dependencies": {
+    "three": "^0.168.0",
+    "@gltf-transform/core": "^4.0.8",
+    "@gltf-transform/functions": "^4.0.8",
+    "@gltf-transform/extensions": "^4.0.8",
+    "meshoptimizer": "^0.21.0"
   }
 }
