@@ -40,5 +40,13 @@
       "require": "./index.cjs",
       "types": "./index.d.ts"
     }
+  },
+  "peerDependencies": {
+    "react": "18.3.1"
+  },
+  "dependencies": {
+    "three": "^0.168.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/drei": "^9.108.4"
   }
 }

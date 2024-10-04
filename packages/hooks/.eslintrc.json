@@ -3,6 +3,29 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "includeTransitiveDependencies": true,
+            "ignoredDependencies": [
+              "@nx/vite",
+              "@vctrl/hooks",
+              "@vitejs/plugin-react",
+              "clsx",
+              "file-saver",
+              "jszip",
+              "react-loader-spinner",
+              "vite",
+              "vite-plugin-dts"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {}
     },

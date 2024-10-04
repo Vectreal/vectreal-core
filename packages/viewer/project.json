@@ -5,6 +5,17 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/viewer/**/*.{ts,tsx,js,jsx}",
+          "packages/viewer/package.json"
+        ]
+      }
+    },
     "nx-release-publish": {
       "dependsOn": ["copy-md"],
       "options": {
@@ -25,8 +36,7 @@
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/packages/vctrl/viewer",
-        "configFile": "packages/viewer/vite.config.ts",
-        "assets": ["packages/viewer/*.md"]
+        "configFile": "packages/viewer/vite.config.ts"
       }
     }
   }
