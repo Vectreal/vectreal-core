@@ -1,3 +1,14 @@
+## 0.3.2 (2024-10-04)
+
+
+### 🩹 Fixes
+
+- **packages:** dependency management on build ([e25cade](https://github.com/Vectreal/vectreal-core/commit/e25cade))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.3.1 (2024-09-22)
 
 
