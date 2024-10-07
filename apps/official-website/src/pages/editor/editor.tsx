@@ -18,7 +18,7 @@ import FileMenu from './file-menu';
 
 const Editor = () => {
   const { isFileLoading, on, off, reset } = useModelContext();
-  const { autoRotate, hdr, showGrid } = useEditorContext();
+  const { autoRotate, hdr, showGrid, color } = useEditorContext();
 
   const [hasShownInfo, setHasShownInfo] = useState(
     !!window.sessionStorage.getItem('hasShownInfo'),
@@ -84,12 +84,22 @@ const Editor = () => {
           key="model-viewer"
           gridOptions={{ showGrid }}
           envOptions={{
-            backgroundColor: 'blue',
-            env: { preset: hdr.preset, background: hdr.asBackground },
+            backgroundColor: color,
+            env: {
+              preset: hdr.preset,
+              background: hdr.asBackground,
+              backgroundIntensity: hdr.backgroundIntensity,
+              environmentIntensity: hdr.exposure,
+            },
+            stage: {
+              preset: hdr.stagePreset,
+            },
           }}
           controlsOptions={{
             autoRotate: autoRotate.enabled,
             autoRotateSpeed: autoRotate.speed,
+            dampingFactor: 0.02,
+            zoomSpeed: 0.4,
           }}
           cameraOptions={{
             initialCameraPosition: new Vector3(0, 5, 5),

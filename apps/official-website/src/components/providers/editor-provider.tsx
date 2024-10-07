@@ -1,6 +1,6 @@
-import { useContext, useState, createContext } from 'react';
+import { useContext, useState, createContext, ComponentProps } from 'react';
+import { Stage } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
-
 const EditorContext = createContext({} as ReturnType<typeof useEditor>);
 
 const useEditor = () => {
@@ -11,20 +11,28 @@ const useEditor = () => {
 
   const [hdr, setHdr] = useState<{
     asBackground: boolean;
+    backgroundIntensity: number;
     exposure: number;
     preset: PresetsType;
+    stagePreset: ComponentProps<typeof Stage>['preset'];
   }>({
-    asBackground: true,
+    asBackground: false,
+    backgroundIntensity: 1,
     exposure: 1,
-    preset: 'studio',
+    preset: 'apartment',
+    stagePreset: 'soft',
   });
 
   const [showGrid, setShowGrid] = useState(true);
 
-  const [backgroundColor, setBackgroundColor] = useState('#ffffff');
+  const [backgroundColor, setBackgroundColor] = useState('#302d2a');
 
   function setShowAsBackground(value: boolean) {
     setHdr((prev) => ({ ...prev, asBackground: value }));
+  }
+
+  function setBackgroundIntensity(value: number) {
+    setHdr((prev) => ({ ...prev, backgroundIntensity: value }));
   }
 
   function setHdrExposure(value: number) {
@@ -32,7 +40,13 @@ const useEditor = () => {
   }
 
   function setHdrPreset(value: PresetsType) {
-    setHdr((prev) => ({ ...prev, preset: value as PresetsType }));
+    setHdr((prev) => ({ ...prev, preset: value }));
+  }
+
+  function setLightingStagePreset(
+    value: ComponentProps<typeof Stage>['preset'],
+  ) {
+    setHdr((prev) => ({ ...prev, stagePreset: value }));
   }
 
   function setAutoRotateEnabled(value: boolean) {
@@ -49,8 +63,10 @@ const useEditor = () => {
 
     hdr,
     setShowAsBackground,
+    setBackgroundIntensity,
     setHdrExposure,
     setHdrPreset,
+    setLightingStagePreset,
 
     autoRotate,
     setAutoRotateEnabled,
