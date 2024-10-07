@@ -36,7 +36,8 @@ function handleExportError(error: ErrorEvent) {
 
 const FileMenu = () => {
   const { file, load, reset, optimize } = useModelContext();
-  const { simplifyOptimization } = optimize;
+  const { simplifyOptimization, dedupOptimization, quantizeOptimization } =
+    optimize;
 
   const { handleGltfExport } = useExportModel(
     handleExportSuccess,
@@ -58,27 +59,10 @@ const FileMenu = () => {
     showGrid,
     setShowGrid,
   } = useEditorContext();
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  function handleToggleColorPicker() {
-    setShowColorPicker(!showColorPicker);
-  }
-
-  function handleReset() {
-    reset();
-  }
-
-  function handleToggleGrid() {
-    setShowGrid(!showGrid);
-  }
-
-  function handleToggleAutoRotate() {
-    setAutoRotateEnabled(!autoRotate.enabled);
-  }
-
-  function handleToggleHdrBackground() {
-    setShowAsBackground(!hdr.asBackground);
-  }
+  // File menu
 
   function handleNewFilesClick() {
     if (inputRef.current) {
@@ -96,13 +80,46 @@ const FileMenu = () => {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  function handleUsdzExport() {}
+  function handleReset() {
+    reset();
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  async function handleSimplifyClick() {
+  // View menu
+
+  function handleToggleColorPicker() {
+    setShowColorPicker(!showColorPicker);
+  }
+
+  function handleToggleGrid() {
+    setShowGrid(!showGrid);
+  }
+
+  function handleToggleAutoRotate() {
+    setAutoRotateEnabled(!autoRotate.enabled);
+  }
+
+  function handleToggleHdrBackground() {
+    setShowAsBackground(!hdr.asBackground);
+  }
+
+  // Edit menu
+
+  function handleSimplifyClick() {
     simplifyOptimization();
   }
+
+  async function handleQuantizeClick() {
+    quantizeOptimization();
+  }
+
+  async function handleDedupClick() {
+    dedupOptimization();
+  }
+
+  // Export menu
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  function handleUsdzExport() {}
 
   return (
     file && (
@@ -269,8 +286,8 @@ const FileMenu = () => {
             <MenubarTrigger key="edit">Edit</MenubarTrigger>
             <MenubarContent align="center">
               <MenubarItem onClick={handleSimplifyClick}>Simplify</MenubarItem>
-              <MenubarItem onClick={handleNewFilesClick}>Weld</MenubarItem>
-              <MenubarItem onClick={handleNewFilesClick}>
+              <MenubarItem onClick={handleQuantizeClick}>Quantize</MenubarItem>
+              <MenubarItem onClick={handleDedupClick}>
                 Remove duplicates
               </MenubarItem>
             </MenubarContent>
