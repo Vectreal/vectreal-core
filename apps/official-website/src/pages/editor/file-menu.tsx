@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import {
   presetsObj,
@@ -24,6 +24,7 @@ import { useModelContext } from '@vctrl/hooks/use-load-model';
 import { useExportModel } from '@vctrl/hooks/use-export-model';
 
 import { useEditorContext } from '../../components/providers';
+import ColorPicker from './color-picker';
 
 function handleExportSuccess() {
   toast.info('Successfully exported model.');
@@ -42,6 +43,8 @@ const FileMenu = () => {
     handleExportError,
   );
 
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
   const {
     autoRotate,
     setAutoRotateEnabled,
@@ -50,12 +53,16 @@ const FileMenu = () => {
     setHdrExposure,
     setHdrPreset,
     setShowAsBackground,
-    color,
-    setColor,
+    setBackgroundIntensity,
+    setLightingStagePreset,
     showGrid,
     setShowGrid,
   } = useEditorContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  function handleToggleColorPicker() {
+    setShowColorPicker(!showColorPicker);
+  }
 
   function handleReset() {
     reset();
@@ -101,21 +108,23 @@ const FileMenu = () => {
     file && (
       <>
         {/* Keep input mounted for upload */}
+
         <input
           type="file"
           onChange={handleLoadNewFiles}
           ref={inputRef}
-          accept=".glb, .gltf, .bin, .usdz, .usda, .jpeg, .jpg, .png"
+          accept="model/gltf-binary,.glb,model/gltf+json,.gltf,.bin,model/vnd.usdz+zip,.usdz,model/vnd.usda,.usda,image/jpeg,.jpeg,.jpg,image/png,.png"
           style={{ display: 'none' }}
           multiple
         />
 
+        <ColorPicker show={showColorPicker} setShow={setShowColorPicker} />
         <Menubar className="absolute bottom-[2rem] right-[50%] translate-x-[50%]">
           <MenubarMenu>
             <MenubarTrigger key="file">File</MenubarTrigger>
             <MenubarContent align="center">
               <MenubarItem onClick={handleNewFilesClick}>
-                Load new files <MenubarShortcut>⌘ + l</MenubarShortcut>
+                Load new file(s)
               </MenubarItem>
 
               <MenubarSeparator />
@@ -135,14 +144,21 @@ const FileMenu = () => {
                 Show Grid
               </MenubarCheckboxItem>
 
-              <MenubarSeparator />
-
               <MenubarCheckboxItem
                 onClick={handleToggleAutoRotate}
                 checked={autoRotate.enabled}
               >
                 Enable Auto-Rotation
               </MenubarCheckboxItem>
+
+              <MenubarCheckboxItem
+                onClick={handleToggleHdrBackground}
+                checked={hdr.asBackground}
+              >
+                Show HDR As Background
+              </MenubarCheckboxItem>
+
+              <MenubarSeparator />
 
               <MenubarSub>
                 <MenubarSubTrigger>Auto-Rotation Speed</MenubarSubTrigger>
@@ -163,16 +179,10 @@ const FileMenu = () => {
 
               <MenubarSeparator />
 
-              <MenubarCheckboxItem
-                onClick={handleToggleHdrBackground}
-                checked={hdr.asBackground}
-              >
-                Show HDR As Background
-              </MenubarCheckboxItem>
               <MenubarSub>
-                <MenubarSubTrigger>Environment HDR</MenubarSubTrigger>
+                <MenubarSubTrigger>HDR Preset</MenubarSubTrigger>
                 <MenubarSubContent>
-                  <MenubarRadioGroup value={hdr.preset as string}>
+                  <MenubarRadioGroup value={String(hdr.preset)}>
                     {Object.keys(presetsObj).map((key) => (
                       <MenubarRadioItem
                         className="capitalize"
@@ -186,6 +196,72 @@ const FileMenu = () => {
                   </MenubarRadioGroup>
                 </MenubarSubContent>
               </MenubarSub>
+
+              <MenubarSub>
+                <MenubarSubTrigger>HDR Intensity</MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={String(hdr.exposure)}>
+                    {['1', '0.75', '0.5', '0.25', '0.125', '0'].map((key) => (
+                      <MenubarRadioItem
+                        key={key}
+                        value={key}
+                        onClick={() => setHdrExposure(Number(key))}
+                      >
+                        {key !== '1' ? key : key + '.0'}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
+
+              <MenubarSub>
+                <MenubarSubTrigger>Lighting Preset</MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={String(hdr.stagePreset)}>
+                    {['rembrandt', 'portrait', 'upfront', 'soft'].map((key) => (
+                      <MenubarRadioItem
+                        className="capitalize"
+                        key={key}
+                        value={key}
+                        onClick={() =>
+                          setLightingStagePreset(key as typeof hdr.stagePreset)
+                        }
+                      >
+                        {key}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
+
+              <MenubarSeparator />
+
+              <MenubarSub>
+                <MenubarSubTrigger disabled={!hdr.asBackground}>
+                  Background Intensity
+                </MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={String(hdr.backgroundIntensity)}>
+                    {['1', '0.75', '0.5', '0.25', '0.125', '0'].map((key) => (
+                      <MenubarRadioItem
+                        key={key}
+                        value={key}
+                        onClick={() => setBackgroundIntensity(Number(key))}
+                      >
+                        {key !== '1' ? key : key + '.0'}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
+
+              <MenubarItem
+                onClick={handleToggleColorPicker}
+                disabled={hdr.asBackground}
+              >
+                {showColorPicker ? 'Hide' : 'Show'} Color-Picker
+                <MenubarShortcut className="ml-8">BG color</MenubarShortcut>
+              </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
@@ -218,8 +294,8 @@ const FileMenu = () => {
               </MenubarSub>
               <MenubarSeparator />
               <MenubarSub>
-                <MenubarSubTrigger>USD (WIP)</MenubarSubTrigger>
-                {/* <MenubarSubContent>
+                <MenubarSubTrigger disabled>USD (WIP)</MenubarSubTrigger>
+                <MenubarSubContent>
                   <MenubarItem onClick={handleUsdzExport}>
                     USDZ
                     <pre className="text-muted-foreground"> .usdz (ASCII)</pre>
@@ -228,7 +304,7 @@ const FileMenu = () => {
                     USDZ
                     <pre className="text-muted-foreground"> .usdz (BINARY)</pre>
                   </MenubarItem>
-                </MenubarSubContent> */}
+                </MenubarSubContent>
               </MenubarSub>
             </MenubarContent>
           </MenubarMenu>
