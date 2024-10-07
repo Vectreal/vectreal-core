@@ -1,12 +1,15 @@
+import { Object3D } from 'three';
 import { Stage } from '@react-three/drei';
 import { useModelContext } from '@vctrl/hooks/use-load-model';
-import { Object3D } from 'three';
+
+import { EnvProps } from './scene-environment';
 
 interface ModelProps {
   object: null | Object3D;
+  envOptions?: EnvProps['stage'];
 }
 
-const SceneModel = ({ object }: ModelProps) => {
+const SceneModel = ({ object, envOptions }: ModelProps) => {
   const { file } = useModelContext();
 
   if (!(object || file?.model)) return null;
@@ -14,11 +17,10 @@ const SceneModel = ({ object }: ModelProps) => {
   return (
     <Stage
       center={{ top: true }}
-      preset="rembrandt"
       intensity={0.1}
       adjustCamera={1.5}
-      shadows="contact"
-      environment="city"
+      environment={null}
+      {...envOptions}
     >
       <primitive object={object || file?.model || new Object3D()} />
     </Stage>

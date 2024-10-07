@@ -14,29 +14,31 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-import { Suspense } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 import { clsx } from 'clsx';
 import { Object3D } from 'three';
 import { Canvas } from '@react-three/fiber';
-
 import { useModelContext } from '@vctrl/hooks/use-load-model';
 
 import {
   CameraProps,
   ControlsProps,
+  EnvProps,
   GridProps,
   SceneCamera,
   SceneControls,
+  SceneEnvironment,
   SceneGrid,
   SceneModel,
 } from './components/scene';
 import { DefaultSpinner, SpinnerWrapper } from './components';
 
-interface VectrealViewerProps {
+interface VectrealViewerProps extends PropsWithChildren {
   model?: Object3D;
   className?: string;
   cameraOptions?: CameraProps;
   controlsOptions?: ControlsProps;
+  envOptions?: EnvProps;
   gridOptions?: GridProps;
   loader?: JSX.Element;
 }
@@ -87,9 +89,11 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
 
   const {
     cameraOptions,
+    envOptions,
     gridOptions,
     controlsOptions,
     loader = <DefaultSpinner />,
+    children,
   } = props;
 
   let { className } = props;
@@ -102,9 +106,18 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
         <SpinnerWrapper loader={loader} />
       ) : (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
+          <Canvas
+            className={className}
+            dpr={[1, 1.5]}
+            shadows
+            style={{ backgroundColor: envOptions?.backgroundColor }}
+          >
             <SceneCamera {...cameraOptions} />
+            <SceneModel object={model || null} envOptions={envOptions?.stage} />
+            <SceneEnvironment {...envOptions?.env} />
             <SceneGrid {...gridOptions} />
             {!isFileLoading && <SceneControls {...controlsOptions} />}
+            {children}
           </Canvas>
         </Suspense>
       )}
