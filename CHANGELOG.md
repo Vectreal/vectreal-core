@@ -1,3 +1,28 @@
+## 0.4.0 (2024-10-07)
+
+
+### 🚀 Features
+
+- **apps/official-website:** add environment controls to `file-menu` ([f93f461](https://github.com/Vectreal/vectreal-core/commit/f93f461))
+- **apps/official-website:** add basic env controls inside editor file menu ([8c64913](https://github.com/Vectreal/vectreal-core/commit/8c64913))
+- **packages/viewer:** add environment controls to `VectrealViewer` ([218abdd](https://github.com/Vectreal/vectreal-core/commit/218abdd))
+- **shared:** add tooltip component ([fede1b2](https://github.com/Vectreal/vectreal-core/commit/fede1b2))
+
+### 🩹 Fixes
+
+- **official-website:** font-family ([2a6fca7](https://github.com/Vectreal/vectreal-core/commit/2a6fca7))
+- **packages/hooks:** dependency externalization ([6364c5d](https://github.com/Vectreal/vectreal-core/commit/6364c5d))
+- **packages/viewer:** center default loading spinner ([6155c54](https://github.com/Vectreal/vectreal-core/commit/6155c54))
+- **shared:** menubar disabled styling ([8f564a5](https://github.com/Vectreal/vectreal-core/commit/8f564a5))
+
+### 📖 Documentation
+
+- **packages/viewer:** add docstring to `VectrealViewer` component ([bf37cf2](https://github.com/Vectreal/vectreal-core/commit/bf37cf2))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.3.2 (2024-10-04)
 
 
