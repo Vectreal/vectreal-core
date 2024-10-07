@@ -21,7 +21,6 @@ import { Canvas } from '@react-three/fiber';
 
 import { useModelContext } from '@vctrl/hooks/use-load-model';
 
-import { DefaultSpinner, SpinnerWrapper } from './components';
 import {
   CameraProps,
   ControlsProps,
@@ -31,6 +30,7 @@ import {
   SceneGrid,
   SceneModel,
 } from './components/scene';
+import { DefaultSpinner, SpinnerWrapper } from './components';
 
 interface VectrealViewerProps {
   model?: Object3D;
@@ -101,9 +101,7 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
       {isFileLoading ? (
         <SpinnerWrapper loader={loader} />
       ) : (
-        <Suspense fallback={loader}>
-          <Canvas className={className} dpr={[1, 1.5]} shadows>
-            <SceneModel object={model || null} />
+        <Suspense fallback={<SpinnerWrapper loader={loader} />}>
             <SceneCamera {...cameraOptions} />
             <SceneGrid {...gridOptions} />
             {!isFileLoading && <SceneControls {...controlsOptions} />}
