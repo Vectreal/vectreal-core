@@ -12,7 +12,6 @@
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
               "@nx/vite",
-              "@vctrl/hooks",
               "@vitejs/plugin-react",
               "clsx",
               "file-saver",

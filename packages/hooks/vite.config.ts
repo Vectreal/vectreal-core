@@ -61,6 +61,10 @@ export default defineConfig({
         'three',
         '@react-three/fiber',
         '@react-three/drei',
+        '@gltf-transform/core',
+        '@gltf-transform/functions',
+        '@gltf-transform/extensions',
+        'meshoptimizer',
       ],
       output: {
         globals: {
