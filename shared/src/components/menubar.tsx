@@ -53,14 +53,16 @@ const MenubarSubTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.SubTrigger> & {
     inset?: boolean;
   }
->(({ className, inset, children, ...props }, ref) => (
+>(({ className, inset, disabled, children, ...props }, ref) => (
   <MenubarPrimitive.SubTrigger
     ref={ref}
     className={cn(
       'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
       inset && 'pl-8',
+      disabled && 'cursor-not-allowed opacity-50',
       className,
     )}
+    disabled={disabled}
     {...props}
   >
     {children}
