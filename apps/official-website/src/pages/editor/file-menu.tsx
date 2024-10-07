@@ -1,5 +1,9 @@
 import { useRef } from 'react';
 import { toast } from 'sonner';
+import {
+  presetsObj,
+  PresetsType,
+} from '@react-three/drei/helpers/environment-assets';
 
 import {
   Menubar,
@@ -13,6 +17,8 @@ import {
   MenubarTrigger,
   MenubarSub,
   MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
 } from '@vctrl/shared/components';
 import { useModelContext } from '@vctrl/hooks/use-load-model';
 import { useExportModel } from '@vctrl/hooks/use-export-model';
@@ -36,15 +42,35 @@ const FileMenu = () => {
     handleExportError,
   );
 
-  const { enableAutoRotate, setEnableAutoRotate } = useEditorContext();
+  const {
+    autoRotate,
+    setAutoRotateEnabled,
+    setAutoRotateSpeed,
+    hdr,
+    setHdrExposure,
+    setHdrPreset,
+    setShowAsBackground,
+    color,
+    setColor,
+    showGrid,
+    setShowGrid,
+  } = useEditorContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   function handleReset() {
     reset();
   }
 
+  function handleToggleGrid() {
+    setShowGrid(!showGrid);
+  }
+
   function handleToggleAutoRotate() {
-    setEnableAutoRotate(!enableAutoRotate);
+    setAutoRotateEnabled(!autoRotate.enabled);
+  }
+
+  function handleToggleHdrBackground() {
+    setShowAsBackground(!hdr.asBackground);
   }
 
   function handleNewFilesClick() {
@@ -100,17 +126,66 @@ const FileMenu = () => {
 
           <MenubarMenu>
             <MenubarTrigger key="file">View</MenubarTrigger>
+
             <MenubarContent align="center">
               <MenubarCheckboxItem
-                onClick={handleToggleAutoRotate}
-                checked={enableAutoRotate}
+                onClick={handleToggleGrid}
+                checked={showGrid}
               >
-                Enable auto-rotation
+                Show Grid
               </MenubarCheckboxItem>
 
               <MenubarSeparator />
 
-              <MenubarItem onClick={handleReset}>Reset viewer</MenubarItem>
+              <MenubarCheckboxItem
+                onClick={handleToggleAutoRotate}
+                checked={autoRotate.enabled}
+              >
+                Enable Auto-Rotation
+              </MenubarCheckboxItem>
+
+              <MenubarSub>
+                <MenubarSubTrigger>Auto-Rotation Speed</MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={String(autoRotate.speed)}>
+                    {['1', '0.5', '0.25'].map((key) => (
+                      <MenubarRadioItem
+                        key={key}
+                        value={key}
+                        onClick={() => setAutoRotateSpeed(Number(key))}
+                      >
+                        {key !== '1' ? key : key + '.0'}x
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
+
+              <MenubarSeparator />
+
+              <MenubarCheckboxItem
+                onClick={handleToggleHdrBackground}
+                checked={hdr.asBackground}
+              >
+                Show HDR As Background
+              </MenubarCheckboxItem>
+              <MenubarSub>
+                <MenubarSubTrigger>Environment HDR</MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={hdr.preset as string}>
+                    {Object.keys(presetsObj).map((key) => (
+                      <MenubarRadioItem
+                        className="capitalize"
+                        key={key}
+                        value={key}
+                        onClick={() => setHdrPreset(key as PresetsType)}
+                      >
+                        {key}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
             </MenubarContent>
           </MenubarMenu>
 
