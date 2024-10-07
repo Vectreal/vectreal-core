@@ -18,7 +18,7 @@ import FileMenu from './file-menu';
 
 const Editor = () => {
   const { isFileLoading, on, off, reset } = useModelContext();
-  const { enableAutoRotate } = useEditorContext();
+  const { autoRotate, hdr, showGrid } = useEditorContext();
 
   const [hasShownInfo, setHasShownInfo] = useState(
     !!window.sessionStorage.getItem('hasShownInfo'),
@@ -82,9 +82,14 @@ const Editor = () => {
       {hasInput ? (
         <VectrealViewer
           key="model-viewer"
-          gridOptions={{ showGrid: true }}
+          gridOptions={{ showGrid }}
+          envOptions={{
+            backgroundColor: 'blue',
+            env: { preset: hdr.preset, background: hdr.asBackground },
+          }}
           controlsOptions={{
-            autoRotate: enableAutoRotate,
+            autoRotate: autoRotate.enabled,
+            autoRotateSpeed: autoRotate.speed,
           }}
           cameraOptions={{
             initialCameraPosition: new Vector3(0, 5, 5),
