@@ -23,6 +23,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -33,12 +34,12 @@ import VectrealLogo from './assets/vectreal-logo';
 
 const mainEntries: { title: string; href: string }[] = [
   {
-    title: 'Home',
-    href: '/',
-  },
-  {
     title: 'Editor',
     href: '/editor',
+  },
+  {
+    title: 'Home',
+    href: '/',
   },
   {
     title: 'Help',
@@ -95,7 +96,8 @@ const MobileMenu = () => {
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-6 pb-8">
         <SheetHeader className="text-left">
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle>Main menu</SheetTitle>
+          <SheetDescription>Navigation</SheetDescription>
         </SheetHeader>
 
         <ul className="grid gap-4 pl-2 text-lg mb-auto">

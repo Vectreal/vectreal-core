@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { MutatingDots } from 'react-loader-spinner';
 import {
   EyeOpenIcon,
   GitHubLogoIcon,
@@ -26,6 +25,7 @@ import reactGraphic from '../components/assets/react-graphic.png';
 import TypographyMuted from '../components/typography/typography-muted';
 import TypographyLead from '../components/typography/typography-lead';
 import ModelScene from '../components/title-model-scene';
+import LoadingSpinner from '../components/loading-spinner';
 
 const featureContent = [
   {
@@ -118,12 +118,7 @@ const Home = () => {
             <Suspense
               fallback={
                 <div className="w-full h-full flex items-center justify-center">
-                  <MutatingDots
-                    height="100px"
-                    width="100px"
-                    color="white"
-                    secondaryColor="white"
-                  />
+                  <LoadingSpinner />
                 </div>
               }
             >
