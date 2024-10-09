@@ -15,9 +15,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 import { useReducer, useCallback, useRef, useEffect } from 'react';
+import { Object3D } from 'three';
 
 import { useOptimizeModel } from '../use-optimize-model';
-
 import eventSystem from './event-system';
 import reducer, { initialState } from './state';
 import {
@@ -30,6 +30,12 @@ import { useLoadBinary, useLoadGltf } from './file-type-hooks';
 import { readDirectory } from './utils';
 import { createGltfLoader } from './loaders';
 
+/**
+ * Custom hook to load and manage 3D models, integrating optimization functionalities.
+ *
+ * @param optimizer - Optional optimizer hook returned from useOptimizeModel.
+ * @returns An object containing the state, event handlers, and optimization functions.
+ */
 function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
   const uploadCompleteRef = useRef(false);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -103,6 +109,7 @@ function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
     async (filesOrDirectories: InputFileOrDirectory) => {
       const allFiles: File[] = [];
 
+      eventSystem.emit('load-start');
       dispatch({ type: 'reset-state' });
       dispatch({ type: 'set-file-loading', payload: true });
 
@@ -123,17 +130,20 @@ function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
     [processFiles, updateProgress],
   );
 
+  // Integration with optimizer
   useEffect(() => {
     if (uploadCompleteRef.current && state.file) {
       eventSystem.emit('load-complete', state.file);
       uploadCompleteRef.current = false;
 
-      if (optimizer) {
-        optimizer.load(state.file.model);
+      if (optimizer && state.file.model) {
+        // Load the model into the optimizer
+        optimizer.load(state.file.model as Object3D);
       }
     }
   }, [state.file, optimizer]);
 
+  // Use the updated optimizer integration
   const optimizerIntegration = useOptimizerIntegration(
     optimizer,
     dispatch,
@@ -150,17 +160,25 @@ function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
   };
 }
 
+/**
+ * Hook to integrate the optimizer into the model loading process.
+ *
+ * @param optimizer - The optimizer instance.
+ * @param dispatch - The dispatch function from useReducer.
+ * @param file - The current model file.
+ * @returns An object containing optimization functions and optimizer states.
+ */
 function useOptimizerIntegration(
   optimizer: ReturnType<typeof useOptimizeModel> | undefined,
   dispatch: React.Dispatch<Action>,
   file: ModelFile | null,
 ) {
   const dispatchNewModel = useCallback(
-    (model: Uint8Array) => {
+    (modelBuffer: ArrayBuffer) => {
       const gltfLoader = createGltfLoader();
 
       gltfLoader.parse(
-        model.buffer,
+        modelBuffer,
         '',
         (gltf) => {
           dispatch({
@@ -180,15 +198,25 @@ function useOptimizerIntegration(
     [dispatch, file],
   );
 
+  /**
+   * Runs the specified optimization function with optional parameters.
+   *
+   * @param optimizationFunction - The optimization function to run.
+   * @param options - Optional parameters for the optimization function.
+   */
   const runOptimization = useCallback(
-    async (optimizationFunction: (() => Promise<void>) | undefined) => {
+    async <TOptions>(
+      optimizationFunction: ((options?: TOptions) => Promise<void>) | undefined,
+      options?: TOptions,
+    ) => {
       if (!optimizer || !optimizationFunction) {
         console.warn('Optimizer or optimization function is not available');
         return;
       }
 
       try {
-        await optimizationFunction();
+        // Apply the optimization with optional parameters
+        await optimizationFunction(options);
         const optimizedModel = await optimizer.getModel();
 
         if (optimizedModel) {
@@ -202,13 +230,37 @@ function useOptimizerIntegration(
     [optimizer, dispatchNewModel],
   );
 
+  // Define types for options using Parameters and ReturnType utility types
+  type SimplifyOptions = Parameters<
+    ReturnType<typeof useOptimizeModel>['simplifyOptimization']
+  >[0];
+  type DedupOptions = Parameters<
+    ReturnType<typeof useOptimizeModel>['dedupOptimization']
+  >[0];
+  type QuantizeOptions = Parameters<
+    ReturnType<typeof useOptimizeModel>['quantizeOptimization']
+  >[0];
+
+  // Include the optimizer's report, error, and loading states
   return optimizer
     ? {
-        simplifyOptimization: () =>
-          runOptimization(optimizer.simplifyOptimization),
-        dedupOptimization: () => runOptimization(optimizer.dedupOptimization),
-        quantizeOptimization: () =>
-          runOptimization(optimizer.quantizeOptimization),
+        simplifyOptimization: (options?: SimplifyOptions) =>
+          runOptimization<SimplifyOptions>(
+            optimizer.simplifyOptimization,
+            options,
+          ),
+        dedupOptimization: (options?: DedupOptions) =>
+          runOptimization(optimizer.dedupOptimization, options),
+        quantizeOptimization: (options?: QuantizeOptions) =>
+          runOptimization<QuantizeOptions>(
+            optimizer.quantizeOptimization,
+            options,
+          ),
+        getSize: optimizer.getSize,
+        reset: optimizer.reset,
+        report: optimizer.report, // Include the report state
+        error: optimizer.error, // Include the error state
+        loading: optimizer.loading, // Include the loading state
       }
     : {
         simplifyOptimization: () => {
@@ -220,6 +272,15 @@ function useOptimizerIntegration(
         quantizeOptimization: () => {
           console.warn('Optimizer is not available');
         },
+        getSize: () => {
+          console.warn('Optimizer is not available');
+        },
+        reset: () => {
+          console.warn('Optimizer is not available');
+        },
+        report: null,
+        error: null,
+        loading: false,
       };
 }
 
