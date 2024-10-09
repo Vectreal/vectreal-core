@@ -25,6 +25,7 @@ import { useExportModel } from '@vctrl/hooks/use-export-model';
 
 import { useEditorContext } from '../../components/providers';
 import ColorPicker from './color-picker';
+import Reports from './reports';
 
 function handleExportSuccess() {
   toast.info('Successfully exported model.');
@@ -45,6 +46,7 @@ const FileMenu = () => {
   );
 
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showReports, setShowReports] = useState(false);
 
   const {
     autoRotate,
@@ -102,6 +104,10 @@ const FileMenu = () => {
     setShowAsBackground(!hdr.asBackground);
   }
 
+  function handleToggleReports() {
+    setShowReports(!showReports);
+  }
+
   // Edit menu
 
   function handleSimplifyClick() {
@@ -136,6 +142,8 @@ const FileMenu = () => {
         />
 
         <ColorPicker show={showColorPicker} setShow={setShowColorPicker} />
+        <Reports show={showReports} setShow={setShowReports} />
+
         <Menubar className="absolute bottom-[2rem] right-[50%] translate-x-[50%]">
           <MenubarMenu>
             <MenubarTrigger key="file">File</MenubarTrigger>
@@ -278,6 +286,12 @@ const FileMenu = () => {
               >
                 {showColorPicker ? 'Hide' : 'Show'} Color-Picker
                 <MenubarShortcut className="ml-8">BG color</MenubarShortcut>
+              </MenubarItem>
+              <MenubarItem onClick={handleToggleReports}>
+                {showReports ? 'Hide' : 'Show'} Reports
+                <MenubarShortcut className="ml-8">
+                  Optimization improvements
+                </MenubarShortcut>
               </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
