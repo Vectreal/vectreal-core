@@ -54,6 +54,7 @@ export type Action =
 export type EventTypes =
   | 'multiple-models'
   | 'not-loaded-files'
+  | 'load-start'
   | 'load-progress'
   | 'load-complete'
   | 'load-reset'
@@ -63,6 +64,7 @@ export type EventTypes =
 export type EventData = {
   'multiple-models': File[];
   'not-loaded-files': File[];
+  'load-start': null;
   'load-progress': number;
   'load-complete': State['file'];
   'load-reset': null;
