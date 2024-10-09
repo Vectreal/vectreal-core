@@ -1,3 +1,24 @@
+## 0.5.0 (2024-10-09)
+
+
+### 🚀 Features
+
+- **apps/official-website:** add vite-PWA ([2765158](https://github.com/Vectreal/vectreal-core/commit/2765158))
+- **apps/official-website:** add `Reports` card component to editor ([3b43ac7](https://github.com/Vectreal/vectreal-core/commit/3b43ac7))
+- **official-website:** add lazy loading for page components ([fe63d3d](https://github.com/Vectreal/vectreal-core/commit/fe63d3d))
+- **packages/hooks:** advance on `use-optimize-model` hook ([0c0b57e](https://github.com/Vectreal/vectreal-core/commit/0c0b57e))
+- **packages/hooks:** rework optimizations hook integration + new way of creating `optimize` return object of `use-load-model` + added `load-start` event to event-system ([2121bb5](https://github.com/Vectreal/vectreal-core/commit/2121bb5))
+
+### 🩹 Fixes
+
+- **apps/official-website:** use actual optimizations in editor file-menu ([d56034b](https://github.com/Vectreal/vectreal-core/commit/d56034b))
+- **apps/official-website:** remove link canonical tag from `index.html` ([7c0bb3b](https://github.com/Vectreal/vectreal-core/commit/7c0bb3b))
+- **packages/hooks:** export `use-export-model` from hooks package ([f00e75f](https://github.com/Vectreal/vectreal-core/commit/f00e75f))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.4.0 (2024-10-07)
 
 
