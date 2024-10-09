@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Oval } from 'react-loader-spinner';
 import { toast } from 'sonner';
 import { Vector3 } from 'three';
 
@@ -12,6 +11,7 @@ import {
 import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
 
 import { EditorProvider, useEditorContext } from '../../components/providers';
+import LoadingSpinner from '../../components/loading-spinner';
 import UploadInfoDialog from './upload-info-dialog';
 import DropZone from './drop-zone';
 import FileMenu from './file-menu';
@@ -104,14 +104,7 @@ const Editor = () => {
           cameraOptions={{
             initialCameraPosition: new Vector3(0, 5, 5),
           }}
-          loader={
-            <Oval
-              width="3rem"
-              color="white"
-              secondaryColor="white"
-              strokeWidth="3"
-            />
-          }
+          loader={<LoadingSpinner />}
         />
       ) : (
         <DropZone key="drop-zone" />

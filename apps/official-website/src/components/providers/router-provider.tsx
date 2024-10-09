@@ -2,9 +2,15 @@ import {
   RouterProvider as BaseRouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import { Help, Home, Contact, Editor } from '../../pages';
 import BaseLayout from '../base-layout';
+import LoadingSpinner from '../loading-spinner';
+
+import Home from '../../pages/home';
+const Help = lazy(() => import('../../pages/help'));
+const Contact = lazy(() => import('../../pages/contact'));
+const Editor = lazy(() => import('../../pages/editor'));
 
 const RouterProvider = () => {
   const router = createBrowserRouter([
@@ -36,7 +42,17 @@ const RouterProvider = () => {
     },
   ]);
 
-  return <BaseRouterProvider router={router} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full h-screen flex justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      }
+    >
+      <BaseRouterProvider router={router} />
+    </Suspense>
+  );
 };
 
 export default RouterProvider;
