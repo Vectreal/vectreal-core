@@ -140,6 +140,7 @@ const Reports = ({ show, setShow }: ReportsProps) => {
 
     return () => {
       off('load-start', reset);
+      reset();
     };
   }, [off, on, reset]);
 

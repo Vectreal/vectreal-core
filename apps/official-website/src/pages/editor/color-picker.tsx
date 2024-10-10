@@ -30,6 +30,8 @@ const ColorPicker = ({ show, setShow }: ColorPickerProps) => {
       <Button
         onClick={() => setShow(false)}
         variant="ghost"
+        aria-label='Close color picker'
+        title='Close color picker'
         className="absolute p-1 h-6 w-6 top-2 right-2"
       >
         <Cross2Icon />
