@@ -1,7 +1,5 @@
 import { HexColorPicker } from 'react-colorful';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
@@ -9,7 +7,9 @@ import {
   CardTitle,
 } from '@vctrl/shared/components';
 import { cn } from '@vctrl/shared/lib/utils';
+
 import { useEditorContext } from '../../components/providers';
+import CloseButton from '../../components/modal-close-button';
 
 interface ColorPickerProps {
   show: boolean;
@@ -27,15 +27,7 @@ const ColorPicker = ({ show, setShow }: ColorPickerProps) => {
         !show && ' opacity-0 -left-4 invisible',
       )}
     >
-      <Button
-        onClick={() => setShow(false)}
-        variant="ghost"
-        aria-label='Close color picker'
-        title='Close color picker'
-        className="absolute p-1 h-6 w-6 top-2 right-2"
-      >
-        <Cross2Icon />
-      </Button>
+      <CloseButton title="Close color picker" onClick={() => setShow(false)} />
       <CardHeader>
         <CardTitle>Set Background-color</CardTitle>
         <CardDescription>Pick a color</CardDescription>
