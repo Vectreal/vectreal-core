@@ -3,9 +3,6 @@ FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
-# Set vite environment variables
-ENV NODE_ENV=production
-
 # Copy only package.json and package-lock.json (or yarn.lock) first
 COPY package*.json ./
 
