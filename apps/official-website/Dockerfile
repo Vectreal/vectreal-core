@@ -3,11 +3,15 @@ FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
+# Set vite environment variables
+ENV NODE_ENV=production
+ENV VITE_GA_ID=$VITE_GA_ID
+
 # Copy only package.json and package-lock.json (or yarn.lock) first
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the rest of the application code
 COPY . .
