@@ -7,8 +7,6 @@ const useInitGA = () => {
       return;
     }
 
-    if (import.meta.env.DEV) return;
-
     ReactGA.initialize(import.meta.env.VITE_GA_ID);
   }, []);
 };
