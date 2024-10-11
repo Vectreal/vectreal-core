@@ -1,3 +1,27 @@
+## 0.6.0 (2024-10-11)
+
+
+### 🚀 Features
+
+- **apps/official-website:** integrate texture compression optimization ([c3933d3](https://github.com/Vectreal/vectreal-core/commit/c3933d3))
+- **official-website:** rework the reports modal of the editor ([1808e07](https://github.com/Vectreal/vectreal-core/commit/1808e07))
+- **packages/hooks:** add tetxure compression optimization ([41555ad](https://github.com/Vectreal/vectreal-core/commit/41555ad))
+
+### 🩹 Fixes
+
+- **apps/official-website:** reset `optimize` on `Reports` dismount ([db5656a](https://github.com/Vectreal/vectreal-core/commit/db5656a))
+- **apps/official-website:** add `use-accept-pattern` hook for unified patterns across inputs ([4bf83a8](https://github.com/Vectreal/vectreal-core/commit/4bf83a8))
+- **packages/hooks:** loading of model buffer failed because of wrong types in development ([1c4e734](https://github.com/Vectreal/vectreal-core/commit/1c4e734))
+
+### 📖 Documentation
+
+- **packages/hooks:** add docstrings ([e9465e4](https://github.com/Vectreal/vectreal-core/commit/e9465e4))
+- **project:** update readme documentations with viewer `envOptions`, options for optimizations and new texture compression optimization + misc. ([0a1df16](https://github.com/Vectreal/vectreal-core/commit/0a1df16))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.5.0 (2024-10-09)
 
 
