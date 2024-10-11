@@ -68,6 +68,8 @@ vectreal-core/
 
   - **use-optimize-model**: Utilizing the [gltf-transform](https://gltf-transform.dev/) js library to optimize models in the browser. May be used standaloe or in conjunction with the `use-load-model` hook for convenience.
 
+  - **use-export-model**: Export the scene in multiple formats using a minimal API
+
 - **[@vctrl/viewer](https://github.com/Vectreal/vectreal-core/tree/main/packages/viewer)**: A fully type-safe and ready-to-use viewer component for React.
 
   Built with the `@vctrl/hooks/use-load-model` hook to dynamically load various model file types.
