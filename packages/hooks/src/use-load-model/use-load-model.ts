@@ -240,6 +240,9 @@ function useOptimizerIntegration(
   type QuantizeOptions = Parameters<
     ReturnType<typeof useOptimizeModel>['quantizeOptimization']
   >[0];
+  type TexturesOptions = Parameters<
+    ReturnType<typeof useOptimizeModel>['texturesOptimization']
+  >[0];
 
   // Include the optimizer's report, error, and loading states
   return optimizer
@@ -256,6 +259,11 @@ function useOptimizerIntegration(
             optimizer.quantizeOptimization,
             options,
           ),
+        texturesCompressOptimization: (options?: TexturesOptions) =>
+          runOptimization<TexturesOptions>(
+            optimizer.texturesOptimization,
+            options,
+          ),
         getSize: optimizer.getSize,
         reset: optimizer.reset,
         report: optimizer.report, // Include the report state
@@ -270,6 +278,9 @@ function useOptimizerIntegration(
           console.warn('Optimizer is not available');
         },
         quantizeOptimization: () => {
+          console.warn('Optimizer is not available');
+        },
+        texturesCompressOptimization: () => {
           console.warn('Optimizer is not available');
         },
         getSize: () => {
