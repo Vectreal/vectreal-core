@@ -174,11 +174,11 @@ function useOptimizerIntegration(
   file: ModelFile | null,
 ) {
   const dispatchNewModel = useCallback(
-    (modelBuffer: ArrayBuffer) => {
+    (modelBuffer: Uint8Array) => {
       const gltfLoader = createGltfLoader();
 
       gltfLoader.parse(
-        modelBuffer,
+        modelBuffer.buffer,
         '',
         (gltf) => {
           dispatch({
