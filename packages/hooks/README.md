@@ -8,7 +8,7 @@
 
 ## Overview
 
-`@vctrl/hooks` is a React hooks package designed to simplify 3D model loading, optimization, and exporting within React applications. It's part of the vectreal-core ecosystem and is primarily used in the `@vctrl/viewer` React component and the official website application.
+`@vctrl/hooks` is a React hooks package designed to simplify 3D model loading, optimization, and exporting within React applications. It's part of the [vectreal-core](https://github.com/vectreal/vectreal-core) ecosystem and is primarily used in the `@vctrl/viewer` React component and the [official website application](https://core.vectreal.com).
 
 The package provides powerful hooks for:
 
@@ -177,11 +177,12 @@ function ModelLoader() {
 }
 ```
 
-The `optimize` object includes:
+The `optimize` object includes quick access optimization:
 
-- `simplifyOptimization()`: Simplifies the model using mesh simplification.
-- `dedupOptimization()`: Removes duplicate vertices and meshes.
-- `quantizeOptimization()`: Reduces the precision of vertex attributes.
+- `simplifyOptimization(options)`: Simplifies the model using mesh simplification.
+- `dedupOptimization(options)`: Removes duplicate vertices and meshes.
+- `quantizeOptimization(options)`: Reduces the precision of vertex attributes.
+- `texturesCompressionOptimization(options)`: Compresses the relevant textures in the model file using texture compression.
 
 ### useOptimizeModel
 
@@ -295,9 +296,15 @@ The `useOptimizeModel` hook returns the following:
 
 - `load(model)`: Loads a Three.js `Object3D` model into the optimizer.
 - `getModel()`: Retrieves the optimized model as a binary array buffer.
-- `simplifyOptimization()`: Simplifies the current model using the `MeshoptSimplifier`.
-- `dedupOptimization()`: Removes duplicate vertices and meshes.
-- `quantizeOptimization()`: Reduces the precision of vertex attributes.
+- `simplifyOptimization(options)`: Simplifies the current model using the `MeshoptSimplifier`.
+- `dedupOptimization(options)`: Removes duplicate vertices and meshes.
+- `quantizeOptimization(options)`: Reduces the precision of vertex attributes.
+- `texturesOptimization(options)`: Compresses related textures.
+- `getSize()`: Object with byte size of gltf scene and a formatted megabyte string
+- `reset()`: Resets the current optimizer model and report state.
+- `report`: @gltf-transform gltf report object with relevant details about a gltf scene
+- `error`: Stores any possible optimization errors
+- `loading`: Boolean for when the model is being loaded
 
 ### useExportModel
 

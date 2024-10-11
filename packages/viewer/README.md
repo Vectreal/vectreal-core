@@ -24,6 +24,7 @@ vctrl/viewer is a React component library for rendering and interacting with 3D 
   - [Customization](#customization)
     - [Camera Options](#camera-options)
     - [Controls Options](#controls-options)
+    - [Environment/Stage Options](#environmentstage-options)
     - [Grid Options](#grid-options)
   - [Integration with vctrl/hooks](#integration-with-vctrlhooks)
   - [Development](#development)
@@ -82,18 +83,58 @@ The main component exported by this package.
 
 ### Props
 
-| Prop            | Type              | Description                                                |
-| --------------- | ----------------- | ---------------------------------------------------------- |
-| model           | Object3D          | (Optional) The 3D model to display                         |
-| className       | string            | (Optional) Additional CSS classes for the viewer container |
-| cameraOptions   | CameraProps       | (Optional) Configuration for the camera                    |
-| controlsOptions | ControlsProps     | (Optional) Configuration for the OrbitControls             |
-| gridOptions     | GridProps         | (Optional) Configuration for the grid                      |
-| loader          | () => JSX.Element | (Optional) Custom loading component                        |
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>model</td>
+      <td>Object3D</td>
+      <td>(Optional when using `use-load-model` context) The 3D model to display</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>string</td>
+      <td>(Optional) Additional CSS classes for the viewer container</td>
+    </tr>
+    <tr>
+      <td>cameraOptions</td>
+      <td>CameraProps</td>
+      <td>(Optional) Configuration for the camera</td>
+    </tr>
+    <tr>
+      <td>controlsOptions</td>
+      <td>ControlsProps</td>
+      <td>(Optional) Configuration for the OrbitControls</td>
+    </tr>
+    <tr>
+      <td>envOptions</td>
+      <td>EnvProps</td>
+      <td>(Optional) Configuration for the Stage and Environment Component</td>
+    </tr>
+    <tr>
+      <td>gridOptions</td>
+      <td>GridProps</td>
+      <td>(Optional) Configuration for the grid</td>
+    </tr>
+    <tr>
+      <td>loader</td>
+      <td>() => JSX.Element</td>
+      <td>(Optional) Custom loading component</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Customization
 
 ### Camera Options
+
+- [Perspective Camera docs](https://threejs.org/docs/index.html#api/en/cameras/PerspectiveCamera)
 
 You can customize the camera by passing a `cameraOptions` prop:
 
@@ -111,7 +152,9 @@ You can customize the camera by passing a `cameraOptions` prop:
 
 ### Controls Options
 
-Customize the OrbitControls with the `controlsOptions` prop:
+- [`Orbit-controls` props interface](https://github.com/pmndrs/drei/blob/c5862585174f0eabfa92485d0ceaae862071a332/src/core/OrbitControls.tsx#L11)
+
+Customize the controls based on OrbitControls with the `controlsOptions` prop:
 
 ```jsx
 <VectrealViewer
@@ -123,7 +166,29 @@ Customize the OrbitControls with the `controlsOptions` prop:
 />
 ```
 
+### Environment/Stage Options
+
+- [`Stage` props interface](https://github.com/pmndrs/drei/blob/c5862585174f0eabfa92485d0ceaae862071a332/src/core/Stage.tsx#L47)
+- [`Environment` props interface](https://github.com/pmndrs/drei/blob/c5862585174f0eabfa92485d0ceaae862071a332/src/core/Environment.tsx#L8)
+
+Customize the @react-three/drei `Stage` and `Environment` components with the `controlsOptions` prop:
+
+```jsx
+<VectrealViewer
+  envOptions={{
+    env: {
+      preset: 'studio',
+    },
+    stage: {
+      adjustCamera: 1.5,
+    },
+    backgroundColor: 'maroon',
+  }}
+/>
+```
+
 ### Grid Options
+- [`Grid` props interface](https://github.com/pmndrs/drei/blob/c5862585174f0eabfa92485d0ceaae862071a332/src/core/Grid.tsx#L14)
 
 Configure the grid display with the `gridOptions` prop:
 
