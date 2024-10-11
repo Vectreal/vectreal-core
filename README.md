@@ -159,7 +159,7 @@ Please refer to the LICENSE file in the package root for licensing information.
 
 Website: [Vectreal Core](https://core.vectreal.com) | [Vectreal Platform](https://vectreal.com)
 
-Discord: [Join our server](https://discord.gg/2wMKRyFE)
+Discord: [Join our server](https://discord.gg/PHMzbHjX)
 
 X/Twitter: [@Vectreal](https://x.com/vectreal)
 

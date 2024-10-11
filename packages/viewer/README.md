@@ -8,7 +8,7 @@
 
 ## Overview
 
-vctrl/viewer is a React component library for rendering and interacting with 3D models. It's part of the vectreal ecosystem and is designed to work seamlessly with the vctrl/hooks package for model loading and management.
+vctrl/viewer is a React component library for rendering and interacting with 3D models. It's part of the [vectreal-core](https://github.com/vectreal/vectreal-core) ecosystem and is designed to work seamlessly with the [`@vctrl/hooks`](https://www.npmjs.com/package/@vctrl/hooks?activeTab=readme) package for model loading and management.
 
 ## Table of Contents
 
@@ -188,6 +188,7 @@ Customize the @react-three/drei `Stage` and `Environment` components with the `c
 ```
 
 ### Grid Options
+
 - [`Grid` props interface](https://github.com/pmndrs/drei/blob/c5862585174f0eabfa92485d0ceaae862071a332/src/core/Grid.tsx#L14)
 
 Configure the grid display with the `gridOptions` prop:
@@ -242,4 +243,4 @@ Contributions are welcome! Please read the contributing guidelines in the [vectr
 
 ## Support
 
-For issues, feature requests, or questions, please file an issue in the GitHub repository.
+For issues, feature requests, or questions, please file an issue in the [GitHub repository](https://github.com/vectreal/vectreal-core).
