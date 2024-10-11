@@ -39,8 +39,12 @@ function handleExportError(error: ErrorEvent) {
 const FileMenu = () => {
   const acceptPattern = useAcceptPattern();
   const { file, load, reset, optimize } = useModelContext();
-  const { simplifyOptimization, dedupOptimization, quantizeOptimization } =
-    optimize;
+  const {
+    simplifyOptimization,
+    dedupOptimization,
+    quantizeOptimization,
+    texturesCompressOptimization,
+  } = optimize;
 
   const { handleGltfExport } = useExportModel(
     handleExportSuccess,
@@ -113,14 +117,26 @@ const FileMenu = () => {
   // Edit menu
 
   function handleSimplifyClick() {
+    !showReports && handleToggleReports();
     simplifyOptimization();
   }
 
+  function handleTexturesOptimizeClick() {
+    !showReports && handleToggleReports();
+    texturesCompressOptimization({
+      targetFormat: 'webp',
+      quality: 80,
+      resize: [512, 512],
+    });
+  }
+
   async function handleQuantizeClick() {
+    !showReports && handleToggleReports();
     quantizeOptimization();
   }
 
   async function handleDedupClick() {
+    !showReports && handleToggleReports();
     dedupOptimization();
   }
 
@@ -291,9 +307,6 @@ const FileMenu = () => {
               </MenubarItem>
               <MenubarItem onClick={handleToggleReports}>
                 {showReports ? 'Hide' : 'Show'} Reports
-                <MenubarShortcut className="ml-8">
-                  Optimization improvements
-                </MenubarShortcut>
               </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
@@ -302,6 +315,9 @@ const FileMenu = () => {
             <MenubarTrigger key="edit">Edit</MenubarTrigger>
             <MenubarContent align="center">
               <MenubarItem onClick={handleSimplifyClick}>Simplify</MenubarItem>
+              <MenubarItem onClick={handleTexturesOptimizeClick}>
+                Compress textures
+              </MenubarItem>
               <MenubarItem onClick={handleQuantizeClick}>Quantize</MenubarItem>
               <MenubarItem onClick={handleDedupClick}>
                 Remove duplicates
