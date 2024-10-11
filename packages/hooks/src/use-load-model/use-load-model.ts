@@ -143,7 +143,6 @@ function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
     }
   }, [state.file, optimizer]);
 
-  // Use the updated optimizer integration
   const optimizerIntegration = useOptimizerIntegration(
     optimizer,
     dispatch,
@@ -152,10 +151,44 @@ function useLoadModel(optimizer?: ReturnType<typeof useOptimizeModel>) {
 
   return {
     ...state,
+
+    /**
+     * Add an event listener to the event system.
+     */
     on: eventSystem.on,
+
+    /**
+     * Remove an event listener from the event system.
+     */
     off: eventSystem.off,
+
+    /**
+     * Load a model and integrate it with the optimizer if available.
+     * This also makes the model available in the use-model-context hook.
+     */
     load,
+
+    /**
+     * Reset the model and optimizer state to the initial state.
+     */
     reset,
+
+    /**
+     * Integration of the optimizer
+     * An object containing functions to interact with the optimizer.
+     *
+     * It exposes the following functions:
+     *
+     * - `simplifyOptimization(options?: SimplifyOptions)`: Runs the simplification optimization with the given options.
+     * - `dedupOptimization(options?: DedupOptions)`: Runs the deduplication optimization with the given options.
+     * - `quantizeOptimization(options?: QuantizeOptions)`: Runs the quantization optimization with the given options.
+     * - `texturesCompressionOptimization(options?: TextureCompressionOptions)`: Runs the texture compression optimization with the given options.
+     * - `getSize()`: Returns the size of the optimized model.
+     * - `reset()`: Resets the optimizer.
+     * - `report`: The report state of the optimizer.
+     * - `error`: The error state of the optimizer.
+     * - `loading`: The loading state of the optimizer.
+     */
     optimize: optimizerIntegration,
   };
 }
