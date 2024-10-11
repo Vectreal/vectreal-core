@@ -29,7 +29,7 @@ import {
   SheetTrigger,
 } from '@vctrl/shared/components';
 
-import useIsMobile from '../lib/hooks/useIsMobile';
+import { useIsMobile } from '../lib/hooks';
 import VectrealLogo from './assets/vectreal-logo';
 
 const mainEntries: { title: string; href: string }[] = [

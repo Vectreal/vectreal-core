@@ -19,7 +19,7 @@ import {
   CardTitle,
 } from '@vctrl/shared/components';
 
-import useIsMobile from '../lib/hooks/useIsMobile';
+import { useIsMobile } from '../lib/hooks';
 
 import reactGraphic from '../components/assets/react-graphic.png';
 import TypographyMuted from '../components/typography/typography-muted';
