@@ -23,6 +23,7 @@ import {
 import { useModelContext } from '@vctrl/hooks/use-load-model';
 import { useExportModel } from '@vctrl/hooks/use-export-model';
 
+import { useAcceptPattern } from '../../lib/hooks';
 import { useEditorContext } from '../../components/providers';
 import ColorPicker from './color-picker';
 import Reports from './reports';
@@ -36,6 +37,7 @@ function handleExportError(error: ErrorEvent) {
 }
 
 const FileMenu = () => {
+  const acceptPattern = useAcceptPattern();
   const { file, load, reset, optimize } = useModelContext();
   const { simplifyOptimization, dedupOptimization, quantizeOptimization } =
     optimize;
@@ -136,7 +138,7 @@ const FileMenu = () => {
           type="file"
           onChange={handleLoadNewFiles}
           ref={inputRef}
-          accept="model/gltf-binary,.glb,model/gltf+json,.gltf,.bin,model/vnd.usdz+zip,.usdz,model/vnd.usda,.usda,image/jpeg,.jpeg,.jpg,image/png,.png"
+          accept={acceptPattern}
           style={{ display: 'none' }}
           multiple
         />
