@@ -16,11 +16,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 import { Action, ModelFileTypes, State } from './types';
 
-// Initial state
+/**
+ * Initial state for the useReadModelFiles hook
+ *
+ * @property file - Currently loaded file
+ * @property isFileLoading - Flag indicating if a file is currently being loaded
+ * @property progress - Current loading progress (0-100)
+ * @property supportedFileTypes - List of supported file types
+ */
 export const initialState: State = {
+  /**
+   * Currently loaded file
+   */
   file: null,
+  /**
+   * Flag indicating if a file is currently being loaded
+   */
   isFileLoading: false,
+  /**
+   * Current loading progress (0-100)
+   */
   progress: 0,
+  /**
+   * List of supported file types
+   * @type {ModelFileTypes[]}
+   */
   supportedFileTypes: Object.values(ModelFileTypes),
 };
 
