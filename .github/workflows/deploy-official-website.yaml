@@ -14,7 +14,6 @@ on:
 env:
   GCR_HOSTNAME: gcr.io
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
   IMAGE_NAME: official-website
   RETENTION_DAYS: 30
 
@@ -56,8 +55,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          secrets: |
-            VITE_GA_ID=${{ secrets.VITE_GA_ID }}
           file: ./apps/official-website/Dockerfile
           push: true
           tags: ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
