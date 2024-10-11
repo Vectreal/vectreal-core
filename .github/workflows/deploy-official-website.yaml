@@ -14,6 +14,7 @@ on:
 env:
   GCR_HOSTNAME: gcr.io
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
   IMAGE_NAME: official-website
   RETENTION_DAYS: 30
 
