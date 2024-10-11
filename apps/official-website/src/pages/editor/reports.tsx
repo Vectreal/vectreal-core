@@ -1,27 +1,25 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import {
-  ArrowDownIcon,
   ArrowRightIcon,
-  ArrowUpIcon,
-  Cross2Icon,
+  CheckIcon,
   CubeIcon,
+  DashIcon,
+  FileIcon,
+  LayersIcon,
 } from '@radix-ui/react-icons';
+import { Separator } from '@radix-ui/react-menubar';
+
 import { useModelContext } from '@vctrl/hooks/use-load-model';
+import { cn } from '@vctrl/shared/lib/utils';
 import {
-  Button,
   Card,
   CardContent,
-  CardDescription,
+  CardFooter,
   CardHeader,
-  CardTitle,
 } from '@vctrl/shared/components';
-import { cn } from '@vctrl/shared/lib/utils';
+
+import CloseButton from '../../components/modal-close-button';
 
 /**
  * Format the file size for display.
@@ -38,54 +36,6 @@ const formatFileSize = (bytes: number): string => {
     return `${bytes} bytes`;
   }
 };
-
-/**
- * A tag to display on a card to indicate how much smaller the model got.
- *
- * @param children - The children to render inside the tag.
- * @returns A JSX element for the improvement tag.
- */
-const ImprovementTag = ({ children }: PropsWithChildren) => (
-  <span className="inline-flex items-center gap-1 text-xs pl-2 font-medium text-lime-400">
-    {children}
-  </span>
-);
-
-interface ImprovementDescriptionProps {
-  improvements: {
-    totalSize: number;
-  };
-  initialFileSize: number;
-  currentFileSize: number;
-}
-
-/**
- * A component to display the size savings of a model.
- *
- * @param improvements - An object with a single property, `totalSize`, which is the total number of bytes saved.
- * @param initialFileSize - The size of the model when it was first loaded.
- * @param currentFileSize - The size of the model after all optimisations have been applied.
- * @returns A JSX element that displays the size savings.
- */
-const ImprovementDescription = ({
-  improvements,
-  initialFileSize,
-  currentFileSize,
-}: ImprovementDescriptionProps) => (
-  <CardDescription>
-    The total file size was reduced by
-    <span className="flex items-center gap-2">
-      <span className="font-semibold text-lime-400 text-lg flex items-center gap-2">
-        <CubeIcon />
-        {formatFileSize(improvements.totalSize)}
-      </span>
-      <span className="flex items-center gap-2">
-        {formatFileSize(initialFileSize)} <ArrowRightIcon />{' '}
-        {formatFileSize(currentFileSize)}
-      </span>
-    </span>
-  </CardDescription>
-);
 
 interface ReportsProps {
   show: boolean;
@@ -150,6 +100,7 @@ const Reports = ({ show, setShow }: ReportsProps) => {
 
   // Retrieve the initial reports and sizes
   const initial = initialReports.current;
+
   /**
    * Helper function to sum a specific property over an array of objects.
    *
@@ -239,88 +190,209 @@ const Reports = ({ show, setShow }: ReportsProps) => {
   };
 
   /**
-   * Format the improvement percentage for display.
-   *
-   * @param percentage - The percentage improvement.
-   * @returns A formatted string representing the improvement.
+   * An array of optimizations based on the percentage improvements.
+   * If an optimization has a value of 0 (no improvement), skip it.
+   * If an optimization has a value greater than 0, add it to the array with the name:
+   * - 'mesh' for mesh optimizations
+   * - 'texture' for texture optimizations
+   * @param percentageImprovements - The percentage improvements
+   * @returns An array of optimizations with the name and reduction percentage
    */
-  const formatImprovementPercentage = (percentage: number) => {
-    if (percentage > 0) {
-      return (
-        <>
-          <ArrowDownIcon />
-          {`${percentage}%`}
-        </>
-      );
-    } else if (percentage < 0) {
-      return (
-        <>
-          <ArrowUpIcon />
-          {`${Math.abs(percentage)}%`}
-        </>
-      );
-    } else {
-      return '0%';
-    }
-  };
+  const optimizations = Object.entries(percentageImprovements).reduce(
+    (acc, [key, value]) => {
+      if (value === 0) return acc;
+
+      // Check if the optimization is a mesh or texture optimization
+      // and add it to the array only if it's not already there
+      if (
+        key === 'texturesSize' &&
+        !acc.find(({ name }) => name === 'texture')
+      ) {
+        acc.push({ name: 'texture', reduction: value });
+      }
+
+      if (
+        key === 'primitivesCount' &&
+        !acc.find(({ name }) => name === 'mesh')
+      ) {
+        acc.push({ name: 'mesh', reduction: value });
+      }
+
+      return acc;
+    },
+    [] as { name: 'mesh' | 'texture'; reduction: number }[],
+  );
 
   return (
-    <Card
-      className={cn(
-        'fixed min-w-80 top-1/2 -translate-y-1/2 transition-all duration-300',
-        show && 'opacity-100 left-4 visible',
-        !show && 'opacity-0 -left-4 invisible',
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          key={'optimization'}
+          initial={{ opacity: 0, transform: `scale(0.95) translateY(-50%)` }}
+          animate={{ opacity: 1, transform: `scale(1) translateY(-50%)` }}
+          exit={{ opacity: 0, transform: `scale(0.95) translateY(-50%)` }}
+          transition={{ duration: 0.2 }}
+          className="fixed top-1/2 right-0 m-4"
+        >
+          <Card className="w-full h-full my-auto max-w-2xl overflow-hidden text-white relative">
+            <CloseButton title="Close report" onClick={() => setShow(false)} />
+            <CardHeader className="p-6">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center space-x-4">
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      <motion.span
+                        className={cn(
+                          'font-bold',
+                          currentFileSize < initialFileSize
+                            ? 'text-emerald-400'
+                            : 'text-gray-400',
+                        )}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1, duration: 0.5 }}
+                      >
+                        {percentageImprovements.totalSize}%
+                      </motion.span>{' '}
+                      Scene Optimization
+                    </h3>
+                    <p className="text-sm text-zinc-400">Enhancement summary</p>
+                  </div>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <motion.div
+                    className="text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="text-3xl font-bold">
+                      {formatFileSize(initialFileSize)}
+                    </div>
+                    <div className="text-sm text-zinc-400">Original</div>
+                  </motion.div>
+                  <ArrowRightIcon
+                    className={cn(
+                      'w-8 h-8 transform',
+                      currentFileSize < initialFileSize
+                        ? 'text-emerald-400 rotate-45'
+                        : 'text-gray-400',
+                    )}
+                  />
+                  <motion.div
+                    className="text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <div
+                      className={cn(
+                        'text-3xl font-bold',
+                        currentFileSize < initialFileSize
+                          ? 'text-emerald-400'
+                          : 'text-gray-400',
+                      )}
+                    >
+                      {formatFileSize(currentFileSize)}
+                    </div>
+                    <div className="text-sm text-zinc-400">Optimized</div>
+                  </motion.div>
+                </div>
+                <motion.div
+                  className="p-4 bg-zinc-900 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <h4
+                    className={cn(
+                      'text-sm font-semibold flex items-center',
+                      currentFileSize < initialFileSize && 'mb-3',
+                    )}
+                  >
+                    {optimizations.length > 0 ? (
+                      <>
+                        <CheckIcon className="w-4 h-4 mr-2 text-emerald-400" />
+                        Optimizations Applied
+                      </>
+                    ) : (
+                      <>
+                        <DashIcon className="w-4 h-4 mr-2 text-gray-400" />
+                        No optimizations applied yet
+                      </>
+                    )}
+                  </h4>
+                  <ul className="space-y-2">
+                    {optimizations.map((opt, index) => (
+                      <motion.li
+                        key={index}
+                        className="flex justify-between text-sm"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          delay: 0.6 + index * 0.1,
+                          duration: 0.3,
+                        }}
+                      >
+                        <span className="capitalize text-zinc-400">
+                          {opt.name} size reduction
+                        </span>
+                        <span className="text-emerald-400">
+                          {opt.reduction}%
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </div>
+            </CardContent>
+            <Separator className="bg-zinc-700" />
+            <CardFooter className="p-6">
+              <div className="w-full space-y-4">
+                <h4 className="text-lg font-semibold">Scene Overview</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <LayersIcon className="w-5 h-5 text-zinc-400" />
+                    <div>
+                      <p className="text-sm font-medium">Vertex Count</p>
+                      <p className="text-xs text-zinc-400">
+                        {initialVerticesTotal.toLocaleString()} →{' '}
+                        {currentVerticesTotal.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <CubeIcon className="w-5 h-5 text-zinc-400" />
+                    <div>
+                      <p className="text-sm font-medium">GL Primitives</p>
+                      <p className="text-xs text-zinc-400">
+                        {initialPrimitivesTotal.toLocaleString()} →{' '}
+                        {currentPrimitivesTotal.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FileIcon className="w-5 h-5 text-zinc-400" />
+                    <div>
+                      <p className="text-sm font-medium">Textures Size</p>
+                      <p className="text-xs text-zinc-400">
+                        {formatFileSize(initialTexturesSizeTotal)} →{' '}
+                        {formatFileSize(currentTexturesSizeTotal)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardFooter>
+          </Card>
+        </motion.div>
       )}
-    >
-      <Button
-        onClick={() => setShow(false)}
-        variant="ghost"
-        aria-label="Close reports"
-        title="Close reports"
-        className="absolute p-1 h-6 w-6 top-2 right-2"
-      >
-        <Cross2Icon />
-      </Button>
-      <CardHeader>
-        <CardTitle>Reports</CardTitle>
-        {improvements.totalSize > 0 ? (
-          <ImprovementDescription
-            improvements={improvements}
-            initialFileSize={initialFileSize}
-            currentFileSize={currentFileSize}
-          />
-        ) : (
-          'No improvements yet'
-        )}
-      </CardHeader>
-      <CardContent>
-        <ul className="grid gap-4">
-          <li>
-            <p>Vertices:</p> <small>{currentVerticesTotal} </small>
-            <ImprovementTag>
-              {formatImprovementPercentage(
-                percentageImprovements.verticesCount,
-              )}
-            </ImprovementTag>
-          </li>
-          <li>
-            <p>Primitives:</p> <small>{currentPrimitivesTotal} </small>
-            <ImprovementTag>
-              {formatImprovementPercentage(
-                percentageImprovements.primitivesCount,
-              )}
-            </ImprovementTag>
-          </li>
-          <li>
-            <p>Textures Size:</p>
-            <small>{formatFileSize(currentTexturesSizeTotal)}</small>
-            <ImprovementTag>
-              {formatImprovementPercentage(percentageImprovements.texturesSize)}
-            </ImprovementTag>
-          </li>
-        </ul>
-      </CardContent>
-    </Card>
+    </AnimatePresence>
   );
 };
 
