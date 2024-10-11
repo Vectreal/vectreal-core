@@ -6,7 +6,7 @@ import { useModelContext } from '@vctrl/hooks/use-load-model';
 import { Card, CardContent } from '@vctrl/shared/components';
 
 import TypographyLead from '../../components/typography/typography-lead';
-import { useIsMobile } from '../../lib/hooks';
+import { useAcceptPattern } from '../../lib/hooks';
 
 declare module 'react' {
   interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -17,22 +17,9 @@ declare module 'react' {
 }
 
 const DropZone = () => {
-  const isMobile = useIsMobile();
+  const acceptPattern = useAcceptPattern();
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone(
-      isMobile // only set accept restrictions on desktop - for some reason doesn't work on IOS
-        ? {}
-        : {
-            accept: {
-              'model/gltf-binary': ['.glb'],
-              'model/gltf+json': ['.gltf', '.bin'],
-              'model/vnd.usdz+zip': ['.usdz'],
-              'model/vnd.usda': ['.usda'],
-              'image/jpeg': ['.jpeg', '.jpg'],
-              'image/png': ['.png'],
-            },
-          },
-    );
+    useDropzone();
 
   const { load } = useModelContext();
 
@@ -64,6 +51,7 @@ const DropZone = () => {
             </TypographyLead>
             <input
               {...getInputProps()}
+              accept={acceptPattern}
               webkitdirectory="true"
               directory="true"
               multiple
