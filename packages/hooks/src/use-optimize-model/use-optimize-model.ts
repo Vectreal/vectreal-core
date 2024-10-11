@@ -170,7 +170,7 @@ const useOptimizeModel = () => {
    *
    * @returns A promise that resolves with the model's ArrayBuffer or null if no model is loaded.
    */
-  const getModel = useCallback(async (): Promise<ArrayBuffer | null> => {
+  const getModel = useCallback(async (): Promise<Uint8Array | null> => {
     if (!modelDoc) return null;
 
     try {
