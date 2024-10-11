@@ -23,6 +23,7 @@ import {
   inspect,
   quantize,
   simplify,
+  textureCompress,
   weld,
 } from '@gltf-transform/functions';
 import { KHRMeshQuantization } from '@gltf-transform/extensions';
@@ -152,6 +153,19 @@ const useOptimizeModel = () => {
   );
 
   /**
+   * Compresses the relevant texture data in the document using texture compression.
+   *
+   * @param options - Optional parameters to control texture compression.
+   * @returns A promise that resolves when the model has been compressed.
+   */
+  const texturesOptimization = useCallback(
+    async (options?: Parameters<typeof textureCompress>[0]): Promise<void> => {
+      options && (await applyTransforms([textureCompress(options)]));
+    },
+    [applyTransforms],
+  );
+
+  /**
    * Retrieves the current model document as a binary ArrayBuffer.
    *
    * @returns A promise that resolves with the model's ArrayBuffer or null if no model is loaded.
@@ -202,6 +216,7 @@ const useOptimizeModel = () => {
     simplifyOptimization,
     dedupOptimization,
     quantizeOptimization,
+    texturesOptimization,
     reset,
     error,
     loading,
