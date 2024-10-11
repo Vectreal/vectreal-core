@@ -56,6 +56,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          secrets: 'VITE_GA_ID=${{ secrets.VITE_GA_ID }}'
           file: ./apps/official-website/Dockerfile
           push: true
           tags: ${{ env.GCR_HOSTNAME }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
