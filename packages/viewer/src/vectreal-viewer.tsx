@@ -113,9 +113,9 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
             style={{ backgroundColor: envOptions?.backgroundColor }}
           >
             <SceneCamera {...cameraOptions} />
-            <SceneModel object={model || null} envOptions={envOptions?.stage} />
             <SceneEnvironment {...envOptions?.env} />
             <SceneGrid {...gridOptions} />
+            <SceneModel object={model || null} envOptions={envOptions?.stage} />
             {!isFileLoading && <SceneControls {...controlsOptions} />}
             {children}
           </Canvas>

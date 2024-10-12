@@ -16,7 +16,6 @@ const SceneModel = ({ object, envOptions }: ModelProps) => {
 
   return (
     <Stage
-      center={{ top: true }}
       intensity={0.1}
       adjustCamera={1.5}
       environment={null}
