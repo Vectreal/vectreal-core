@@ -27,6 +27,7 @@ import { useAcceptPattern } from '../../lib/hooks';
 import { useEditorContext } from '../../components/providers';
 import ColorPicker from './color-picker';
 import Reports from './reports';
+import LoadingOverlay from './loading-overlay';
 
 function handleExportSuccess() {
   toast.info('Successfully exported model.');
@@ -53,6 +54,7 @@ const FileMenu = () => {
 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showReports, setShowReports] = useState(false);
+  const [optimizeLoading, setOptimizeLoading] = useState(false);
 
   const {
     autoRotate,
@@ -107,6 +109,8 @@ const FileMenu = () => {
   }
 
   function handleToggleHdrBackground() {
+    // hide the color picker if it's open and the HDR background is shown
+    !hdr.asBackground && showColorPicker && setShowColorPicker(false);
     setShowAsBackground(!hdr.asBackground);
   }
 
@@ -116,28 +120,53 @@ const FileMenu = () => {
 
   // Edit menu
 
-  function handleSimplifyClick() {
+  async function handleOptimization(
+    optimizationName: string,
+    description: string | null,
+    optimization: () => void | Promise<void>,
+  ) {
+    setOptimizeLoading(true);
+
+    await optimization();
+
+    setOptimizeLoading(false);
+
     !showReports && handleToggleReports();
-    simplifyOptimization();
+    toast.info(
+      <>
+        Applied optimization:{' '}
+        <span className="capitalize">{optimizationName}</span>
+      </>,
+      {
+        duration: 10000,
+        description,
+      },
+    );
   }
 
-  function handleTexturesOptimizeClick() {
-    !showReports && handleToggleReports();
-    texturesCompressOptimization({
-      targetFormat: 'webp',
-      quality: 80,
-      resize: [512, 512],
-    });
+  function handleSimplifyClick() {
+    handleOptimization('simplify', null, simplifyOptimization);
+  }
+
+  async function handleTexturesOptimizeClick() {
+    await handleOptimization(
+      'textures',
+      '(webp - 80% - 512x512)',
+      async () =>
+        await texturesCompressOptimization({
+          targetFormat: 'webp',
+          quality: 80,
+          resize: [512, 512],
+        }),
+    );
   }
 
   async function handleQuantizeClick() {
-    !showReports && handleToggleReports();
-    quantizeOptimization();
+    await handleOptimization('quantize', null, quantizeOptimization);
   }
 
   async function handleDedupClick() {
-    !showReports && handleToggleReports();
-    dedupOptimization();
+    await handleOptimization('deduplication', null, dedupOptimization);
   }
 
   // Export menu
@@ -159,6 +188,7 @@ const FileMenu = () => {
           multiple
         />
 
+        {optimizeLoading && <LoadingOverlay />}
         <ColorPicker show={showColorPicker} setShow={setShowColorPicker} />
         <Reports show={showReports} setShow={setShowReports} />
 
