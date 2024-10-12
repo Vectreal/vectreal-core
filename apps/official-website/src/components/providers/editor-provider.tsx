@@ -14,11 +14,13 @@ const useEditor = () => {
     backgroundIntensity: number;
     exposure: number;
     preset: PresetsType;
+    blurriness: number;
     stagePreset: ComponentProps<typeof Stage>['preset'];
   }>({
     asBackground: false,
     backgroundIntensity: 1,
     exposure: 1,
+    blurriness: 0.5,
     preset: 'apartment',
     stagePreset: 'soft',
   });
@@ -43,6 +45,10 @@ const useEditor = () => {
     setHdr((prev) => ({ ...prev, preset: value }));
   }
 
+  function setHdrBluriness(value: number) {
+    setHdr((prev) => ({ ...prev, blurriness: value }));
+  }
+
   function setLightingStagePreset(
     value: ComponentProps<typeof Stage>['preset'],
   ) {
@@ -64,6 +70,7 @@ const useEditor = () => {
     hdr,
     setShowAsBackground,
     setBackgroundIntensity,
+    setHdrBluriness,
     setHdrExposure,
     setHdrPreset,
     setLightingStagePreset,

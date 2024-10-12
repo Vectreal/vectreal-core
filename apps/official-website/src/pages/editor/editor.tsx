@@ -90,6 +90,7 @@ const Editor = () => {
               background: hdr.asBackground,
               backgroundIntensity: hdr.backgroundIntensity,
               environmentIntensity: hdr.exposure,
+              backgroundBlurriness: hdr.blurriness,
             },
             stage: {
               preset: hdr.stagePreset,

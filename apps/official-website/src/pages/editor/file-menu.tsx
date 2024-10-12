@@ -61,6 +61,7 @@ const FileMenu = () => {
     setAutoRotateEnabled,
     setAutoRotateSpeed,
     hdr,
+    setHdrBluriness,
     setHdrExposure,
     setHdrPreset,
     setShowAsBackground,
@@ -264,6 +265,25 @@ const FileMenu = () => {
                         onClick={() => setHdrPreset(key as PresetsType)}
                       >
                         {key}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                </MenubarSubContent>
+              </MenubarSub>
+
+              <MenubarSub>
+                <MenubarSubTrigger disabled={!hdr.asBackground}>
+                  HDR Background Blurriness
+                </MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={String(hdr.blurriness)}>
+                    {['1', '0.75', '0.5', '0.25', '0.125', '0'].map((key) => (
+                      <MenubarRadioItem
+                        key={key}
+                        value={key}
+                        onClick={() => setHdrBluriness(Number(key))}
+                      >
+                        {key !== '1' ? key : key + '.0'}
                       </MenubarRadioItem>
                     ))}
                   </MenubarRadioGroup>
