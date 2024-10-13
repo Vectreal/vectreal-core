@@ -49,7 +49,7 @@
     "three": "^0.168.0",
     "@gltf-transform/core": "^4.0.8",
     "@gltf-transform/functions": "^4.0.8",
-    "@gltf-transform/extensions": "^4.0.8",
+    "@gltf-transform/extensions": "^4.0.10",
     "meshoptimizer": "^0.21.0"
   }
 }
