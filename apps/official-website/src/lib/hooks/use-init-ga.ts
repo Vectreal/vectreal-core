@@ -3,7 +3,7 @@ import ReactGA from 'react-ga4';
 
 const useInitGA = () => {
   useEffect(() => {
-    ReactGA.initialize('G-0TB46Y2M59');
+    ReactGA.initialize('G-NQ71FMDTPE');
   }, []);
 };
 
