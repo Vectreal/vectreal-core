@@ -28,6 +28,7 @@
               "sonner",
               "@radix-ui/react-tooltip",
               "@nx/vite",
+              "vctrl/hooks",
               "@vitejs/plugin-react",
               "@gltf-transform/core",
               "@gltf-transform/functions",
