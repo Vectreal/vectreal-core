@@ -11,17 +11,30 @@
           {
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
+              "@nx/react",
+              "@radix-ui/react-accordion",
+              "@radix-ui/react-icons",
+              "@radix-ui/react-avatar",
+              "framer-motion",
+              "class-variance-authority",
+              "@radix-ui/react-slot",
+              "@radix-ui/react-dialog",
+              "@radix-ui/react-dropdown-menu",
+              "@radix-ui/react-label",
+              "@radix-ui/react-menubar",
+              "@radix-ui/react-navigation-menu",
+              "@radix-ui/react-popover",
+              "@radix-ui/react-progress",
+              "sonner",
+              "@radix-ui/react-tooltip",
               "@nx/vite",
-              "@vctrl/hooks",
               "@vitejs/plugin-react",
               "@gltf-transform/core",
               "@gltf-transform/functions",
               "@gltf-transform/extensions",
               "meshoptimizer",
-              "clsx",
               "file-saver",
               "jszip",
-              "react-loader-spinner",
               "vite",
               "vite-plugin-dts"
             ]
@@ -31,7 +44,14 @@
     },
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          1, // warning
+          {
+            "enforceBuildableLibDependency": false
+          }
+        ]
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

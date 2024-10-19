@@ -14,8 +14,6 @@
               "@nx/vite",
               "@vitejs/plugin-react",
               "clsx",
-              "file-saver",
-              "jszip",
               "react-loader-spinner",
               "vite",
               "vite-plugin-dts"

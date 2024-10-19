@@ -42,9 +42,13 @@
     }
   },
   "peerDependencies": {
-    "react": "18.3.1"
+    "react": "18.3.1",
+    "@vctrl/hooks": "0.6.0"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.2",
+    "react-loader-spinner": "^6.1.6",
     "three": "^0.168.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/drei": "^9.108.4"
