@@ -4,7 +4,7 @@ interface Props {
 
 const SpinnerWrapper = ({ loader }: Props) => {
   return (
-    <div className="flex items-center justify-center absolute top-0 right-0 bottom-0 left-0">
+    <div className="flex items-center justify-center absolute w-full h-full">
       {loader}
     </div>
   );
