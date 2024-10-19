@@ -1,41 +1,61 @@
-import { useLayoutEffect, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stage, useGLTF } from '@react-three/drei';
+import { Vector3 } from 'three';
+import { useGLTF } from '@react-three/drei';
+import { VectrealViewer } from '@vctrl/viewer';
 
 interface ModelSceneProps {
   url: string;
 }
 
+const InfoContent = () => {
+  return (
+    <p className="text-sm text-zinc-400 pr-4">
+      This work is based on{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="text-zinc-300"
+        href="https://sketchfab.com/3d-models/unused-blue-vans-shoe-96baa4684df7415ba8ba87d39bd1c2ee"
+      >
+        "Unused Blue Vans Shoe"
+      </a>{' '}
+      by{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="text-zinc-300"
+        href="https://sketchfab.com/thesidekick"
+      >
+        Lassi Kaukonen
+      </a>{' '}
+      licensed under{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="text-zinc-300"
+        href="https://creativecommons.org/licenses/by/4.0/"
+      >
+        CC-BY-4.0
+      </a>
+    </p>
+  );
+};
+
 const HomeModelScene = ({ url }: ModelSceneProps) => {
   const { scene } = useGLTF(url);
-  const [isControlsEnabled, setIsControlsEnabled] = useState(false);
-
-  // wait for the stage component to center the model
-  // after 1 second enable the controls
-  useLayoutEffect(() => {
-    if (isControlsEnabled || !scene) return;
-    const timeoutId = setTimeout(() => setIsControlsEnabled(true), 1500);
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scene]);
 
   return (
-    <Canvas className="h-full w-full -top-9" camera={{ position: [5, 0, 0] }}>
-      {isControlsEnabled && (
-        <OrbitControls
-          autoRotate
-          autoRotateSpeed={1}
-          makeDefault
-          enableZoom={false}
-          enablePan={false}
-          maxPolarAngle={Math.PI / 2}
-          dampingFactor={0.2}
-        />
-      )}
-      <Stage preset="soft" environment="city" adjustCamera={1.5}>
-        <primitive object={scene} />
-      </Stage>
-    </Canvas>
+    <VectrealViewer
+      model={scene}
+      infoContent={<InfoContent />}
+      cameraOptions={{ initialCameraPosition: new Vector3(-5, 2, 0) }}
+      controlsOptions={{ enableZoom: false, dampingFactor: 0.1 }}
+      gridOptions={{ showGrid: true }}
+      envOptions={{
+        backgroundColor: '#141414',
+        env: { preset: 'city', background: false, backgroundBlurriness: 1 },
+        stage: { adjustCamera: 1 },
+      }}
+    />
   );
 };
 

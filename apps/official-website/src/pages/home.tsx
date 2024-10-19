@@ -62,10 +62,11 @@ const Home = () => {
           /> */}
 
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
-            Unlock the Power of Open-Source 3D Optimization
+            Engineered for Speed, Designed for Quality
           </h1>
           <h4 className="md:text-2xl text-muted-foreground !leading-[2.5rem]">
-            Contribute to <Highlight>the future of 3D content</Highlight> with
+            Built on open principles for{' '}
+            <Highlight>faster load times</Highlight> and stunning results with
             Vectreal's community-driven tools.
           </h4>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -122,7 +123,7 @@ const Home = () => {
                 </div>
               }
             >
-              <ModelScene url="/assets/DamagedHelmet.glb" />
+              <ModelScene url="/assets/vans-shoe.glb" />
             </Suspense>
           </Card>
         </div>
