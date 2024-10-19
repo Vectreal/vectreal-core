@@ -32,6 +32,7 @@ import {
   SceneModel,
 } from './components/scene';
 import { DefaultSpinner, SpinnerWrapper } from './components';
+import './index.css';
 
 interface VectrealViewerProps extends PropsWithChildren {
   model?: Object3D;
