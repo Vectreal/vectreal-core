@@ -1,13 +1,8 @@
-import { MutatingDots } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 const DefaultSpinner = () => {
   return (
-    <MutatingDots
-      height="100px"
-      width="100px"
-      color="#fff"
-      secondaryColor="#fff"
-    />
+    <Oval height="100px" width="100px" color="#fff" secondaryColor="#fff" />
   );
 };
 
