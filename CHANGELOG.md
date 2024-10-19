@@ -1,3 +1,28 @@
+## 0.7.0 (2024-10-19)
+
+### 🚀 Features
+
+- **apps/official-website:** unify optimization handler in editor file-menu ([714197e](https://github.com/Vectreal/vectreal-core/commit/714197e))
+- **apps/official-website:** add color picker hex value input ([41812d5](https://github.com/Vectreal/vectreal-core/commit/41812d5))
+- **official-website:** add hdr bluriness control to file-menu ([8a32492](https://github.com/Vectreal/vectreal-core/commit/8a32492))
+- **packages/viewer:** add info popover to display additional info ([5547fb1](https://github.com/Vectreal/vectreal-core/commit/5547fb1))
+
+### 🩹 Fixes
+
+- **apps/official-website:** remove dev check in ga hook ([2aecde4](https://github.com/Vectreal/vectreal-core/commit/2aecde4))
+- **packages:** update dependencies in `package.json` with eslint nx plugin ([1eab9b7](https://github.com/Vectreal/vectreal-core/commit/1eab9b7))
+- **packages/viewer:** adjust grid component to snap to bottom of model ([2e1a294](https://github.com/Vectreal/vectreal-core/commit/2e1a294))
+- **packages/viewer:** default env preset + optional background color ([5ecc5d0](https://github.com/Vectreal/vectreal-core/commit/5ecc5d0))
+- **project:** tailwind setup for packages + apps ([3240e01](https://github.com/Vectreal/vectreal-core/commit/3240e01))
+
+### 📖 Documentation
+
+- **project:** small changes - mainly added/changed links ([b2a9934](https://github.com/Vectreal/vectreal-core/commit/b2a9934))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.6.0 (2024-10-11)
 
 
