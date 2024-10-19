@@ -35,6 +35,7 @@
     "build": {
       "executor": "@nx/vite:build",
       "options": {
+        "generatePackageJson": false,
         "outputPath": "dist/packages/vctrl/viewer",
         "configFile": "packages/viewer/vite.config.ts"
       }

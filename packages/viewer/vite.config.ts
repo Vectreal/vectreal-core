@@ -55,6 +55,7 @@ export default defineConfig({
         'three',
         '@react-three/fiber',
         '@react-three/drei',
+        "@vctrl/hooks",
         '@gltf-transform/core',
         '@gltf-transform/extensions',
         '@gltf-transform/functions',
