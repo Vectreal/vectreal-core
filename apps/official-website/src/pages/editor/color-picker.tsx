@@ -19,6 +19,13 @@ interface ColorPickerProps {
 const ColorPicker = ({ show, setShow }: ColorPickerProps) => {
   const { color, setColor } = useEditorContext();
 
+  function handleColorPickerChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+    if (value.length > 7) return;
+
+    setColor(value.includes('#') ? value : `#${value}`);
+  }
+
   return (
     <Card
       className={cn(
@@ -34,6 +41,14 @@ const ColorPicker = ({ show, setShow }: ColorPickerProps) => {
       </CardHeader>
       <CardContent>
         <HexColorPicker color={color} onChange={setColor} />
+        <p className="mt-4">
+          <span className="text-sm text-zinc-600">Current color: </span>
+          <input
+            value={color}
+            className="bg-zinc-700 rounded px-1 w-24 uppercase"
+            onChange={handleColorPickerChange}
+          />
+        </p>
       </CardContent>
     </Card>
   );
