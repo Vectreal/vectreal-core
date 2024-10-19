@@ -15,10 +15,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 import { PropsWithChildren, Suspense } from 'react';
-import { clsx } from 'clsx';
 import { Object3D } from 'three';
 import { Canvas } from '@react-three/fiber';
 import { useModelContext } from '@vctrl/hooks/use-load-model';
+import { cn } from '@vctrl/shared/lib/utils';
 
 import {
   CameraProps,
@@ -32,6 +32,8 @@ import {
   SceneModel,
 } from './components/scene';
 import { DefaultSpinner, SpinnerWrapper } from './components';
+import InfoPopover from './components/info-popover';
+
 import './index.css';
 
 interface VectrealViewerProps extends PropsWithChildren {
@@ -42,6 +44,7 @@ interface VectrealViewerProps extends PropsWithChildren {
   envOptions?: EnvProps;
   gridOptions?: GridProps;
   loader?: JSX.Element;
+  infoContent?: JSX.Element | string;
 }
 
 /**
@@ -62,6 +65,7 @@ interface VectrealViewerProps extends PropsWithChildren {
  * - `envOptions`: An optional object containing options for the environment.
  * - `gridOptions`: An optional object containing options for the grid.
  * - `loader`: An optional JSX element to render while the model is loading.
+ * - `infoContent`: An optional JSX element or string to render as the info popover content.
  *
  * The component will render a `Canvas` component with the provided props. It will also render a
  * `SceneCamera`, `SceneModel`, `SceneEnvironment`, and `SceneGrid` component inside the canvas.
@@ -95,14 +99,15 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
     controlsOptions,
     loader = <DefaultSpinner />,
     children,
+    infoContent,
   } = props;
 
   let { className } = props;
 
-  className = clsx('w-full h-full', className);
+  className = cn('vctrl-viewer-canvas w-full h-full', className);
 
   return (
-    <div className="w-full h-full">
+    <div className="vctrl-viewer w-full h-full grow overflow-clip">
       {isFileLoading ? (
         <SpinnerWrapper loader={loader} />
       ) : (
@@ -122,6 +127,8 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
           </Canvas>
         </Suspense>
       )}
+
+      <InfoPopover content={infoContent} />
     </div>
   );
 };
