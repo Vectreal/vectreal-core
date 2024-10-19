@@ -1,3 +1,13 @@
+## 0.7.2 (2024-10-19)
+
+### 🩹 Fixes
+
+- **packages:** cross dependencies ([4fbe8b3](https://github.com/Vectreal/vectreal-core/commit/4fbe8b3))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.0 (2024-10-19)
 
 ### 🚀 Features
