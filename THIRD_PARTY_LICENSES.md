@@ -1462,13 +1462,13 @@ The following npm packages may be included in this product:
  - @types/debounce@1.2.4
  - @types/draco3d@1.4.10
  - @types/ndarray@1.0.14
- - @types/node@22.5.5
+ - @types/node@22.7.5
  - @types/offscreencanvas@2019.7.3
  - @types/prop-types@15.7.13
- - @types/react-dom@18.3.0
+ - @types/react-dom@18.3.1
  - @types/react-reconciler@0.26.7
  - @types/react-reconciler@0.28.8
- - @types/react@18.3.8
+ - @types/react@18.3.11
  - @types/stats.js@0.17.3
  - @types/stylis@4.2.5
  - @types/three@0.163.0
@@ -1972,8 +1972,8 @@ SOFTWARE.**
 
 The following npm packages may be included in this product:
 
- - @vctrl/hooks@0.4.0
- - @vctrl/viewer@0.4.0
+ - @vctrl/hooks@0.6.0
+ - @vctrl/viewer@0.6.0
 
 These packages each contain the following license and notice below:
 
@@ -2968,7 +2968,7 @@ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 The following npm package may be included in this product:
 
- - package-json-from-dist@1.0.0
+ - package-json-from-dist@1.0.1
 
 This package contains the following license and notice below:
 
@@ -3241,7 +3241,7 @@ third-party archives.
 
 The following npm package may be included in this product:
 
- - typescript@5.6.2
+ - typescript@5.6.3
 
 This package contains the following license and notice below:
 
@@ -4121,7 +4121,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 The following npm packages may be included in this product:
 
  - tslib@2.6.2
- - tslib@2.7.0
+ - tslib@2.8.0
 
 These packages each contain the following license and notice below:
 
@@ -4378,7 +4378,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - yaml@2.5.1
+ - yaml@2.6.0
 
 This package contains the following license and notice below:
 
@@ -5445,32 +5445,28 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 The following npm packages may be included in this product:
 
  - @radix-ui/primitive@1.1.0
- - @radix-ui/react-accordion@1.2.0
+ - @radix-ui/react-accordion@1.2.1
  - @radix-ui/react-arrow@1.1.0
- - @radix-ui/react-avatar@1.1.0
- - @radix-ui/react-collapsible@1.1.0
+ - @radix-ui/react-avatar@1.1.1
+ - @radix-ui/react-collapsible@1.1.1
  - @radix-ui/react-collection@1.1.0
  - @radix-ui/react-compose-refs@1.1.0
  - @radix-ui/react-context@1.1.0
  - @radix-ui/react-context@1.1.1
- - @radix-ui/react-dialog@1.1.1
+ - @radix-ui/react-dialog@1.1.2
  - @radix-ui/react-direction@1.1.0
- - @radix-ui/react-dismissable-layer@1.1.0
  - @radix-ui/react-dismissable-layer@1.1.1
- - @radix-ui/react-dropdown-menu@2.1.1
- - @radix-ui/react-focus-guards@1.1.0
+ - @radix-ui/react-dropdown-menu@2.1.2
  - @radix-ui/react-focus-guards@1.1.1
  - @radix-ui/react-focus-scope@1.1.0
  - @radix-ui/react-id@1.1.0
  - @radix-ui/react-label@2.1.0
- - @radix-ui/react-menu@2.1.1
- - @radix-ui/react-menubar@1.1.1
- - @radix-ui/react-navigation-menu@1.2.0
+ - @radix-ui/react-menu@2.1.2
+ - @radix-ui/react-menubar@1.1.2
+ - @radix-ui/react-navigation-menu@1.2.1
  - @radix-ui/react-popover@1.1.2
  - @radix-ui/react-popper@1.2.0
- - @radix-ui/react-portal@1.1.1
  - @radix-ui/react-portal@1.1.2
- - @radix-ui/react-presence@1.1.0
  - @radix-ui/react-presence@1.1.1
  - @radix-ui/react-primitive@2.0.0
  - @radix-ui/react-progress@1.1.0
@@ -5486,13 +5482,14 @@ The following npm packages may be included in this product:
  - @radix-ui/react-use-size@1.1.0
  - @radix-ui/react-visually-hidden@1.1.0
  - @radix-ui/rect@1.1.0
- - @react-three/fiber@8.17.7
+ - @react-three/fiber@8.17.10
  - dlv@1.1.3
  - eastasianwidth@0.2.0
  - err-code@2.0.3
  - imurmurhash@0.1.4
  - isarray@1.0.0
  - maath@0.10.8
+ - react-ga4@2.1.0
  - react-remove-scroll-bar@2.3.6
  - react-style-singleton@2.2.1
  - stats-gl@2.2.8
@@ -5657,7 +5654,7 @@ THE SOFTWARE.
 
 The following npm package may be included in this product:
 
- - acorn@8.12.1
+ - acorn@8.13.0
 
 This package contains the following license and notice below:
 
@@ -5748,10 +5745,10 @@ SOFTWARE.
 
 The following npm packages may be included in this product:
 
- - @babel/code-frame@7.24.7
- - @babel/helper-validator-identifier@7.24.7
- - @babel/highlight@7.24.7
- - @babel/runtime@7.25.6
+ - @babel/code-frame@7.25.7
+ - @babel/helper-validator-identifier@7.25.7
+ - @babel/highlight@7.25.7
+ - @babel/runtime@7.25.7
 
 These packages each contain the following license and notice below:
 
@@ -6083,7 +6080,6 @@ SOFTWARE.
 The following npm packages may be included in this product:
 
  - aria-hidden@1.2.4
- - react-remove-scroll@2.5.7
  - react-remove-scroll@2.6.0
  - use-callback-ref@1.3.2
  - use-sidecar@1.1.2
@@ -6567,7 +6563,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - @react-three/drei@9.113.0
+ - @react-three/drei@9.114.4
 
 This package contains the following license and notice below:
 
@@ -6627,7 +6623,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - detect-gpu@5.0.49
+ - detect-gpu@5.0.52
 
 This package contains the following license and notice below:
 
@@ -6687,7 +6683,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - tailwind-merge@2.5.2
+ - tailwind-merge@2.5.4
 
 This package contains the following license and notice below:
 
@@ -7341,9 +7337,9 @@ SOFTWARE.
 
 The following npm packages may be included in this product:
 
- - @remix-run/router@1.19.2
- - react-router-dom@6.26.2
- - react-router@6.26.2
+ - @remix-run/router@1.20.0
+ - react-router-dom@6.27.0
+ - react-router@6.27.0
 
 These packages each contain the following license and notice below:
 
@@ -7469,7 +7465,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The following npm package may be included in this product:
 
- - tailwindcss@3.4.12
+ - tailwindcss@3.4.14
 
 This package contains the following license and notice below:
 
@@ -9088,7 +9084,7 @@ THE SOFTWARE.
 
 The following npm package may be included in this product:
 
- - attr-accept@2.2.2
+ - attr-accept@2.2.4
 
 This package contains the following license and notice below:
 
@@ -9481,7 +9477,7 @@ THE SOFTWARE.
 
 The following npm package may be included in this product:
 
- - framer-motion@11.5.6
+ - framer-motion@11.11.9
 
 This package contains the following license and notice below:
 
@@ -9571,7 +9567,7 @@ THE SOFTWARE.
 
 The following npm package may be included in this product:
 
- - react-dropzone@14.2.3
+ - react-dropzone@14.2.9
 
 This package contains the following license and notice below:
 
@@ -9784,9 +9780,9 @@ THE SOFTWARE.
 
 The following npm packages may be included in this product:
 
- - @gltf-transform/core@4.0.8
- - @gltf-transform/extensions@4.0.8
- - @gltf-transform/functions@4.0.8
+ - @gltf-transform/core@4.0.10
+ - @gltf-transform/extensions@4.0.10
+ - @gltf-transform/functions@4.0.10
 
 These packages each contain the following license and notice below:
 
