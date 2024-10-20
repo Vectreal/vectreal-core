@@ -42,8 +42,7 @@
     }
   },
   "peerDependencies": {
-    "react": "18.3.1",
-    "@vctrl/hooks": "latest"
+    "react": "18.3.1"
   },
   "dependencies": {
     "clsx": "^2.1.1",

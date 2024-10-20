@@ -17,7 +17,7 @@ import DropZone from './drop-zone';
 import FileMenu from './file-menu';
 
 const Editor = () => {
-  const { isFileLoading, on, off, reset } = useModelContext();
+  const { isFileLoading, file, on, off, reset } = useModelContext();
   const { autoRotate, hdr, showGrid, color } = useEditorContext();
 
   const [hasShownInfo, setHasShownInfo] = useState(
@@ -81,6 +81,7 @@ const Editor = () => {
 
       {hasInput ? (
         <VectrealViewer
+          model={file?.model}
           key="model-viewer"
           gridOptions={{ showGrid }}
           envOptions={{

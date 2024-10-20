@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 import { PropsWithChildren, Suspense } from 'react';
 import { Object3D } from 'three';
 import { Canvas } from '@react-three/fiber';
-import { useModelContext } from '@vctrl/hooks/use-load-model';
 import { cn } from '@vctrl/shared/lib/utils';
 
 import {
@@ -51,14 +50,12 @@ interface VectrealViewerProps extends PropsWithChildren {
  * A React component for rendering 3D models.
  *
  * This component is designed to be easily extensible and customizable. It uses the
- * `useModelContext` hook to access the model context and loading state. It also uses the
  * `@react-three/drei` library to render the 3D scene.
- *
- * If a model is not provided, the component will render a spinner until the model is loaded.
  *
  * The component also accepts the following props:
  *
- * - `model`: A 3D model to render if not provided as child or via the `ModelContext`.
+ * - `children`: Any React children to render inside the canvas.
+ * - `model`: A 3D model to render as three `Object3D`.
  * - `className`: An optional className to apply to the outermost container element.
  * - `cameraOptions`: An optional object containing options for the camera.
  * - `controlsOptions`: An optional object containing options for the OrbitControls.
@@ -90,16 +87,14 @@ interface VectrealViewerProps extends PropsWithChildren {
  * };
  */
 const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
-  const { isFileLoading } = useModelContext();
-
   const {
+    children,
     cameraOptions,
     envOptions,
     gridOptions,
     controlsOptions,
-    loader = <DefaultSpinner />,
-    children,
     infoContent,
+    loader = <DefaultSpinner />,
   } = props;
 
   let { className } = props;
@@ -108,9 +103,7 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
 
   return (
     <div className="vctrl-viewer w-full h-full grow overflow-clip">
-      {isFileLoading ? (
-        <SpinnerWrapper loader={loader} />
-      ) : (
+      {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
             className={className}
@@ -122,7 +115,7 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
             <SceneEnvironment {...envOptions?.env} />
             <SceneGrid {...gridOptions} />
             <SceneModel object={model || null} envOptions={envOptions?.stage} />
-            {!isFileLoading && <SceneControls {...controlsOptions} />}
+            <SceneControls {...controlsOptions} />
             {children}
           </Canvas>
         </Suspense>

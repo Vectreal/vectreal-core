@@ -26,7 +26,6 @@ vctrl/viewer is a React component library for rendering and interacting with 3D 
     - [Controls Options](#controls-options)
     - [Environment/Stage Options](#environmentstage-options)
     - [Grid Options](#grid-options)
-  - [Integration with vctrl/hooks](#integration-with-vctrlhooks)
   - [Development](#development)
   - [License](#license)
   - [Contributing](#contributing)
@@ -203,24 +202,6 @@ Configure the grid display with the `gridOptions` prop:
     cellColor: 'rgb(100, 100, 100)',
   }}
 />
-```
-
-## Integration with vctrl/hooks
-
-The VectrealViewer component is designed to work with the vctrl/hooks package. It uses the `useModelContext` hook to access the loaded model and loading state:
-
-```jsx
-import { ModelProvider } from '@vctrl/hooks/use-load-model';
-import { VectrealViewer } from '@vctrl/viewer';
-
-function App() {
-  return (
-    <ModelProvider>
-      <VectrealViewer />
-      {/* Other components that use the model context */}
-    </ModelProvider>
-  );
-}
 ```
 
 ## Development
