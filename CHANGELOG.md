@@ -1,3 +1,13 @@
+## 0.7.3 (2024-10-20)
+
+### 🩹 Fixes
+
+- **packages/viewer:** remove cross dependency to vctrl/hooks ([f150b31](https://github.com/Vectreal/vectreal-core/commit/f150b31))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.2 (2024-10-19)
 
 ### 🩹 Fixes
