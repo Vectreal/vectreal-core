@@ -26,7 +26,11 @@ import {
   textureCompress,
   weld,
 } from '@gltf-transform/functions';
-import { KHRMeshQuantization } from '@gltf-transform/extensions';
+import {
+  KHRMeshQuantization,
+  KHRMaterialsVolume,
+  KHRMaterialsTransmission,
+} from '@gltf-transform/extensions';
 import { MeshoptSimplifier } from 'meshoptimizer';
 
 import { ModelSize } from './types';
@@ -48,7 +52,11 @@ const useOptimizeModel = () => {
   // Initialize the GLTFExporter and WebIO with required extensions.
   const exporterRef = useRef<GLTFExporter>(new GLTFExporter());
   const ioRef = useRef<WebIO>(
-    new WebIO().registerExtensions([KHRMeshQuantization]),
+    new WebIO().registerExtensions([
+      KHRMeshQuantization,
+      KHRMaterialsVolume,
+      KHRMaterialsTransmission,
+    ]),
   );
 
   /**
