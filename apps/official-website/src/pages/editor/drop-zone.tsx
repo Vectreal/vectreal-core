@@ -51,10 +51,10 @@ const DropZone = () => {
             </TypographyLead>
             <input
               {...getInputProps()}
-              accept={acceptPattern}
-              webkitdirectory="true"
+              // webkitdirectory="true"
               directory="true"
               multiple
+              accept={acceptPattern}
             />
           </div>
         </CardContent>
