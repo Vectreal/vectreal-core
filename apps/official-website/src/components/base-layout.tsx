@@ -4,6 +4,9 @@ import { Pencil2Icon } from '@radix-ui/react-icons';
 
 import { TypewriterEffect, Button, Toaster } from '@vctrl/shared/components';
 
+import { useInitGA } from '../lib/hooks';
+import { sendCustomEvent } from '../lib/utils/ga-utils';
+
 import NavMenu from './nav-menu';
 import Footer from './footer';
 
@@ -17,12 +20,31 @@ const cta = words.map((word, i) => ({
   }),
 }));
 
+/**
+ * BaseLayout component that sets up the main layout for the application.
+ * It includes navigation, main content area, and footer.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @remarks
+ * - Uses `useLocation` to get the current URL path.
+ * - Uses `useEffect` to scroll to the top of the page on path change.
+ * - Initializes Google Analytics with `useInitGA`.
+ * - Displays a navigation menu, main content, and a footer.
+ * - Conditionally renders additional sections and footer based on the current path.
+ *  */
 const BaseLayout = () => {
   const currentLocation = useLocation();
 
+  // Scroll to top on path change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentLocation.pathname]);
+
+  // Initialize Google Analytics
+  useInitGA();
 
   return (
     <>
@@ -38,7 +60,16 @@ const BaseLayout = () => {
               </p>
               <TypewriterEffect words={cta} cursorClassName="bg-zinc-500" />
               <div className="flex flex-row gap-4">
-                <Link to="/editor">
+                <Link
+                  to="/editor"
+                  onClick={() =>
+                    sendCustomEvent({
+                      category: 'Footer',
+                      action: 'Click',
+                      label: 'CTA - Open Editor',
+                    })
+                  }
+                >
                   <Button variant="secondary">
                     <Pencil2Icon className="mr-3" /> Open the Free Editor
                   </Button>

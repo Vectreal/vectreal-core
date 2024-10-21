@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from '@vctrl/shared/components';
 
+import { sendCustomEvent } from '../lib/utils/ga-utils';
 import { useIsMobile } from '../lib/hooks';
 
 import reactGraphic from '../components/assets/react-graphic.png';
@@ -56,11 +57,6 @@ const Home = () => {
       {!isMobile && <BackgroundBeams className="absolute z-0" />}
       <section className="flex flex-col items-center my-48 relative z-10">
         <div className="flex flex-col items-center gap-8 text-center max-w-2xl">
-          {/* <object
-            aria-label="GitHub stars"
-            data="https://img.shields.io/github/stars/vectreal/.github?style=flat&color=ff7518&link=https%3A%2F%2Fgithub.com%2Fvectreal"
-          /> */}
-
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
             Engineered for Speed, Designed for Quality
           </h1>
@@ -70,7 +66,16 @@ const Home = () => {
             Vectreal's community-driven tools.
           </h4>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/editor">
+            <Link
+              to="/editor"
+              onClick={() =>
+                sendCustomEvent({
+                  category: 'Home Page',
+                  action: 'Click',
+                  label: 'Hero Section - Open Editor',
+                })
+              }
+            >
               <Button>
                 <Pencil2Icon className="mr-3" /> Get Started with Our Editor
               </Button>
@@ -78,6 +83,13 @@ const Home = () => {
             <Link
               to="https://github.com/vectreal/vectreal-core"
               target="_blank"
+              onClick={() =>
+                sendCustomEvent({
+                  category: 'Home Page',
+                  action: 'Click',
+                  label: 'Hero Section - GitHub',
+                })
+              }
             >
               <Button variant="outline">
                 <GitHubLogoIcon className="mr-3" /> Join Our Community on GitHub
@@ -156,7 +168,16 @@ const Home = () => {
           Test the power of our tools right here using our free online editor
           toolkit.
         </TypographyMuted>
-        <Link to="/editor">
+        <Link
+          to="/editor"
+          onClick={() =>
+            sendCustomEvent({
+              category: 'Home Page',
+              action: 'Click',
+              label: 'CTA - Open Editor',
+            })
+          }
+        >
           <Button>
             <Pencil2Icon className="mr-3" /> Open the Editor
           </Button>
@@ -202,6 +223,13 @@ const Home = () => {
                 to="https://github.com/vectreal"
                 target="_blank"
                 className="mt-4"
+                onClick={() =>
+                  sendCustomEvent({
+                    category: 'Home Page',
+                    action: 'Click',
+                    label: 'Collaboration - GitHub',
+                  })
+                }
               >
                 <Button>Visit GitHub</Button>
               </Link>
@@ -221,6 +249,13 @@ const Home = () => {
                 to="https://discord.gg/UHxPjGMH"
                 target="_blank"
                 className="mt-4"
+                onClick={() =>
+                  sendCustomEvent({
+                    category: 'Home Page',
+                    action: 'Click',
+                    label: 'Collaboration - Discord',
+                  })
+                }
               >
                 <Button>Join Discord</Button>
               </Link>

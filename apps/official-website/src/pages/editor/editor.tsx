@@ -10,8 +10,10 @@ import {
 } from '@vctrl/hooks/use-load-model';
 import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
 
+import { sendCustomEvent } from '../../lib/utils/ga-utils';
 import { EditorProvider, useEditorContext } from '../../components/providers';
 import LoadingSpinner from '../../components/loading-spinner';
+
 import UploadInfoDialog from './upload-info-dialog';
 import DropZone from './drop-zone';
 import FileMenu from './file-menu';
@@ -48,17 +50,27 @@ const Editor = () => {
     reset();
   }
 
+  function handleLoadStart() {
+    sendCustomEvent({
+      category: 'Editor Page',
+      action: 'Upload',
+      label: 'Model Load Start',
+    });
+  }
+
   useEffect(() => {
     on('load-reset', handleReset);
     on('not-loaded-files', handleNotLoadedFiles);
     on('load-complete', handleLoadComplete);
     on('load-error', handleLoadError);
+    on('load-start', handleLoadStart);
 
     return () => {
       off('load-reset', handleReset);
       off('not-loaded-files', handleNotLoadedFiles);
       off('load-complete', handleLoadComplete);
       off('load-error', handleLoadError);
+      off('load-start', handleLoadStart);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
