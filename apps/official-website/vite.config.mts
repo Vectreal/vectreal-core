@@ -52,6 +52,10 @@ export default defineConfig({
     }),
   ],
 
+  css: {
+    postcss: path.resolve(__dirname, '../../postcss.config.js'),
+  },
+
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],

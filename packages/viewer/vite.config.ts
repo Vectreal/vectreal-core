@@ -28,7 +28,9 @@ export default defineConfig({
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
   // },
-
+  css: {
+    postcss: path.resolve(__dirname, '../../postcss.config.js'),
+  },
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
@@ -37,6 +39,7 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
@@ -55,7 +58,7 @@ export default defineConfig({
         'three',
         '@react-three/fiber',
         '@react-three/drei',
-        "@vctrl/hooks",
+        '@vctrl/hooks',
         '@gltf-transform/core',
         '@gltf-transform/extensions',
         '@gltf-transform/functions',
