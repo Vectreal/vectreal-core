@@ -1,3 +1,13 @@
+## 0.7.5 (2024-10-22)
+
+### 🩹 Fixes
+
+- **packages/viewer:** styling in info-popover component ([dfdd977](https://github.com/Vectreal/vectreal-core/commit/dfdd977))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.4 (2024-10-22)
 
 ### 🚀 Features
