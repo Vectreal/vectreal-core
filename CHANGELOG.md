@@ -1,3 +1,21 @@
+## 0.7.4 (2024-10-22)
+
+### 🚀 Features
+
+- **apps/official-website:** enable offline Google Analytics in Vite config ([9b25a2f](https://github.com/Vectreal/vectreal-core/commit/9b25a2f))
+- **apps/official-website:** move ga initialization to `base-layout` & add custom event tracking ([660e847](https://github.com/Vectreal/vectreal-core/commit/660e847))
+
+### 🩹 Fixes
+
+- **apps/official-website:** remove useInitGA hook from app component ([c5a7ec1](https://github.com/Vectreal/vectreal-core/commit/c5a7ec1))
+- **apps/official-website/editor:** fix accept pattern and remove webkitdirectory attribute ([7c0f653](https://github.com/Vectreal/vectreal-core/commit/7c0f653))
+- **packages/hooks:** optimize hook volumne + emission material extension registration ([6ec7915](https://github.com/Vectreal/vectreal-core/commit/6ec7915))
+- **project:** update postcss configuration in vite ([3dad878](https://github.com/Vectreal/vectreal-core/commit/3dad878))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.3 (2024-10-20)
 
 ### 🩹 Fixes
