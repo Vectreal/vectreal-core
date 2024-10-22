@@ -39,7 +39,8 @@
       "import": "./index.js",
       "require": "./index.cjs",
       "types": "./index.d.ts"
-    }
+    },
+    "./css": "./style.css"
   },
   "peerDependencies": {
     "react": "18.3.1"
