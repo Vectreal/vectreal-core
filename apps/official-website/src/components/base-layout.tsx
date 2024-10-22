@@ -65,7 +65,7 @@ const BaseLayout = () => {
                   onClick={() =>
                     sendCustomEvent({
                       category: 'Footer',
-                      action: 'Click',
+                      action: 'click',
                       label: 'CTA - Open Editor',
                     })
                   }

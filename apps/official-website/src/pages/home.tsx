@@ -71,7 +71,7 @@ const Home = () => {
               onClick={() =>
                 sendCustomEvent({
                   category: 'Home Page',
-                  action: 'Click',
+                  action: 'click',
                   label: 'Hero Section - Open Editor',
                 })
               }
@@ -86,7 +86,7 @@ const Home = () => {
               onClick={() =>
                 sendCustomEvent({
                   category: 'Home Page',
-                  action: 'Click',
+                  action: 'click',
                   label: 'Hero Section - GitHub',
                 })
               }
@@ -173,7 +173,7 @@ const Home = () => {
           onClick={() =>
             sendCustomEvent({
               category: 'Home Page',
-              action: 'Click',
+              action: 'click',
               label: 'CTA - Open Editor',
             })
           }
@@ -226,7 +226,7 @@ const Home = () => {
                 onClick={() =>
                   sendCustomEvent({
                     category: 'Home Page',
-                    action: 'Click',
+                    action: 'click',
                     label: 'Collaboration - GitHub',
                   })
                 }
@@ -252,7 +252,7 @@ const Home = () => {
                 onClick={() =>
                   sendCustomEvent({
                     category: 'Home Page',
-                    action: 'Click',
+                    action: 'click',
                     label: 'Collaboration - Discord',
                   })
                 }
