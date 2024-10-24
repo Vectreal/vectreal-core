@@ -37,7 +37,10 @@
               "file-saver",
               "jszip",
               "vite",
-              "vite-plugin-dts"
+              "vite-plugin-dts",
+              "clsx",
+              "tailwind-merge",
+              "react-loader-spinner"
             ]
           }
         ]
