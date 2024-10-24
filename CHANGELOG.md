@@ -1,3 +1,13 @@
+## 0.7.6 (2024-10-24)
+
+### 📖 Documentation
+
+- **packages/viewer:** add CodeSandbox example link ([9d196fa](https://github.com/Vectreal/vectreal-core/commit/9d196fa))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.5 (2024-10-22)
 
 ### 🩹 Fixes
