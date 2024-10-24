@@ -30,8 +30,8 @@ import {
   SceneGrid,
   SceneModel,
 } from './components/scene';
-import { DefaultSpinner, SpinnerWrapper } from './components';
-import InfoPopover from './components/info-popover';
+
+import { DefaultSpinner, InfoPopover, SpinnerWrapper } from './components';
 
 import './index.css';
 
@@ -88,6 +88,7 @@ interface VectrealViewerProps extends PropsWithChildren {
  */
 const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
   const {
+    className,
     children,
     cameraOptions,
     envOptions,
@@ -97,16 +98,12 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
     loader = <DefaultSpinner />,
   } = props;
 
-  let { className } = props;
-
-  className = cn('vctrl-viewer-canvas w-full h-full', className);
-
   return (
     <div className="vctrl-viewer w-full h-full grow overflow-clip">
       {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
-            className={className}
+            className={cn('vctrl-viewer-canvas w-full h-full', className)}
             dpr={[1, 1.5]}
             shadows
             style={{ backgroundColor: envOptions?.backgroundColor }}
