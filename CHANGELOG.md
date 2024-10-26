@@ -1,3 +1,13 @@
+## 0.7.7 (2024-10-26)
+
+### 📖 Documentation
+
+- **packages/viewer:** optimize README.md and add example code ([7b7fce8](https://github.com/Vectreal/vectreal-core/commit/7b7fce8))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.6 (2024-10-24)
 
 ### 📖 Documentation
