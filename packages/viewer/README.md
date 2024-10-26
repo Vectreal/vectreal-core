@@ -3,7 +3,7 @@
 [![Version and release packages to NPM](https://img.shields.io/github/actions/workflow/status/vectreal/vectreal-core/version-release.yaml?logo=github&logoColor=%23fc6c18&label=Version%20and%20release%20packages%20to%20NPM&color=%23fc6c18)
 ](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
 [![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
-[![Static Badge](https://img.shields.io/badge/Code_Sandbox_example-Open-fc6c18?logo=codesandbox&logoColor=%23fc6c18)](https://codesandbox.io/p/sandbox/vectreal-core-viewer-vctrl-viewer-example-kwncm2)
+[![Code sandbox](https://img.shields.io/badge/Code_Sandbox_example-Open-fc6c18?logo=codesandbox&logoColor=%23fc6c18)](https://codesandbox.io/p/sandbox/vectreal-core-viewer-vctrl-viewer-example-kwncm2)
 
 > This library is still undergoing heavy development until the first major version is released. This may lead to breaking changes in upcoming updates.
 
@@ -55,23 +55,29 @@ yarn add @vctrl/viewer
 
 Here's a basic example of how to use the VectrealViewer component:
 
-```jsx
+```tsx
 import React from 'react';
+
+// Use vctrl/hooks for loading a local model
+import { useLoadModel } from '@vctrl/hooks/useLoadModel';
+
+// You could also use the `useGLTF` hook from `@react-three/drei`
+// import { useGLTF } from '@react-three/drei'
+
 import { VectrealViewer } from '@vctrl/viewer';
-import { ModelProvider } from '@vctrl/hooks/use-load-model';
+import '@vctrl/viewer/css';
 
 function App() {
-  const { scene } = useGltf('https://url-to-your-model.glb');
+  const { file } = useLoadModel();
+  // const { scene: model } = useGLTF('/model.glb');
 
-  return (
-    <>
-      <VectrealViewer model={scene} />
-    </>
-  );
+  return <VectrealViewer model={file.model} />;
 }
 
 export default App;
 ```
+
+> You must also import the CSS bundle for the viewer to work as expected. See the full example [here](https://codesandbox.io/p/sandbox/vectreal-core-viewer-vctrl-viewer-example-kwncm2).
 
 > You can also load any model supported by the [react-three-drei](https://github.com/pmndrs/react-three-drei) loading hooks and pass it into the `VectrealViewer` using the `model` prop.
 
