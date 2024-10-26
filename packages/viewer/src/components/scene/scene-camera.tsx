@@ -3,7 +3,10 @@ import { PerspectiveCamera, Vector3 } from 'three';
 import { useThree } from '@react-three/fiber';
 
 export interface CameraProps {
-  initialCameraPosition?: Vector3;
+  initialCameraPosition?:
+    | Vector3
+    | { x: number; y: number; z: number }
+    | [number, number, number];
   fov?: number;
   aspect?: number;
   near?: number;
@@ -18,7 +21,21 @@ const SceneCamera = (props: CameraProps) => {
     camera.near = props.near || 0.01;
     camera.fov = props.fov || 69;
 
-    if (props.initialCameraPosition) {
+    if (!props.initialCameraPosition) return;
+
+    if (Array.isArray(props.initialCameraPosition)) {
+      camera.position.set(
+        props.initialCameraPosition[0],
+        props.initialCameraPosition[1],
+        props.initialCameraPosition[2],
+      );
+    } else if (
+      props.initialCameraPosition instanceof Vector3 ||
+      (props.initialCameraPosition instanceof Object &&
+        'x' in props.initialCameraPosition &&
+        'y' in props.initialCameraPosition &&
+        'z' in props.initialCameraPosition)
+    ) {
       camera.position.set(
         props.initialCameraPosition.x,
         props.initialCameraPosition.y,
