@@ -1,3 +1,13 @@
+## 0.7.8 (2024-10-28)
+
+### 🩹 Fixes
+
+- **packages/viewer:** disabled/stuttering SceneControls component ([361f6a1](https://github.com/Vectreal/vectreal-core/commit/361f6a1))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.7.7 (2024-10-26)
 
 ### 📖 Documentation
