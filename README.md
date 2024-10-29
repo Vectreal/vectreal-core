@@ -120,13 +120,13 @@ Visit our [free online editor toolkit](https://core.vectreal.com/editor) to see 
 To serve one of the app projects, use the following command:
 
 ```bash
-npx nx serve vectreal/official-website
+npx nx serve vctrl/official-website
 ```
 
 To see all available targets for a project:
 
 ```bash
-npx nx show project vectreal/official-website --web
+npx nx show project vctrl/official-website --web
 ```
 
 > The optional `--web` parameter opens a visual overview of all possible commands available for a project.
