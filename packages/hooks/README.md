@@ -8,7 +8,7 @@
 
 ## Overview
 
-`@vctrl/hooks` is a React hooks package designed to simplify 3D model loading, optimization, and exporting within React applications. It's part of the [vectreal-core](https://github.com/vectreal/vectreal-core) ecosystem and is primarily used in the [`@vctrl/viewer`](https://www.npmjs.com/package/@vctrl/viewer?activeTab=readme) React component and the [official website application](https://core.vectreal.com).
+`@vctrl/hooks` is a React hooks package designed to simplify 3D model loading, optimization, and exporting within React applications. It's part of the [vectreal-core](https://github.com/vectreal/vectreal-core) ecosystem and is fully integrated into the [official website application](https://core.vectreal.com).
 
 The package provides powerful hooks for:
 
