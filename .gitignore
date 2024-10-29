@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .nx/
-vite.config.mts.timestamp-* 
-vite.config.ts.timestamp-* 
+vite.config.mts.timestamp-*
+vite.config.ts.timestamp-*
 .DS_Store
+**/vite.config.{js,ts,mjs,mts,cjs,cts}.timestamp*
