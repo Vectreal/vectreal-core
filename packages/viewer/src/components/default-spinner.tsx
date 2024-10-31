@@ -2,7 +2,7 @@ import { Oval } from 'react-loader-spinner';
 
 const DefaultSpinner = () => {
   return (
-    <Oval height="100px" width="100px" color="#fff" secondaryColor="#fff" />
+    <Oval width="3rem" color="white" secondaryColor="white" strokeWidth="3" />
   );
 };
 
