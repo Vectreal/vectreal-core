@@ -118,7 +118,6 @@ const Editor = () => {
           cameraOptions={{
             initialCameraPosition: new Vector3(0, 5, 5),
           }}
-          loader={<LoadingSpinner />}
         />
       ) : (
         <DropZone key="drop-zone" />
