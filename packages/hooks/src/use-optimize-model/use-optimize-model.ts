@@ -23,6 +23,7 @@ import {
   inspect,
   quantize,
   simplify,
+  normals,
   textureCompress,
   weld,
 } from '@gltf-transform/functions';
@@ -161,6 +162,19 @@ const useOptimizeModel = () => {
   );
 
   /**
+   * Optimizes the normals of a model by applying the specified transformations.
+   *
+   * @param options - Optional parameters for the normals transformation function.
+   * @returns A promise that resolves when the optimization is complete.
+   */
+  const normalsOptimization = useCallback(
+    async (options?: Parameters<typeof normals>[0]): Promise<void> => {
+      await applyTransforms([normals(options)]);
+    },
+    [applyTransforms],
+  );
+
+  /**
    * Compresses the relevant texture data in the document using texture compression.
    *
    * @param options - Optional parameters to control texture compression.
@@ -224,6 +238,7 @@ const useOptimizeModel = () => {
     simplifyOptimization,
     dedupOptimization,
     quantizeOptimization,
+    normalsOptimization,
     texturesOptimization,
     reset,
     error,

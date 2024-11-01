@@ -182,6 +182,7 @@ The `optimize` object includes quick access optimization:
 - `simplifyOptimization(options)`: Simplifies the model using mesh simplification.
 - `dedupOptimization(options)`: Removes duplicate vertices and meshes.
 - `quantizeOptimization(options)`: Reduces the precision of vertex attributes.
+- `normalsOptimization(options)`: Overrides the normals of each object in the scene.
 - `texturesCompressionOptimization(options)`: Compresses the relevant textures in the model file using texture compression.
 
 ### useOptimizeModel
@@ -299,6 +300,7 @@ The `useOptimizeModel` hook returns the following:
 - `simplifyOptimization(options)`: Simplifies the current model using the `MeshoptSimplifier`.
 - `dedupOptimization(options)`: Removes duplicate vertices and meshes.
 - `quantizeOptimization(options)`: Reduces the precision of vertex attributes.
+- `normalsOptimization`: Overrides normals
 - `texturesOptimization(options)`: Compresses related textures.
 - `getSize()`: Object with byte size of gltf scene and a formatted megabyte string
 - `reset()`: Resets the current optimizer model and report state.

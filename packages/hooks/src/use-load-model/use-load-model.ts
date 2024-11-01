@@ -273,59 +273,57 @@ function useOptimizerIntegration(
   type QuantizeOptions = Parameters<
     ReturnType<typeof useOptimizeModel>['quantizeOptimization']
   >[0];
+  type NormalsOptions = Parameters<
+    ReturnType<typeof useOptimizeModel>['normalsOptimization']
+  >[0];
   type TexturesOptions = Parameters<
     ReturnType<typeof useOptimizeModel>['texturesOptimization']
   >[0];
 
-  // Include the optimizer's report, error, and loading states
-  return optimizer
-    ? {
-        simplifyOptimization: (options?: SimplifyOptions) =>
-          runOptimization<SimplifyOptions>(
-            optimizer.simplifyOptimization,
-            options,
-          ),
-        dedupOptimization: (options?: DedupOptions) =>
-          runOptimization(optimizer.dedupOptimization, options),
-        quantizeOptimization: (options?: QuantizeOptions) =>
-          runOptimization<QuantizeOptions>(
-            optimizer.quantizeOptimization,
-            options,
-          ),
-        texturesCompressOptimization: (options?: TexturesOptions) =>
-          runOptimization<TexturesOptions>(
-            optimizer.texturesOptimization,
-            options,
-          ),
-        getSize: optimizer.getSize,
-        reset: optimizer.reset,
-        report: optimizer.report, // Include the report state
-        error: optimizer.error, // Include the error state
-        loading: optimizer.loading, // Include the loading state
-      }
-    : {
-        simplifyOptimization: () => {
-          console.warn('Optimizer is not available');
-        },
-        dedupOptimization: () => {
-          console.warn('Optimizer is not available');
-        },
-        quantizeOptimization: () => {
-          console.warn('Optimizer is not available');
-        },
-        texturesCompressOptimization: () => {
-          console.warn('Optimizer is not available');
-        },
-        getSize: () => {
-          console.warn('Optimizer is not available');
-        },
-        reset: () => {
-          console.warn('Optimizer is not available');
-        },
-        report: null,
-        error: null,
-        loading: false,
-      };
+  const createUnavailableHandler = (message: string) => () => {
+    console.warn(message);
+  };
+
+  const unavailableHandler = {
+    simplifyOptimization: createUnavailableHandler(
+      'Optimizer is not available',
+    ),
+    dedupOptimization: createUnavailableHandler('Optimizer is not available'),
+    quantizeOptimization: createUnavailableHandler(
+      'Optimizer is not available',
+    ),
+    normalsOptimization: createUnavailableHandler('Optimizer is not available'),
+    texturesCompressOptimization: createUnavailableHandler(
+      'Optimizer is not available',
+    ),
+    getSize: createUnavailableHandler('Optimizer is not available'),
+    reset: createUnavailableHandler('Optimizer is not available'),
+    report: null,
+    error: null,
+    loading: false,
+  };
+
+  if (!optimizer) {
+    return unavailableHandler;
+  }
+
+  return {
+    simplifyOptimization: (options?: SimplifyOptions) =>
+      runOptimization<SimplifyOptions>(optimizer.simplifyOptimization, options),
+    dedupOptimization: (options?: DedupOptions) =>
+      runOptimization(optimizer.dedupOptimization, options),
+    quantizeOptimization: (options?: QuantizeOptions) =>
+      runOptimization<QuantizeOptions>(optimizer.quantizeOptimization, options),
+    normalsOptimization: (options?: NormalsOptions) =>
+      runOptimization<NormalsOptions>(optimizer.normalsOptimization, options),
+    texturesCompressOptimization: (options?: TexturesOptions) =>
+      runOptimization<TexturesOptions>(optimizer.texturesOptimization, options),
+    getSize: optimizer.getSize,
+    reset: optimizer.reset,
+    report: optimizer.report, // Include the report state
+    error: optimizer.error, // Include the error state
+    loading: optimizer.loading, // Include the loading state
+  };
 }
 
 export default useLoadModel;
