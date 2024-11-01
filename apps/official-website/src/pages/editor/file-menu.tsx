@@ -29,6 +29,9 @@ import ColorPicker from './color-picker';
 import Reports from './reports';
 import LoadingOverlay from './loading-overlay';
 
+type TextureSize = 256 | 512 | 768 | 1024 | 2048 | 4096;
+type TextureFormat = 'webp' | 'jpeg' | 'png';
+
 function handleExportSuccess() {
   toast.info('Successfully exported model.');
 }
@@ -44,6 +47,7 @@ const FileMenu = () => {
     simplifyOptimization,
     dedupOptimization,
     quantizeOptimization,
+    normalsOptimization,
     texturesCompressOptimization,
   } = optimize;
 
@@ -55,6 +59,7 @@ const FileMenu = () => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showReports, setShowReports] = useState(false);
   const [optimizeLoading, setOptimizeLoading] = useState(false);
+  const [textureFormat, setTextureFormat] = useState<TextureFormat>('webp');
 
   const {
     autoRotate,
@@ -149,21 +154,29 @@ const FileMenu = () => {
     handleOptimization('simplify', null, simplifyOptimization);
   }
 
-  async function handleTexturesOptimizeClick() {
+  async function handleTexturesOptimizeClick(size: TextureSize) {
     await handleOptimization(
       'textures',
-      '(webp - 80% - 512x512)',
+      `Target: ${size}x${size}, Format: ${textureFormat}, Quality: 80`,
       async () =>
         await texturesCompressOptimization({
-          targetFormat: 'webp',
+          targetFormat: textureFormat,
           quality: 80,
-          resize: [512, 512],
+          resize: [size, size],
         }),
     );
   }
 
   async function handleQuantizeClick() {
     await handleOptimization('quantize', null, quantizeOptimization);
+  }
+
+  async function handleNormalsClick() {
+    await handleOptimization(
+      'normals',
+      'Overriding normals',
+      async () => await normalsOptimization({ overwrite: true }),
+    );
   }
 
   async function handleDedupClick() {
@@ -190,6 +203,7 @@ const FileMenu = () => {
         />
 
         {optimizeLoading && <LoadingOverlay />}
+
         <ColorPicker show={showColorPicker} setShow={setShowColorPicker} />
         <Reports show={showReports} setShow={setShowReports} />
 
@@ -365,9 +379,52 @@ const FileMenu = () => {
             <MenubarTrigger key="edit">Edit</MenubarTrigger>
             <MenubarContent align="center">
               <MenubarItem onClick={handleSimplifyClick}>Simplify</MenubarItem>
-              <MenubarItem onClick={handleTexturesOptimizeClick}>
-                Compress textures
+              <MenubarItem onClick={handleNormalsClick}>
+                Override Normals
               </MenubarItem>
+
+              <MenubarSub>
+                <MenubarSubTrigger>Optimize textures</MenubarSubTrigger>
+                <MenubarSubContent>
+                  <MenubarRadioGroup value={textureFormat}>
+                    {['webp', 'jpeg', 'png'].map((key) => (
+                      <MenubarRadioItem
+                        key={key}
+                        value={key}
+                        onClick={() => setTextureFormat(key as TextureFormat)}
+                      >
+                        {key}
+                      </MenubarRadioItem>
+                    ))}
+                  </MenubarRadioGroup>
+                  <MenubarSeparator />
+                  <MenubarItem onClick={() => handleTexturesOptimizeClick(256)}>
+                    256x256
+                  </MenubarItem>
+                  <MenubarItem onClick={() => handleTexturesOptimizeClick(512)}>
+                    512x512
+                  </MenubarItem>
+                  <MenubarItem onClick={() => handleTexturesOptimizeClick(768)}>
+                    768x768
+                  </MenubarItem>
+                  <MenubarItem
+                    onClick={() => handleTexturesOptimizeClick(1024)}
+                  >
+                    1024x1024
+                  </MenubarItem>
+                  <MenubarItem
+                    onClick={() => handleTexturesOptimizeClick(2048)}
+                  >
+                    2048x2048
+                  </MenubarItem>
+                  <MenubarItem
+                    onClick={() => handleTexturesOptimizeClick(4096)}
+                  >
+                    4096x4096
+                  </MenubarItem>
+                </MenubarSubContent>
+              </MenubarSub>
+
               <MenubarItem onClick={handleQuantizeClick}>Quantize</MenubarItem>
               <MenubarItem onClick={handleDedupClick}>
                 Remove duplicates
