@@ -12,7 +12,6 @@ import { useOptimizeModel } from '@vctrl/hooks/use-optimize-model';
 
 import { sendCustomEvent } from '../../lib/utils/ga-utils';
 import { EditorProvider, useEditorContext } from '../../components/providers';
-import LoadingSpinner from '../../components/loading-spinner';
 
 import UploadInfoDialog from './upload-info-dialog';
 import DropZone from './drop-zone';

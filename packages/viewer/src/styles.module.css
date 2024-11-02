@@ -1,0 +1,12 @@
+.vctrl-viewer {
+  width: 100%;
+  height: 100%;
+
+  flex-grow: 1;
+  overflow: clip;
+}
+
+.vctrl-viewer-canvas {
+  width: 100%;
+  height: 100%;
+}

@@ -33,7 +33,7 @@ import {
 
 import { DefaultSpinner, InfoPopover, SpinnerWrapper } from './components';
 
-import './index.css';
+import styles from './styles.module.css';
 
 interface VectrealViewerProps extends PropsWithChildren {
   model?: Object3D;
@@ -99,11 +99,15 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
   } = props;
 
   return (
-    <div className="vctrl-viewer w-full h-full grow overflow-clip">
+    <div className={cn('vctrl-viewer', styles['vctrl-viewer'])}>
       {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
-            className={cn('vctrl-viewer-canvas w-full h-full', className)}
+            className={cn(
+              'vctrl-viewer-canvas',
+              styles['vctrl-viewer-canvas'],
+              className,
+            )}
             dpr={[1, 1.5]}
             shadows
             style={{ backgroundColor: envOptions?.backgroundColor }}

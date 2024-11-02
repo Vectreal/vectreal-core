@@ -29,7 +29,7 @@ export default defineConfig({
   //  plugins: [ nxViteTsPaths() ],
   // },
   css: {
-    postcss: path.resolve(__dirname, '../../postcss.config.js'),
+    postcss: path.resolve(__dirname, './postcss.viewer.config.js'),
   },
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
