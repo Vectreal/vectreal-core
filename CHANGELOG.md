@@ -1,3 +1,25 @@
+## 0.8.0 (2024-11-02)
+
+### 🚀 Features
+
+- **packages/hooks:** optimize model and add normals optimization ([6f0bde1](https://github.com/Vectreal/vectreal-core/commit/6f0bde1))
+- **project:** added github actions and nx grouping to dependabot ([7ffc248](https://github.com/Vectreal/vectreal-core/commit/7ffc248))
+
+### 🩹 Fixes
+
+- **packages/viewer:** adjust loading spinner styles ([286ccc7](https://github.com/Vectreal/vectreal-core/commit/286ccc7))
+- **packages/viewer:** change tailwind styling to css modules styling ([273ec59](https://github.com/Vectreal/vectreal-core/commit/273ec59))
+
+### 📖 Documentation
+
+- **project:** changed the serve command to vctrl ([b48b34b](https://github.com/Vectreal/vectreal-core/commit/b48b34b))
+
+### ❤️  Thank You
+
+- Mo @Schlomoh
+- Moritz Becker
+- Nils Ingwersen
+
 ## 0.7.8 (2024-10-28)
 
 ### 🩹 Fixes
