@@ -11,6 +11,7 @@ const Contact = () => {
     console.log('Form submitted');
 
     const formData = new FormData(event.currentTarget as HTMLFormElement);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const data = Object.fromEntries(formData.entries());
   };
 

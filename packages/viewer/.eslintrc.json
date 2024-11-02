@@ -12,7 +12,6 @@
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
               "@nx/react",
-              "cssnano",
               "autoprefixer",
               "postcss-modules",
               "@radix-ui/react-accordion",
