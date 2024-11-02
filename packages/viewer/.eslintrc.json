@@ -12,6 +12,9 @@
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
               "@nx/react",
+              "cssnano",
+              "autoprefixer",
+              "postcss-modules",
               "@radix-ui/react-accordion",
               "@radix-ui/react-icons",
               "@radix-ui/react-avatar",

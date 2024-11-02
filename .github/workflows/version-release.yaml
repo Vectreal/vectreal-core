@@ -10,6 +10,9 @@ jobs:
     name: Versioning and Publishing to NPM
     environment: packages-releasing
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22]
 
     steps:
       - name: Checkout code
@@ -20,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
