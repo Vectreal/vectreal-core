@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Build Storybook
-        run: npm run build-storybook
+        run: npx nx build-storybook vctrl/viewer
 
       - name: ⚡ Run chromatic
         uses: chromaui/action@latest
