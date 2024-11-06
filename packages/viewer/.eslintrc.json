@@ -1,6 +1,6 @@
 {
   "extends": ["plugin:@nx/react", "../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "storybook-static"],
   "overrides": [
     {
       "files": ["*.json"],
@@ -11,14 +11,15 @@
           {
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
+              "@nx/vite",
               "@nx/react",
               "autoprefixer",
               "postcss-modules",
+              "framer-motion",
+              "class-variance-authority",
               "@radix-ui/react-accordion",
               "@radix-ui/react-icons",
               "@radix-ui/react-avatar",
-              "framer-motion",
-              "class-variance-authority",
               "@radix-ui/react-slot",
               "@radix-ui/react-dialog",
               "@radix-ui/react-dropdown-menu",
@@ -27,11 +28,9 @@
               "@radix-ui/react-navigation-menu",
               "@radix-ui/react-popover",
               "@radix-ui/react-progress",
-              "sonner",
               "@radix-ui/react-tooltip",
-              "@nx/vite",
+              "sonner",
               "@vctrl/hooks",
-              "@vitejs/plugin-react",
               "@gltf-transform/core",
               "@gltf-transform/functions",
               "@gltf-transform/extensions",
@@ -40,9 +39,13 @@
               "jszip",
               "vite",
               "vite-plugin-dts",
+              "@vitejs/plugin-react",
               "clsx",
               "tailwind-merge",
-              "react-loader-spinner"
+              "postcss-mixins",
+              "postcss-nested",
+              "@storybook/react-vite",
+              "@storybook/react"
             ]
           }
         ]
@@ -52,7 +55,7 @@
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nx/enforce-module-boundaries": [
-          1, // warning
+          1,
           {
             "enforceBuildableLibDependency": false
           }

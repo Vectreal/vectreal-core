@@ -1,64 +1,134 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { cn } from '@vctrl/shared/lib/utils';
+
+import styles from '../styles.module.css';
 
 import VectrealLogo from './assets/vectreal-logo';
 import InfoIcon from './assets/info-icon';
 import CrossIcon from './assets/cross-icon';
 
-interface InfoPopoverProps {
+export interface InfoPopoverProps {
+  /**
+   * Whether to add the info popover and it's trigger to the viewer.
+   */
+  showInfo?: boolean;
+
+  /**
+   * The content to display in the popover. Can be a JSX element or a string.
+   */
   content?: JSX.Element | string;
 }
 
-const InfoPopover = ({ content }: InfoPopoverProps) => {
+export const defaultInfoPopoverProps: InfoPopoverProps = {
+  showInfo: true,
+};
+
+const InfoPopover = (props: InfoPopoverProps) => {
+  const { content, showInfo } = { ...defaultInfoPopoverProps, ...props };
   const [isOpen, setIsOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // Handle focus when modal opens and closes
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      // Move focus to the modal
+      popoverRef.current?.focus();
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  // Trap focus within the modal when it's open
+  useEffect(() => {
+    const trapFocus = (event: FocusEvent) => {
+      if (
+        isOpen &&
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
+        event.preventDefault();
+        popoverRef.current?.focus();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('focusin', trapFocus);
+    } else {
+      document.removeEventListener('focusin', trapFocus);
+    }
+
+    return () => {
+      document.removeEventListener('focusin', trapFocus);
+    };
+  }, [isOpen]);
 
   return (
-    <div id="vctrl-viewer-info-popover" className="absolute bottom-0 m-2">
-      <div id="vctrl-viewer-button-wrapper" className="relative w-6 h-6">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-full h-full z-10 rounded-full bg-black/40 hover:bg-zinc-700/40 p-1"
-        >
-          <InfoIcon className="text-white opacity-20 w-4 h-4" />
-        </button>
-
-        <div
-          className={cn(
-            'absolute w-64 h-fit flex-col flex rounded-lg overflow-hidden transition-all ease-in-out bottom-0 left-0',
-            'bg-white dark:bg-zinc-900',
-            isOpen
-              ? 'translate-y-0 translate-x-0 opacity-100 visible'
-              : 'translate-y-2 -translate-x-2 opacity-0 invisible ',
-          )}
-        >
-          <button
-            onClick={() => setIsOpen(false)}
-            aria-label="Close info popover"
-            className="absolute right-0 top-0 m-2 p-2 rounded-md text-black dark:text-white hover:bg-gray-200 dark:hover:bg-zinc-800 active:bg-gray-300 dark:active:bg-zinc-700 transition-colors duration-300"
-          >
-            <CrossIcon />
-          </button>
-          <div className="grow p-4">
-            {content || (
-              <p className="text-sm text-gray-600 dark:text-zinc-400">
-                No additional info
-              </p>
-            )}
+    showInfo && (
+      <div className={styles.viewer}>
+        <div className={styles.popover}>
+          <div className={styles['popover-trigger']}>
+            <button
+              onClick={() => setIsOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={isOpen}
+              aria-controls="info-popover"
+              aria-label="Open information popover"
+            >
+              <InfoIcon />
+            </button>
           </div>
-          <a
-            className="h-full"
-            href="https://core.vectreal.com"
-            target="_blank"
-            rel="noreferrer"
+          <div
+            id="info-popover"
+            role="dialog"
+            aria-modal="true"
+            className={cn(
+              styles['popover-modal'],
+              isOpen ? styles.show : styles.hide,
+            )}
+            ref={popoverRef}
+            tabIndex={-1}
           >
-            <div className="flex flex-row items-start justify-between gap-2 h-10 p-4 py-2 border-t border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-800 hover:text-gray-700 dark:hover:text-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-800/25 transition-colors duration-300">
-              <small className="text-sm">Vectreal viewer</small>{' '}
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Close information popover"
+              className={styles['popover-close']}
+            >
+              <CrossIcon />
+            </button>
+            <div className={styles['text-container']}>
+              {content ? (
+                typeof content === 'string' ? (
+                  <p>{content}</p>
+                ) : (
+                  content
+                )
+              ) : (
+                <p>No additional info</p>
+              )}
+            </div>
+            <div className={styles['popover-footer']}>
+              <a
+                href="https://core.vectreal.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Vectreal viewer
+              </a>
               <VectrealLogo />
             </div>
-          </a>
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 

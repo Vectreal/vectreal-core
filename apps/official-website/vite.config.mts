@@ -5,6 +5,11 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import postcssMixins from 'postcss-mixins';
+import postcssNested from 'postcss-nested';
+
 export default defineConfig({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/official-website',
@@ -53,7 +58,9 @@ export default defineConfig({
   ],
 
   css: {
-    postcss: path.resolve(__dirname, '../../postcss.config.js'),
+    postcss: {
+      plugins: [autoprefixer, postcssNested, postcssMixins, tailwindcss],
+    },
   },
 
   // Uncomment this if you are using workers.

@@ -1,13 +1,11 @@
+import styles from '../styles.module.css';
+
 interface Props {
   loader: JSX.Element;
 }
 
 const SpinnerWrapper = ({ loader }: Props) => {
-  return (
-    <div className="flex items-center justify-center w-full h-full">
-      {loader}
-    </div>
-  );
+  return <div className={styles['spinner-wrapper']}>{loader}</div>;
 };
 
 export default SpinnerWrapper;

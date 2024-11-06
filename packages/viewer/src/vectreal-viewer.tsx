@@ -31,19 +31,57 @@ import {
   SceneModel,
 } from './components/scene';
 
-import { DefaultSpinner, InfoPopover, SpinnerWrapper } from './components';
+import {
+  DefaultSpinner,
+  InfoPopover,
+  SpinnerWrapper,
+  type InfoPopoverProps,
+} from './components';
 
 import styles from './styles.module.css';
 
 interface VectrealViewerProps extends PropsWithChildren {
+  /**
+   * The 3D model to render in the viewer. (three.js `Object3D`)
+   */
   model?: Object3D;
+
+  /**
+   * An optional className to apply to the canvas element of the viewer.
+   */
   className?: string;
+
+  /**
+   * Options for the camera.
+   */
   cameraOptions?: CameraProps;
+
+  /**
+   * Options for the OrbitControls.
+   */
   controlsOptions?: ControlsProps;
+
+  /**
+   * Options for the react-three environment and stage components.
+   */
   envOptions?: EnvProps;
+
+  /**
+   * Options for the grid.
+   *
+   * @see {@link https://drei.docs.pmnd.rs/gizmos/grid}
+   */
   gridOptions?: GridProps;
+
+  /**
+   * Options for the info popover.
+   */
+  infoPopoverOptions?: InfoPopoverProps;
+
+  /**
+   * JSX element to render while the model is loading.
+   */
   loader?: JSX.Element;
-  infoContent?: JSX.Element | string;
 }
 
 /**
@@ -61,13 +99,8 @@ interface VectrealViewerProps extends PropsWithChildren {
  * - `controlsOptions`: An optional object containing options for the OrbitControls.
  * - `envOptions`: An optional object containing options for the environment.
  * - `gridOptions`: An optional object containing options for the grid.
+ * - `infoPopoverOptions`: An optional object containing options for the info popover.
  * - `loader`: An optional JSX element to render while the model is loading.
- * - `infoContent`: An optional JSX element or string to render as the info popover content.
- *
- * The component will render a `Canvas` component with the provided props. It will also render a
- * `SceneCamera`, `SceneModel`, `SceneEnvironment`, and `SceneGrid` component inside the canvas.
- *
- * If the `controlsOptions` prop is not provided, the component will not render any controls.
  *
  * The component will render any provided children inside the canvas.
  *
@@ -94,18 +127,18 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
     envOptions,
     gridOptions,
     controlsOptions,
-    infoContent,
+    infoPopoverOptions,
     loader = <DefaultSpinner />,
   } = props;
 
   return (
-    <div className={cn('vctrl-viewer', styles['vctrl-viewer'])}>
+    <div className={cn('vctrl-viewer', styles['viewer'])}>
       {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
             className={cn(
               'vctrl-viewer-canvas',
-              styles['vctrl-viewer-canvas'],
+              styles['viewer-canvas'],
               className,
             )}
             dpr={[1, 1.5]}
@@ -122,7 +155,7 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
         </Suspense>
       )}
 
-      <InfoPopover content={infoContent} />
+      <InfoPopover {...infoPopoverOptions} />
     </div>
   );
 };
