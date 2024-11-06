@@ -6,3 +6,4 @@ vite.config.ts.timestamp-*
 .DS_Store
 **/vite.config.{js,ts,mjs,mts,cjs,cts}.timestamp*
 storybook-static
+*.log

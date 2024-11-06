@@ -38,6 +38,12 @@
         "outputPath": "dist/packages/vctrl/viewer",
         "configFile": "packages/viewer/vite.config.ts"
       }
+    },
+    "chromatic": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm --prefix packages/viewer run chromatic"]
+      }
     }
   }
 }
