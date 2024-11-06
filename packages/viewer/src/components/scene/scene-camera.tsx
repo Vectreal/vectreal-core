@@ -2,51 +2,70 @@ import { useEffect } from 'react';
 import { PerspectiveCamera, Vector3 } from 'three';
 import { useThree } from '@react-three/fiber';
 
+type CameraPosition =
+  | Vector3
+  | { x: number; y: number; z: number }
+  | [number, number, number];
+
 export interface CameraProps {
-  initialCameraPosition?:
-    | Vector3
-    | { x: number; y: number; z: number }
-    | [number, number, number];
+  /**
+   * Initial camera position.
+   */
+  initialCameraPosition?: CameraPosition;
+  /**
+   * Field of view.
+   */
   fov?: number;
+  /**
+   * Aspect ratio.
+   */
   aspect?: number;
+  /**
+   * Near clipping plane.
+   */
   near?: number;
+  /**
+   *  Near clipping plane.
+   */
   far?: number;
 }
 
+export const defaultCameraOptions: Required<CameraProps> = {
+  aspect: 1,
+  initialCameraPosition: new Vector3(0, 0, 5),
+  fov: 69,
+  near: 0.01,
+  far: 1000,
+};
+
+/**
+ * Configures the Three.js camera using provided props.
+ *
+ * @param {CameraProps} props - Camera configuration.
+ * @returns {null} No rendered output.
+ */
 const SceneCamera = (props: CameraProps) => {
-  const { camera }: { camera: PerspectiveCamera } = useThree();
+  const cameraOptions = { ...defaultCameraOptions, ...props };
+  const { initialCameraPosition, fov, near, far } = cameraOptions;
+  const { camera } = useThree();
 
   useEffect(() => {
-    camera.far = props.far || 1000;
-    camera.near = props.near || 0.01;
-    camera.fov = props.fov || 69;
+    camera.far = far;
+    camera.near = near;
+    (camera as PerspectiveCamera).fov = fov;
 
-    if (!props.initialCameraPosition) return;
+    const pos = initialCameraPosition;
 
-    if (Array.isArray(props.initialCameraPosition)) {
-      camera.position.set(
-        props.initialCameraPosition[0],
-        props.initialCameraPosition[1],
-        props.initialCameraPosition[2],
-      );
-    } else if (
-      props.initialCameraPosition instanceof Vector3 ||
-      (props.initialCameraPosition instanceof Object &&
-        'x' in props.initialCameraPosition &&
-        'y' in props.initialCameraPosition &&
-        'z' in props.initialCameraPosition)
-    ) {
-      camera.position.set(
-        props.initialCameraPosition.x,
-        props.initialCameraPosition.y,
-        props.initialCameraPosition.z,
-      );
+    if (pos instanceof Vector3) {
+      camera.position.copy(pos);
+    } else if (Array.isArray(pos)) {
+      camera.position.fromArray(pos);
+    } else {
+      camera.position.set(pos.x, pos.y, pos.z);
     }
 
     camera.updateProjectionMatrix();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only for initial render
+  }, [camera, initialCameraPosition, fov, near, far]);
 
   return null;
 };

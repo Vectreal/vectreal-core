@@ -11,12 +11,19 @@ export interface GridProps extends ThreeGridProps {
    * Whether to show the grid.
    */
   showGrid?: boolean;
+
+  /**
+   * Snap grid position to bottom of scene bounding box (y axis).
+   */
+  snapToBottom?: boolean;
 }
 
 /**
  * Default grid options.
  */
-const defaultGridOptions = {
+export const defaultGridOptions: GridProps = {
+  showGrid: false,
+  snapToBottom: true,
   cellSize: 0.5,
   sectionSize: 5,
   sectionColor: 'rgb(134, 73, 33)',
@@ -31,9 +38,6 @@ const defaultGridOptions = {
 /**
  * SceneGrid component that renders a grid based on the size of the scene's content.
  * The grid adjusts its position and size according to the bounding box of the scene.
- *
- * @param {GridProps} props - Props for the SceneGrid component.
- * @returns {JSX.Element | null} A Grid component if showGrid is true and size is available, otherwise null.
  */
 const SceneGrid = (props: GridProps) => {
   // State to hold the size of the scene's bounding box
@@ -83,24 +87,23 @@ const SceneGrid = (props: GridProps) => {
   }, [scene.children, scene, computeBoundingBox]);
 
   // Merge default grid options with props
-  const { showGrid = false, ...gridOptions } = {
+  const { showGrid, snapToBottom, ...gridOptions } = {
     ...defaultGridOptions,
     ...props,
   };
 
   // If showGrid is false or size is not available, don't render anything
-  if (!showGrid || !size) {
+  if (!showGrid) {
     return null;
   }
 
+  const position =
+    snapToBottom && size
+      ? new Vector3(0, -size.y / 2, 0)
+      : new Vector3(0, 0, 0);
+
   // Render the Grid component, positioning it at the bottom of the scene's bounding box
-  return (
-    <Grid
-      name="Grid"
-      position={new Vector3(0, -size.y / 2, 0)}
-      {...(gridOptions as GridProps)}
-    />
-  );
+  return <Grid name="Grid" position={position} {...gridOptions} />;
 };
 
 export default SceneGrid;

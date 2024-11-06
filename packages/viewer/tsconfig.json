@@ -6,13 +6,16 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
-    "types": ["vite/client"],
+    "types": ["vite/client"]
   },
   "files": [],
   "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
   ],
   "extends": "../../tsconfig.base.json"
