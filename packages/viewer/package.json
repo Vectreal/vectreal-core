@@ -23,7 +23,7 @@
     "model-viewer"
   ],
   "repository": {
-    "url": "https://github.com/vectreal/vectreal-core",
+    "url": "git+https://github.com/vectreal/vectreal-core.git",
     "type": "https"
   },
   "license": "AGPL-3.0-only",
@@ -41,6 +41,10 @@
       "types": "./index.d.ts"
     },
     "./css": "./style.css"
+  },
+  "scripts": {
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_b3f4d26ac3d3190"
   },
   "peerDependencies": {
     "react": "^18.0.0"
