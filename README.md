@@ -148,7 +148,7 @@ To contribute:
 4. Push your changes to your fork
 5. Submit a pull request to the main repository
 
-Join our Discord community for support, announcements, and discussions about the future of 3D web content.
+[Join our Discord community](https://discord.gg/A9a3nPkZw7) for support, announcements, and discussions about the future of 3D web content.
 
 ## License
 
@@ -160,7 +160,7 @@ Please refer to the LICENSE file in the package root for licensing information.
 
 Website: [Vectreal Core](https://core.vectreal.com) | [Vectreal Platform](https://vectreal.com)
 
-Discord: [Join our server](https://discord.gg/PHMzbHjX)
+Discord: [Join our server](https://discord.gg/A9a3nPkZw7)
 
 X/Twitter: [@Vectreal](https://x.com/vectreal)
 

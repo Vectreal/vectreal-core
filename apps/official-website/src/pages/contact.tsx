@@ -72,7 +72,7 @@ const Contact = () => {
           </Link>{' '}
           ( or reach us via our{' '}
           <Link
-            to="https://discord.gg/4GyS8rrD"
+            to="https://discord.gg/A9a3nPkZw7"
             target="_blank"
             className="text-zinc-100 hover:underline"
           >

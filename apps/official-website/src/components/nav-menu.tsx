@@ -74,7 +74,7 @@ const components: {
   {
     title: 'Discord',
     icon: <DiscordLogoIcon />,
-    href: 'https://discord.gg/UHxPjGMH',
+    href: 'https://discord.gg/A9a3nPkZw7',
     description: 'Join our community of 3D developers and get in touch.',
   },
   {

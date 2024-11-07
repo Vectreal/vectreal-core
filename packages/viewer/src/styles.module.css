@@ -168,7 +168,7 @@ html.dark {
       justify-content: space-between;
       gap: 0.5rem;
 
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem 1rem;
 
       border-top: 1px solid var(--vctrl-border);
       color: var(--vctrl-text);

@@ -246,7 +246,7 @@ const Home = () => {
                 collaboration. Help shape the future of 3D web content!
               </CardDescription>
               <Link
-                to="https://discord.gg/UHxPjGMH"
+                to="https://discord.gg/A9a3nPkZw7"
                 target="_blank"
                 className="mt-4"
                 onClick={() =>
