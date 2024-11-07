@@ -1,3 +1,13 @@
+## 0.9.1 (2024-11-07)
+
+### 🩹 Fixes
+
+- **packages/viewer:** dedup div with "vctrl-viewer" classname and add vctrl classnames to popover ([a00be5b](https://github.com/Vectreal/vectreal-core/commit/a00be5b))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.9.0 (2024-11-07)
 
 ### 🚀 Features
