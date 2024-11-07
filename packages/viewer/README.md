@@ -4,6 +4,7 @@
 ](https://github.com/Vectreal/vectreal-core/actions/workflows/version-release.yaml)
 [![@vctrl/viewer | NPM Downloads](https://img.shields.io/npm/dm/%40vctrl%2Fviewer?logo=npm&logoColor=%23fc6c18&label=%40vctrl%2Fviewer%20%7C%20NPM%20Downloads&color=%23fc6c18)](https://npmjs.com/package/@vctrl/viewer)
 [![Code sandbox](https://img.shields.io/badge/Code_Sandbox_example-Open-fc6c18?logo=codesandbox&logoColor=%23fc6c18)](https://codesandbox.io/p/sandbox/vectreal-core-viewer-vctrl-viewer-example-kwncm2)
+[![Storybook vctrl/viewer](https://img.shields.io/badge/Storybook_vctrl/viewer-Docs-fc6c18?logo=storybook&logoColor=%23fc6c18)](https://main--672b9522ee5bda25942a731c.chromatic.com/?path=/docs/vectrealviewer--docs)
 
 > This library is still undergoing heavy development until the first major version is released. This may lead to breaking changes in upcoming updates.
 
