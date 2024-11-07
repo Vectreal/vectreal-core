@@ -1,3 +1,18 @@
+## 0.9.0 (2024-11-07)
+
+### 🚀 Features
+
+- **packages/viewer:** update peer dependencies, add Storybook configuration, implement robust styling and remove postcss config files ([df8359a](https://github.com/Vectreal/vectreal-core/commit/df8359a))
+- **packages/viewer:** enhance Storybook configuration with deep controls and auto-generated documentation ([7df00eb](https://github.com/Vectreal/vectreal-core/commit/7df00eb))
+
+### 📖 Documentation
+
+- **project:** add Storybook badge to README files for vctrl/viewer documentation ([c0a0659](https://github.com/Vectreal/vectreal-core/commit/c0a0659))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.8.0 (2024-11-02)
 
 ### 🚀 Features
