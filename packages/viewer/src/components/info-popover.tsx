@@ -73,58 +73,62 @@ const InfoPopover = (props: InfoPopoverProps) => {
 
   return (
     showInfo && (
-      <div className={styles.viewer}>
-        <div className={styles.popover}>
-          <div className={styles['popover-trigger']}>
-            <button
-              onClick={() => setIsOpen(true)}
-              aria-haspopup="dialog"
-              aria-expanded={isOpen}
-              aria-controls="info-popover"
-              aria-label="Open information popover"
-            >
-              <InfoIcon />
-            </button>
-          </div>
-          <div
-            id="info-popover"
-            role="dialog"
-            aria-modal="true"
-            className={cn(
-              styles['popover-modal'],
-              isOpen ? styles.show : styles.hide,
-            )}
-            ref={popoverRef}
-            tabIndex={-1}
+      <div className={cn('vctrl-viewer-info-popover', styles.popover)}>
+        <div
+          className={cn(
+            'vctrl-viewer-info-popover-trigger',
+            styles['popover-trigger'],
+          )}
+        >
+          <button
+            onClick={() => setIsOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={isOpen}
+            aria-controls="info-popover"
+            aria-label="Open information popover"
           >
-            <button
-              onClick={() => setIsOpen(false)}
-              aria-label="Close information popover"
-              className={styles['popover-close']}
-            >
-              <CrossIcon />
-            </button>
-            <div className={styles['text-container']}>
-              {content ? (
-                typeof content === 'string' ? (
-                  <p>{content}</p>
-                ) : (
-                  content
-                )
+            <InfoIcon />
+          </button>
+        </div>
+        <div
+          id="info-popover"
+          role="dialog"
+          aria-modal="true"
+          className={cn(
+            'vctrl-viewer-info-popover-modal',
+            styles['popover-modal'],
+            isOpen ? styles.show : styles.hide,
+          )}
+          ref={popoverRef}
+          tabIndex={-1}
+        >
+          <button
+            onClick={() => setIsOpen(false)}
+            aria-label="Close information popover"
+            className={styles['popover-close']}
+          >
+            <CrossIcon />
+          </button>
+          <div className={styles['text-container']}>
+            {content ? (
+              typeof content === 'string' ? (
+                <p>{content}</p>
               ) : (
-                <p>No additional info</p>
-              )}
-            </div>
-            <div className={styles['popover-footer']}>
-              <a
-                href="https://core.vectreal.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Vectreal viewer
-              </a>
-              <VectrealLogo />
-            </div>
+                content
+              )
+            ) : (
+              <p>No additional info</p>
+            )}
+          </div>
+          <div className={styles['popover-footer']}>
+            <a
+              href="https://core.vectreal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vectreal viewer
+            </a>
+            <VectrealLogo />
           </div>
         </div>
       </div>
