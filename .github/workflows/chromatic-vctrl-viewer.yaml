@@ -1,7 +1,12 @@
 name: Publish vctrl/viewer Storybook to Chromatic
 
 #exclude dependabot and renovate branches
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+      - 'renovate/**'
+      - 'chore/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-chromatic
@@ -46,4 +51,4 @@ jobs:
           exitZeroOnChanges: true
           exitOnceUploaded: true
           onlyChanged: true
-          skip: '@(renovate/**|dependabot/**)'
+          skip: '@(renovate/**|dependabot/**|chore/)'
