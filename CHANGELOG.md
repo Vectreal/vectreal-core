@@ -1,3 +1,15 @@
+## 0.9.2 (2024-11-23)
+
+### 🩹 Fixes
+
+- **pacakges/official-website:** normalize action string for upload event ([94035cb](https://github.com/Vectreal/vectreal-core/commit/94035cb))
+- **packages/viewer:** update CSS selectors for light and dark mode variables ([f1d43cd](https://github.com/Vectreal/vectreal-core/commit/f1d43cd))
+- **project:** update dependencies and remove obsolete entries ([356b1c4](https://github.com/Vectreal/vectreal-core/commit/356b1c4))
+
+### ❤️  Thank You
+
+- Moritz Becker
+
 ## 0.9.1 (2024-11-07)
 
 ### 🩹 Fixes
