@@ -52,7 +52,7 @@ const Editor = () => {
   function handleLoadStart() {
     sendCustomEvent({
       category: 'Editor Page',
-      action: 'Upload',
+      action: 'upload',
       label: 'Model Load Start',
     });
   }
