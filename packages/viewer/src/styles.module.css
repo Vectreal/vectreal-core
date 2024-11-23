@@ -1,5 +1,5 @@
 /* Base variables for light mode */
-:root {
+.viewer {
   --vctrl-bg: #f3f4f6;
   --vctrl-hover-bg: #e5e7eb;
   --vctrl-active-bg: #d1d5db;
@@ -9,7 +9,7 @@
 
 /* Override variables when browser prefers dark mode */
 @media (prefers-color-scheme: dark) {
-  :root {
+  .viewer {
     --vctrl-bg: #141414;
     --vctrl-hover-bg: #363636;
     --vctrl-active-bg: #585858;
@@ -19,6 +19,7 @@
 }
 
 /* Allow users to manually set light mode */
+.viewer.light,
 html.light {
   --vctrl-bg: #f3f4f6;
   --vctrl-hover-bg: #e5e7eb;
@@ -28,6 +29,7 @@ html.light {
 }
 
 /* Allow users to manually set dark mode */
+.viewer.dark,
 html.dark {
   --vctrl-bg: #141414;
   --vctrl-hover-bg: #363636;
@@ -114,18 +116,20 @@ html.dark {
     bottom: 0;
     left: 0;
     width: 16rem;
+
     display: flex;
     flex-direction: column;
+
     border-radius: 0.5rem;
     overflow: hidden;
     background-color: var(--vctrl-bg);
-    transition: translate 0.3s ease-in-out;
+
+    transition: all 0.3s ease-out;
 
     &.hide {
-      translate: 0.25rem -0.25rem;
+      translate: -0.5rem 0.5rem;
       opacity: 0;
       visibility: hidden;
-      display: none;
     }
 
     &.show {
