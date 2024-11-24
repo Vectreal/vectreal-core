@@ -1,3 +1,16 @@
+## 0.9.3 (2024-11-24)
+
+### 🩹 Fixes
+
+- **packages/viewer:** the clickable area of the info-popover footer ([de4c3d7](https://github.com/Vectreal/vectreal-core/commit/de4c3d7))
+- **packages/viewer:** update className description and apply it to the outermost container ([3c5c3c1](https://github.com/Vectreal/vectreal-core/commit/3c5c3c1))
+- **packages/viewer:** add 'storybook-addon-deep-controls' to ignoredDependencies in ESLint configuration ([bedcaf6](https://github.com/Vectreal/vectreal-core/commit/bedcaf6))
+- **workflows:** update Chromatic workflow to ignore chore branches ([4f937a7](https://github.com/Vectreal/vectreal-core/commit/4f937a7))
+
+### ❤️ Thank You
+
+- Moritz Becker
+
 ## 0.9.2 (2024-11-23)
 
 ### 🩹 Fixes
