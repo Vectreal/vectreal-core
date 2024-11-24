@@ -120,16 +120,16 @@ const InfoPopover = (props: InfoPopoverProps) => {
               <p>No additional info</p>
             )}
           </div>
-          <div className={styles['popover-footer']}>
-            <a
-              href="https://core.vectreal.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Vectreal viewer
-            </a>
+
+          <a
+            className={styles['popover-footer']}
+            href="https://core.vectreal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Vectreal viewer
             <VectrealLogo />
-          </div>
+          </a>
         </div>
       </div>
     )
