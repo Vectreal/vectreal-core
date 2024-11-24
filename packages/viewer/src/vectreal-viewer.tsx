@@ -47,7 +47,7 @@ interface VectrealViewerProps extends PropsWithChildren {
   model?: Object3D;
 
   /**
-   * An optional className to apply to the canvas element of the viewer.
+   * An optional className to apply to the outermost container of the viewer.
    */
   className?: string;
 
@@ -132,15 +132,11 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
   } = props;
 
   return (
-    <div className={cn('vctrl-viewer', styles['viewer'])}>
+    <div className={cn('vctrl-viewer', styles['viewer'], className)}>
       {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
-            className={cn(
-              'vctrl-viewer-canvas',
-              styles['viewer-canvas'],
-              className,
-            )}
+            className={cn('vctrl-viewer-canvas', styles['viewer-canvas'])}
             dpr={[1, 1.5]}
             shadows
             style={{ backgroundColor: envOptions?.backgroundColor }}
