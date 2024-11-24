@@ -1,3 +1,13 @@
+## 0.9.4 (2024-11-24)
+
+### 🩹 Fixes
+
+- **packages/viewer:** add manual dark mode support in VectrealViewer component using js ([aaf5a14](https://github.com/Vectreal/vectreal-core/commit/aaf5a14))
+
+### ❤️ Thank You
+
+- Moritz Becker
+
 ## 0.9.3 (2024-11-24)
 
 ### 🩹 Fixes
