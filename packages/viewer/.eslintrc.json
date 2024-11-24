@@ -11,6 +11,7 @@
           {
             "includeTransitiveDependencies": true,
             "ignoredDependencies": [
+              "storybook-addon-deep-controls",
               "@nx/vite",
               "@nx/react",
               "autoprefixer",
