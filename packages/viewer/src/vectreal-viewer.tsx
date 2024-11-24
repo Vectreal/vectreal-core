@@ -131,8 +131,18 @@ const VectrealViewer = ({ model, ...props }: VectrealViewerProps) => {
     loader = <DefaultSpinner />,
   } = props;
 
+  // Check if the dark mode is manually enabled - This needs to be js because of CSS modules and minification
+  const isManualDarkModel = className?.split(' ').includes('dark');
+
   return (
-    <div className={cn('vctrl-viewer', styles['viewer'], className)}>
+    <div
+      className={cn(
+        className,
+        'vctrl-viewer',
+        styles['viewer'],
+        isManualDarkModel && styles.dark,
+      )}
+    >
       {model && (
         <Suspense fallback={<SpinnerWrapper loader={loader} />}>
           <Canvas
