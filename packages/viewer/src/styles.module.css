@@ -1,5 +1,5 @@
-/* Base variables for light mode */
-.viewer {
+/* Color schemes */
+@define-mixin colors-light {
   --vctrl-bg: #f3f4f6;
   --vctrl-hover-bg: #e5e7eb;
   --vctrl-active-bg: #d1d5db;
@@ -7,35 +7,48 @@
   --vctrl-border: #181818;
 }
 
-/* Override variables when browser prefers dark mode */
-@media (prefers-color-scheme: dark) {
-  .viewer {
-    --vctrl-bg: #141414;
-    --vctrl-hover-bg: #363636;
-    --vctrl-active-bg: #585858;
-    --vctrl-text: #959595;
-    --vctrl-border: rgba(229, 231, 235, 0.5);
-  }
-}
-
-/* Allow users to manually set light mode */
-.viewer.light,
-html.light {
-  --vctrl-bg: #f3f4f6;
-  --vctrl-hover-bg: #e5e7eb;
-  --vctrl-active-bg: #d1d5db;
-  --vctrl-text: #1f2937;
-  --vctrl-border: #181818;
-}
-
-/* Allow users to manually set dark mode */
-.viewer.dark,
-html.dark {
+@define-mixin colors-dark {
   --vctrl-bg: #141414;
   --vctrl-hover-bg: #363636;
   --vctrl-active-bg: #585858;
   --vctrl-text: #959595;
   --vctrl-border: rgba(229, 231, 235, 0.5);
+}
+
+/* Mixins for reusable styles */
+@define-mixin vctrl-bg-hover-active {
+  background-color: var(--vctrl-bg);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--vctrl-hover-bg);
+  }
+
+  &:active {
+    background-color: var(--vctrl-active-bg);
+  }
+}
+
+/* Base light theme */
+.viewer {
+  @mixin colors-light;
+}
+
+/* Dark mode variants */
+@media (prefers-color-scheme: dark) {
+  .viewer {
+    @mixin colors-dark;
+  }
+}
+
+.viewer.dark,
+html.dark {
+  @mixin colors-dark;
+}
+
+.viewer.light,
+html.light {
+  @mixin colors-light;
 }
 
 .viewer {
@@ -54,20 +67,6 @@ html.dark {
 
   p {
     margin: 0;
-  }
-}
-
-/* Mixins for reusable styles */
-@define-mixin vctrl-bg-hover-active {
-  background-color: var(--vctrl-bg);
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--vctrl-hover-bg);
-  }
-
-  &:active {
-    background-color: var(--vctrl-active-bg);
   }
 }
 
@@ -95,13 +94,12 @@ html.dark {
     height: 1.5rem;
 
     button {
+      @mixin vctrl-bg-hover-active;
       width: inherit;
       height: inherit;
       padding: 0.25rem;
       border-radius: 50%;
       z-index: 10;
-
-      @mixin vctrl-bg-hover-active;
 
       svg {
         color: var(--vctrl-text);
@@ -149,40 +147,32 @@ html.dark {
     }
 
     .popover-close {
+      @mixin vctrl-bg-hover-active;
       position: absolute;
       right: 0;
       top: 0;
       width: 2rem;
       height: 2rem;
-
       margin: 0.5rem;
       padding: 0.5rem;
       border-radius: 0.25rem;
-
       color: var(--vctrl-text);
-
       transition: all 0.3s ease-in-out;
-
-      @mixin vctrl-bg-hover-active;
     }
 
     .popover-footer {
+      @mixin vctrl-bg-hover-active;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
-
       padding: 0.5rem 1rem;
       font-size: 0.75rem;
-
       border-top: 1px solid var(--vctrl-border);
       color: var(--vctrl-text);
-
       transition:
         color 0.3s,
         background-color 0.3s;
-
-      @mixin vctrl-bg-hover-active;
 
       svg {
         height: 1rem;
