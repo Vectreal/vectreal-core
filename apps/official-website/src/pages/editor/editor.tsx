@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { Vector3 } from 'three';
 
@@ -25,10 +25,8 @@ const Editor = () => {
     !!window.sessionStorage.getItem('hasShownInfo'),
   );
 
-  const [hasInput, setHasInput] = useState(false);
-
   function handleReset() {
-    setHasInput(false);
+    reset()
   }
 
   function handleNotLoadedFiles(files?: File[]) {
@@ -44,9 +42,6 @@ const Editor = () => {
   function handleLoadError(error: unknown) {
     console.error('Load error:', error);
     toast.error(error as string);
-
-    setHasInput(false);
-    reset();
   }
 
   function handleLoadStart() {
@@ -74,12 +69,6 @@ const Editor = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (isFileLoading && !hasInput) {
-      setHasInput(true);
-    }
-  }, [isFileLoading, hasInput]);
-
   function handleClose() {
     setHasShownInfo(true);
     // To avoid showing the dialog again during the session
@@ -90,7 +79,7 @@ const Editor = () => {
     <section className="h-dvh overflow-hidden mx-[-1rem]">
       <UploadInfoDialog open={!hasShownInfo} onClose={handleClose} />
 
-      {hasInput ? (
+      {file ? (
         <VectrealViewer
           model={file?.model}
           key="model-viewer"
